@@ -4,5 +4,6 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports.biome": "explicit"
   },
-  "ignoreSync": ["biome.json"]
+  "ignoreSync": ["biome.json"],
+  "css.lint.unknownAtRules": "ignore"
 }
