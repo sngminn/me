@@ -73,7 +73,9 @@ async function main() {
     console.log(`📝 생성된 메시지: "${commitMsg}"`);
 
     // 4. 커밋
-    execSync(`git commit -m "${commitMsg}"`, { stdio: 'inherit' });
+    // 쌍따옴표 이스케이프 처리
+    const safeCommitMsg = commitMsg.replace(/"/g, '\\"');
+    execSync(`git commit -m "${safeCommitMsg}"`, { stdio: 'inherit' });
 
     console.log('✅ 커밋 완료! (푸시는 직접 해주세요: git push)');
   } catch (error) {
