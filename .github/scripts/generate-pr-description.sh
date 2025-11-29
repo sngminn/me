@@ -5,6 +5,8 @@ TARGET_BRANCH=$1
 SOURCE_BRANCH=$2
 
 # 1. 병합 기준점(Merge Base) 찾기
+git fetch origin $TARGET_BRANCH
+git fetch origin $SOURCE_BRANCH
 echo "🔍 origin/$TARGET_BRANCH 와 origin/$SOURCE_BRANCH 사이의 병합 기준점 찾는 중..."
 MERGE_BASE=$(git merge-base origin/$TARGET_BRANCH origin/$SOURCE_BRANCH)
 
@@ -53,9 +55,10 @@ echo "🤖 Gemini에게 물어보는 중..."
 API_URL="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=$GEMINI_API_KEY"
 
 # Node.js를 사용하여 API 호출 (의존성 최소화)
+export PROMPT
 RESPONSE=$(node -e "
   const https = require('https');
-  const prompt = \`$PROMPT\`;
+  const prompt = process.env.PROMPT;
   
   const data = JSON.stringify({
     contents: [{ parts: [{ text: prompt }] }]

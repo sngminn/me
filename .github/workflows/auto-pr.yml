@@ -38,16 +38,35 @@ jobs:
           chmod +x .github/scripts/generate-pr-description.sh
           bash .github/scripts/generate-pr-description.sh main ${{ github.ref_name }}
 
+      - name: Determine Label
+        id: label
+        run: |
+          if [[ "${{ github.ref_name }}" == feat/* ]]; then
+            echo "name=enhancement" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref_name }}" == fix/* ]]; then
+            echo "name=bug" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref_name }}" == docs/* ]]; then
+            echo "name=documentation" >> $GITHUB_OUTPUT
+          else
+            echo "name=enhancement" >> $GITHUB_OUTPUT
+          fi
+
       - name: Create Pull Request
         if: steps.check-pr.outputs.exists == 'false'
         env:
           GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT || secrets.GITHUB_TOKEN }}
+          PR_TITLE: ${{ steps.generate-pr.outputs.title }}
+          PR_BODY: ${{ steps.generate-pr.outputs.body }}
         run: |
+          echo "$PR_BODY" > pr_body.md
+          echo "" >> pr_body.md
+          echo "---" >> pr_body.md
+          echo "_🤖 AI(Gemini)로 자동 생성된 PR입니다._" >> pr_body.md
+          
           gh pr create \
             --base main \
             --head ${{ github.ref_name }} \
-            --title "${{ steps.generate-pr.outputs.title }}" \
-            --body "${{ steps.generate-pr.outputs.body }}
-            
-            ---
-            _🤖 AI(Gemini)로 자동 생성된 PR입니다._"
+            --title "$PR_TITLE" \
+            --assignee "${{ github.actor }}" \
+            --label "${{ steps.label.outputs.name }}" \
+            --body-file pr_body.md
