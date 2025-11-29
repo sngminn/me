@@ -21,7 +21,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          existing_pr=$(gh pr list --head ${{ github.ref_name }} --base main --json number --jq '.[0].number')
+          existing_pr=$(gh pr list --head ${{ github.ref_name }} --base develop --json number --jq '.[0].number')
           if [ -n "$existing_pr" ]; then
             echo "exists=true" >> $GITHUB_OUTPUT
             echo "PR already exists: #$existing_pr"
@@ -36,7 +36,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           chmod +x .github/scripts/generate-pr-description.sh
-          bash .github/scripts/generate-pr-description.sh main ${{ github.ref_name }}
+          bash .github/scripts/generate-pr-description.sh develop ${{ github.ref_name }}
 
       - name: Create Pull Request
         if: steps.check-pr.outputs.exists == 'false'
@@ -51,7 +51,7 @@ jobs:
           echo "_Gemini로 자동 생성된 PR입니다._" >> pr_body.md
           
           gh pr create \
-            --base main \
+            --base develop \
             --head ${{ github.ref_name }} \
             --title "$PR_TITLE" \
             --assignee "${{ github.actor }}" \
