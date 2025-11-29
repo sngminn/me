@@ -53,9 +53,10 @@ echo "🤖 Gemini에게 물어보는 중..."
 API_URL="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=$GEMINI_API_KEY"
 
 # Node.js를 사용하여 API 호출 (의존성 최소화)
+export PROMPT
 RESPONSE=$(node -e "
   const https = require('https');
-  const prompt = \`$PROMPT\`;
+  const prompt = process.env.PROMPT;
   
   const data = JSON.stringify({
     contents: [{ parts: [{ text: prompt }] }]
