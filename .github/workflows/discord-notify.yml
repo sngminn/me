@@ -1,0 +1,22 @@
+name: Discord Notification
+
+on:
+  issues:
+    types: [opened, closed, reopened]
+  pull_request:
+    types: [opened, closed, reopened, review_requested]
+  issue_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  discord-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord Notification
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: '📢 {{ EVENT_PAYLOAD.repository.full_name }}: **{{ EVENT_PAYLOAD.sender.login }}**님이 **${{ github.event_name }}** 이벤트를 발생시켰습니다.\n\n제목: {{ (EVENT_PAYLOAD.issue && EVENT_PAYLOAD.issue.title) || (EVENT_PAYLOAD.pull_request && EVENT_PAYLOAD.pull_request.title) || ''제목 없음'' }}'
