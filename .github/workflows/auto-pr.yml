@@ -1,0 +1,53 @@
+name: Auto PR
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  auto-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for existing PR
+        id: check-pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          existing_pr=$(gh pr list --head ${{ github.ref_name }} --base main --json number --jq '.[0].number')
+          if [ -n "$existing_pr" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "PR already exists: #$existing_pr"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate PR Content
+        if: steps.check-pr.outputs.exists == 'false'
+        id: generate-pr
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          chmod +x .github/scripts/generate-pr-description.sh
+          bash .github/scripts/generate-pr-description.sh main ${{ github.ref_name }}
+
+      - name: Create Pull Request
+        if: steps.check-pr.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base main \
+            --head ${{ github.ref_name }} \
+            --title "${{ steps.generate-pr.outputs.title }}" \
+            --body "${{ steps.generate-pr.outputs.body }}
+            
+            ---
+            _🤖 AI(Gemini)로 자동 생성된 PR입니다._"
