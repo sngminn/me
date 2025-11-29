@@ -38,6 +38,19 @@ jobs:
           chmod +x .github/scripts/generate-pr-description.sh
           bash .github/scripts/generate-pr-description.sh main ${{ github.ref_name }}
 
+      - name: Determine Label
+        id: label
+        run: |
+          if [[ "${{ github.ref_name }}" == feat/* ]]; then
+            echo "name=enhancement" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref_name }}" == fix/* ]]; then
+            echo "name=bug" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref_name }}" == docs/* ]]; then
+            echo "name=documentation" >> $GITHUB_OUTPUT
+          else
+            echo "name=automated" >> $GITHUB_OUTPUT
+          fi
+
       - name: Create Pull Request
         if: steps.check-pr.outputs.exists == 'false'
         env:
@@ -47,6 +60,8 @@ jobs:
             --base main \
             --head ${{ github.ref_name }} \
             --title "${{ steps.generate-pr.outputs.title }}" \
+            --assignee "${{ github.actor }}" \
+            --label "${{ steps.label.outputs.name }}" \
             --body "${{ steps.generate-pr.outputs.body }}
             
             ---
