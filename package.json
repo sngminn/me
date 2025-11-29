@@ -39,5 +39,11 @@
     "*.{js,ts,cjs,mjs,jsx,tsx,json}": [
       "biome check --write --no-errors-on-unmatched"
     ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
