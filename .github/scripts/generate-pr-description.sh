@@ -5,6 +5,8 @@ TARGET_BRANCH=$1
 SOURCE_BRANCH=$2
 
 # 1. 병합 기준점(Merge Base) 찾기
+git fetch origin $TARGET_BRANCH
+git fetch origin $SOURCE_BRANCH
 echo "🔍 origin/$TARGET_BRANCH 와 origin/$SOURCE_BRANCH 사이의 병합 기준점 찾는 중..."
 MERGE_BASE=$(git merge-base origin/$TARGET_BRANCH origin/$SOURCE_BRANCH)
 
