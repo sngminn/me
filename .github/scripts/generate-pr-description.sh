@@ -5,6 +5,8 @@ TARGET_BRANCH=$1
 SOURCE_BRANCH=$2
 
 # 1. 병합 기준점(Merge Base) 찾기
+git fetch origin $TARGET_BRANCH
+git fetch origin $SOURCE_BRANCH
 echo "🔍 origin/$TARGET_BRANCH 와 origin/$SOURCE_BRANCH 사이의 병합 기준점 찾는 중..."
 MERGE_BASE=$(git merge-base origin/$TARGET_BRANCH origin/$SOURCE_BRANCH)
 
@@ -25,15 +27,23 @@ PROMPT="
 당신은 숙련된 개발자입니다. 다음 코드 변경 사항을 분석하여 Pull Request 제목과 설명을 작성하세요.
 
 **중요: 반드시 다음 형식을 정확히 따라야 합니다:**
-TITLE: [50자 이내의 간결한 제목 (한국어)]
+TITLE: [타입]: [간결한 제목 (한국어)]
 ---
-[마크다운 형식의 상세 설명 (한국어)]
+## 📝 요약
+[변경 사항에 대한 한 줄 요약]
+
+## 🛠️ 변경 사항
+- [변경 사항 1]
+- [변경 사항 2]
+- [변경 사항 3]
+
+## 💡 영향 및 주의사항 (Optional)
+- [영향 범위나 주의할 점이 있다면 작성, 없다면 생략]
 
 **작성 규칙:**
 - **모든 내용은 한국어로 작성하세요.**
-- 이모지를 적절히 활용하세요 (📝 요약, ✨ 변경사항, 🐛 버그 수정 등).
-- 핵심 변경 사항을 요약하세요.
-- 가능하다면 왜 이러한 변경이 있었는지 설명하세요.
+- 불필요한 미사여구는 생략하고 핵심만 전달하세요.
+- 변경 사항은 개조식으로 작성하세요.
 
 **Context:**
 Commits:
@@ -53,9 +63,10 @@ echo "🤖 Gemini에게 물어보는 중..."
 API_URL="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=$GEMINI_API_KEY"
 
 # Node.js를 사용하여 API 호출 (의존성 최소화)
+export PROMPT
 RESPONSE=$(node -e "
   const https = require('https');
-  const prompt = \`$PROMPT\`;
+  const prompt = process.env.PROMPT;
   
   const data = JSON.stringify({
     contents: [{ parts: [{ text: prompt }] }]
