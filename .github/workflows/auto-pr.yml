@@ -41,7 +41,7 @@ jobs:
       - name: Create Pull Request
         if: steps.check-pr.outputs.exists == 'false'
         env:
-          GH_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT || secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_TITLE: ${{ steps.generate-pr.outputs.title }}
           PR_BODY: ${{ steps.generate-pr.outputs.body }}
         run: |
