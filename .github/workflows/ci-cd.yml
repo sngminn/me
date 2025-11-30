@@ -55,7 +55,8 @@ jobs:
         with:
           name: me-image
           path: /tmp
-
+      - name: Debug - List files in /tmp
+        run: ls -R /tmp
       - name: Copy image to server
         uses: appleboy/scp-action@master
         with:
