@@ -63,7 +63,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           source: "me.tar"
-          target: "/tmp"
+          target: "/home/${{ secrets.USERNAME }}/"
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
@@ -72,9 +72,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            ls -la /tmp/me.tar || echo "File not found at /tmp/me.tar"
-
-            docker load -i /tmp/me.tar
+            ls -la me.tar
+            docker load -i me.tar
+            rm me.tar
             docker stop me || true
             docker rm me || true
             docker run -d --restart unless-stopped -p 3000:3000 --name me me:latest
