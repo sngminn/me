@@ -1,0 +1,133 @@
+{
+  "items": [
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "https://github.com/sngminn/me/blob/21d996cb4785bebac658f23703edfdd6d4df0315/app/page.tsx#L5\n\n```tsx\n\nimport Image from 'next/image';\n\nexport default function Home() {\n  return (\n    // TODO: 나중에 수정\n    <div className=\"flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black\">\n      <main className=\"flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start\">\n        <Image\n\n```",
+        "number": 6,
+        "repository": "sngminn/me",
+        "title": "나중에 수정",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/6"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh4h3k",
+      "labels": ["todo"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Backlog",
+      "title": "나중에 수정"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 📝 요약\nGitHub Actions의 CI/CD 워크플로우와 Pull Request 자동 생성 스크립트의 설정을 개선하고, Discord 알림 기능을 추가합니다.\n\n## 🛠️ 변경 사항\n- Pull Request 자동 생성 시 사용되는 스크립트의 설명 생성 프롬프트를 개선하여, 마크다운 형식에 맞게 \"요약\", \"변경 사항\", \"영향 및 주의사항\" 섹션을 포함하도록 수정했습니다.\n- Pull Request 자동 생성 워크플로우에서 레이블 결정 로직을 제거하고, Discord 알림 기능을 추가하는 워크플로우를 새로 생성했습니다.\n- Discord 알림 메시지 및 Git 커밋 메시지에서 특수 문자를 이스케이프 처리하여 오류를 방지하도록 수정했습니다.\n- `coderabbit.yaml` 설정을 삭제하고, `app/page.tsx`에 TODO 주석을 추가했습니다.\n\n## 💡 영향 및 주의사항 (Optional)\n- Discord 웹훅 URL을 secrets에 추가해야 Discord 알림이 정상적으로 동작합니다.\n- `coderabbit.yaml` 파일이 삭제되었으므로, 해당 설정에 의존하던 기능은 작동하지 않습니다.\n\n---\n_Gemini로 자동 생성된 PR입니다._\n",
+        "number": 5,
+        "repository": "sngminn/me",
+        "title": "chore: CI/CD 워크플로우 및 PR 생성 스크립트 개선",
+        "type": "PullRequest",
+        "url": "https://github.com/sngminn/me/pull/5"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh4iq8",
+      "labels": ["enhancement"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Done",
+      "title": "chore: CI/CD 워크플로우 및 PR 생성 스크립트 개선"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 📝 요약\nCI/CD 워크플로우, Dockerfile, Biome 설정 업데이트 및 Git 커밋 메시지 처리 방식을 개선했습니다.\n\n## 🛠️ 변경 사항\n- `.github/workflows/ci-cd.yml` 파일에서 CI/CD 워크플로우가 `main` 브랜치뿐만 아니라 `develop` 브랜치에서도 트리거되도록 수정했습니다.\n- `Dockerfile`에서 `.next` 디렉토리 생성 및 권한 설정을 `RUN` 명령어로 변경하여 일관성을 높였습니다.\n- `biome.json` 파일에 CSS 관련 설정을 추가하여 CSS 모듈 및 Tailwind CSS 직접 지시어 파싱을 활성화했습니다.\n- `.vscode/settings.json` 파일에 `css.lint.unknownAtRules: \"ignore\"` 설정을 추가하여 알 수 없는 CSS at-rules에 대한 린팅 경고를 무시하도록 했습니다.\n- `scripts/smart-commit.mjs`에서 Git 커밋 메시지를 전달하는 방식을 `execSync`의 `input` 옵션을 사용하여 쉘 인젝션 공격을 방지하고 안전하게 처리하도록 변경했습니다.\n\n## 💡 영향 및 주의사항 (Optional)\n- `develop` 브랜치에 대한 CI/CD 파이프라인이 활성화됩니다.\n- Git 커밋 메시지를 생성하는 스크립트의 동작 방식이 변경되었으므로, 해당 스크립트 사용 시 이전과 동일하게 동작하는지 확인이 필요합니다.\n\n---\n_Gemini로 자동 생성된 PR입니다._\n",
+        "number": 15,
+        "repository": "sngminn/me",
+        "title": "chore: CI/CD, Dockerfile, Biome 설정 및 커밋 메시지 처리 개선",
+        "type": "PullRequest",
+        "url": "https://github.com/sngminn/me/pull/15"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh48n8",
+      "labels": ["enhancement"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Done",
+      "title": "chore: CI/CD, Dockerfile, Biome 설정 및 커밋 메시지 처리 개선"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n개발 환경을 구축하고 필수 라이브러리를 설치하여 개발 준비를 마친다.\n\n## 세부 작업 (Tasks)\n- [ ] 필수 라이브러리 설치 (framer-motion, lucide-react, next-themes, clsx, tailwind-merge, react-force-graph-2d, @types/d3)\n- [ ] Tailwind CSS v4 설정 검증\n- [ ] 디렉토리 구조 생성 (/content, /src/lib/obsidian, /src/components/graph)\n\n## 완료 조건 (Acceptance Criteria)\n- package.json에 모든 의존성이 추가되어야 함.\n- pnpm dev 실행 시 에러 없이 서버가 켜져야 함.\n- 다크 모드 전환이 동작해야 함.",
+        "number": 28,
+        "repository": "sngminn/me",
+        "title": "프로젝트 초기 세팅",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/28"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh5lac",
+      "labels": ["setup"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Backlog",
+      "title": "프로젝트 초기 세팅"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n로컬의 마크다운 파일들을 읽어와서 웹에서 사용할 수 있는 데이터로 변환한다.\n\n## 세부 작업 (Tasks)\n- [ ] MDX 파서 구현 (src/lib/obsidian/post.ts)\n- [ ] 그래프 데이터 추출기 구현 (src/lib/obsidian/graph.ts)\n\n## 완료 조건 (Acceptance Criteria)\n- /content 폴더에 있는 .md 파일을 읽어서 JSON 형태로 반환하는 함수가 있어야 함.\n- 내부 링크([[Link]])가 올바르게 파싱되어 links 배열에 담겨야 함.",
+        "number": 29,
+        "repository": "sngminn/me",
+        "title": "옵시디언 파이프라인 구축",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/29"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh5lag",
+      "labels": ["feature"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Backlog",
+      "title": "옵시디언 파이프라인 구축"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n메인 화면에 옵시디언 그래프를 띄우고, 인터랙티브한 네비게이션을 구현한다.\n\n## 세부 작업 (Tasks)\n- [ ] Graph View 컴포넌트 개발 (NeuralGraph.tsx)\n- [ ] 인터랙션 구현 (Node Click, Hover)\n\n## 완료 조건 (Acceptance Criteria)\n- 메인 페이지 접속 시 그래프가 렌더링되어야 함.\n- 노드를 클릭하면 해당 포스트 페이지로 이동해야 함.\n- 그래프가 화면 중앙에 예쁘게 위치해야 함.",
+        "number": 30,
+        "repository": "sngminn/me",
+        "title": "신경망 네비게이션 구현",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/30"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh5law",
+      "labels": ["feature"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Backlog",
+      "title": "신경망 네비게이션 구현"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n개별 포스트를 읽을 수 있는 상세 페이지와 기본 레이아웃을 만든다.\n\n## 세부 작업 (Tasks)\n- [ ] 공통 레이아웃 (layout.tsx)\n- [ ] 상세 페이지 (/posts/[slug]/page.tsx)\n\n## 완료 조건 (Acceptance Criteria)\n- /posts/hello-world 접속 시 글 내용이 보여야 함.\n- 마크다운 문법이 예쁘게 스타일링되어야 함.",
+        "number": 31,
+        "repository": "sngminn/me",
+        "title": "포스트 상세 페이지 & UI",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/31"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh5la4",
+      "labels": ["feature"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Backlog",
+      "title": "포스트 상세 페이지 & UI"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n실제 서버에 배포하고 동작을 확인한다.\n\n## 세부 작업 (Tasks)\n- [ ] 배포 스크립트 확인\n- [ ] 최종 테스트 (데스크탑/모바일)\n\n## 완료 조건 (Acceptance Criteria)\n- main 브랜치 푸시 후, 홈서버 URL로 접속 가능해야 함.\n- 모바일에서도 그래프가 터치로 조작되어야 함.",
+        "number": 32,
+        "repository": "sngminn/me",
+        "title": "배포 및 검증",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/32"
+      },
+      "id": "PVTI_lAHOCABwHM4BJYZbzgh5lbE",
+      "labels": ["deploy"],
+      "repository": "https://github.com/sngminn/me",
+      "status": "Backlog",
+      "title": "배포 및 검증"
+    }
+  ],
+  "totalCount": 8
+}
