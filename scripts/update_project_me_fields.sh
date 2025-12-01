@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 PROJECT_ID="PVT_kwHOCABwHM4BJYZb"
 

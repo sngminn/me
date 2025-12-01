@@ -103,7 +103,7 @@ export PROMPT
 # 3. Call Gemini
 echo "🤖 Asking Gemini..."
 
-API_URL="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=$GEMINI_API_KEY"
+API_URL="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent"
 
 RESPONSE=$(node -e "
   const https = require('https');
@@ -113,7 +113,10 @@ RESPONSE=$(node -e "
     contents: [{ parts: [{ text: prompt }] }]
   });
 
-  const req = https.request('$API_URL', {
+  const url = new URL('$API_URL');
+  url.searchParams.set('key', process.env.GEMINI_API_KEY);
+
+  const req = https.request(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' }
   }, (res) => {
@@ -145,7 +148,8 @@ GENERATED_BODY=$(echo "$RESPONSE" | sed '1,/^---$/d')
 # Function to edit text in vim
 edit_text() {
     local content="$1"
-    local tmp_file=$(mktemp)
+    local tmp_file
+    tmp_file=$(mktemp) || { echo "❌ Failed to create temp file"; return 1; }
     echo "$content" > "$tmp_file"
     
     # --- FIX 2: Explicit TTY redirection for vim ---
