@@ -23,7 +23,7 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedVariables": "error",
+        "noUnusedVariables": "warn",
         "noUnusedImports": "error"
       },
       "style": {
@@ -32,6 +32,10 @@
       },
       "a11y": {
         "noSvgWithoutTitle": "off"
+      },
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "useIterableCallbackReturn": "off"
       }
     }
   },

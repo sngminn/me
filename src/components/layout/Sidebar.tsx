@@ -1,0 +1,34 @@
+import type { Post } from '@/src/lib/obsidian/types';
+
+interface SidebarProps {
+  posts: Post[];
+  relatedPosts?: Post[];
+  className?: string;
+}
+
+export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
+  return (
+    <aside>
+      <div>
+        {relatedPosts && relatedPosts.length > 0 && (
+          <>
+            <h3>Related</h3>
+            <ul>
+              {relatedPosts.map((post) => (
+                <li key={post.slug}>{post.title}</li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
+      <div>
+        <h3>All Posts</h3>
+        <ul>
+          {posts.map((post) => (
+            <li key={post.slug}>{post.title}</li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  );
+}
