@@ -17,7 +17,7 @@ export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
             <ul>
               {relatedPosts.map((post) => (
                 <li key={post.slug}>
-                  <Link href={post.slug}>{post.title}</Link>
+                  <Link href={`/posts/${post.slug}`}>{post.title}</Link>
                 </li>
               ))}
             </ul>
@@ -29,7 +29,7 @@ export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
         <ul>
           {posts.map((post) => (
             <li key={post.slug}>
-              <Link href={post.slug}>{post.title}</Link>
+              <Link href={`/posts/${post.slug}`}>{post.title}</Link>
             </li>
           ))}
         </ul>
