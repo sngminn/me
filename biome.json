@@ -34,8 +34,8 @@
         "noSvgWithoutTitle": "off"
       },
       "suspicious": {
-        "noAssignInExpressions": "off",
-        "useIterableCallbackReturn": "off"
+        "noAssignInExpressions": "warn",
+        "useIterableCallbackReturn": "warn"
       }
     }
   },

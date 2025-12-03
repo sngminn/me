@@ -10,6 +10,7 @@ export function getGraphData(): GraphData {
   // Key: lowercase slug, Value: actual slug
   const slugMap = new Map<string, string>();
   posts.forEach((p) => slugMap.set(p.slug.toLowerCase(), p.slug));
+  const addedGhosts = new Set<string>(); // Track added ghost nodes
 
   // 1. Create Nodes
   posts.forEach((post) => {
@@ -45,7 +46,7 @@ export function getGraphData(): GraphData {
         targetSlug = linkTarget.replace(/\s+/g, '-').toLowerCase(); // Simple slugify
 
         // Add ghost node if not already added
-        if (!nodes.find((n) => n.id === targetSlug)) {
+        if (!addedGhosts.has(targetSlug)) {
           nodes.push({
             id: targetSlug,
             name: linkTarget,
@@ -53,6 +54,7 @@ export function getGraphData(): GraphData {
           });
           // Update map to avoid duplicates
           slugMap.set(linkTarget.toLowerCase(), targetSlug);
+          addedGhosts.add(targetSlug);
         }
       }
 

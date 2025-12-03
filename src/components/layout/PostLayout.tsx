@@ -10,7 +10,7 @@ interface PostLayoutProps {
 
 export function PostLayout({ children, allPosts, relatedPosts }: PostLayoutProps) {
   return (
-    <div>
+    <div className="flex gap-[24px]">
       <Sidebar posts={allPosts} relatedPosts={relatedPosts} />
       <main>{children}</main>
     </div>

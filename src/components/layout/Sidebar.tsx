@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Post } from '@/src/lib/obsidian/types';
 
 interface SidebarProps {
@@ -15,7 +16,9 @@ export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
             <h3>Related</h3>
             <ul>
               {relatedPosts.map((post) => (
-                <li key={post.slug}>{post.title}</li>
+                <li key={post.slug}>
+                  <Link href={post.slug}>{post.title}</Link>
+                </li>
               ))}
             </ul>
           </>
@@ -25,7 +28,9 @@ export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
         <h3>All Posts</h3>
         <ul>
           {posts.map((post) => (
-            <li key={post.slug}>{post.title}</li>
+            <li key={post.slug}>
+              <Link href={post.slug}>{post.title}</Link>
+            </li>
           ))}
         </ul>
       </div>
