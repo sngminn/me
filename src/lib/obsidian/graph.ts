@@ -1,3 +1,4 @@
+import { slugify } from '@/lib/utils/slugify';
 import { getAllPosts } from './post';
 import type { GraphData, GraphLink, GraphNode } from './types';
 
@@ -43,7 +44,7 @@ export function getGraphData(): GraphData {
 
       // If target doesn't exist, create a ghost node
       if (!targetSlug) {
-        targetSlug = linkTarget.replace(/\s+/g, '-').toLowerCase(); // Simple slugify
+        targetSlug = slugify(linkTarget); // Simple slugify
 
         // Add ghost node if not already added
         if (!addedGhosts.has(targetSlug)) {

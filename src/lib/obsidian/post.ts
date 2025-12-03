@@ -1,6 +1,7 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import { slugify } from '@/lib/utils/slugify';
 import type { Post } from './types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
@@ -46,7 +47,7 @@ export function getPostBySlug(slug: string): Post | null {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    // Transform WikiLinks [[link]] -> [link](/posts/link)
+    // obsidian 링크 [[link]] -> 일반 마크다운 링크 [link](/posts/link)로 변환
     const processedContent = content.replace(/\[\[(.*?)\]\]/g, (match, p1) => {
       let linkTarget = p1;
       let linkText = p1;
@@ -58,7 +59,7 @@ export function getPostBySlug(slug: string): Post | null {
         linkText = parts[1];
       }
 
-      const targetSlug = linkTarget.trim().replace(/\s+/g, '-').toLowerCase();
+      const targetSlug = slugify(linkTarget);
       return `[${linkText}](/posts/${targetSlug})`;
     });
 
@@ -70,7 +71,10 @@ export function getPostBySlug(slug: string): Post | null {
       content: processedContent,
       excerpt: data.excerpt || '',
     } as Post;
-  } catch (_) {
+  } catch (e) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`get post error ${slug}:`, e);
+    }
     return null;
   }
 }
