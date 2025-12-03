@@ -1,0 +1,225 @@
+{
+  "items": [
+    {
+      "content": {
+        "body": "# 🚀 Pull Request\r\n\r\n## 📝 PR 유형\r\n\r\n- [x] 기능 추가 (Feature)\r\n- [ ] 버그 수정 (Bug Fix)\r\n- [ ] 코드 개선 (Refactoring)\r\n- [ ] 스타일 변경 (UI/UX)\r\n- [ ] 환경 설정 (Configuration)\r\n- [ ] 기타 (Other)\r\n\r\n## 🔍 변경 사항\r\n- 폴더 전체 탐색 추가\r\n<!-- 이 PR에서 무엇이 변경되었는지 간략하게 설명해주세요 -->\r\n\r\n## 📸 스크린샷\r\n\r\n<!-- UI 변경사항이 있다면 스크린샷을 첨부해주세요 -->\r\n\r\n\r\n## 🚧 관련 이슈\r\n\r\n<!-- 관련 이슈 번호가 있다면 적어주세요 (e.g. #123 또는 ISSUE-123 과 같은 JIRA key) -->\r\n\r\n## 💡 추가 정보\r\n\r\n<!-- 리뷰어가 알아야 할 추가 정보가 있다면 여기에 적어주세요 -->",
+        "number": 2,
+        "repository": "sngminn/archive",
+        "title": "Feat/explore entire folder",
+        "type": "PullRequest",
+        "url": "https://github.com/sngminn/archive/pull/2"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgfogk8",
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Done",
+      "title": "Feat/explore entire folder"
+    },
+    {
+      "content": {
+        "body": "선택한 노트에 따라 URI 수정하여\n브라우저 이전, 다음 탐색 원활히",
+        "number": 7,
+        "repository": "sngminn/archive",
+        "title": "선택된 노트에 따른 URI 수정",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/7"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgff81U",
+      "labels": ["enhancement"],
+      "repository": "https://github.com/sngminn/archive",
+      "status": "In review",
+      "title": "선택된 노트에 따른 URI 수정"
+    },
+    {
+      "content": {
+        "body": "```JSON\n...\n\"links\": [\"노트_고유_ID_2\"],\n    \"backlinks\": [\"노트_고유_ID_3\"]\n...\n```\n노트 리스트 객체에 위 형태의 링크, 백링크 추가하기",
+        "number": 4,
+        "repository": "sngminn/archive",
+        "title": "노트 리스트 객체 내 링크, 백링크 추가",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/4"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgff8po",
+      "labels": ["enhancement"],
+      "repository": "https://github.com/sngminn/archive",
+      "status": "In progress",
+      "title": "노트 리스트 객체 내 링크, 백링크 추가"
+    },
+    {
+      "content": {
+        "body": "### 🎯 **1. 이 작업의 최종 목표는 무엇인가?**\n- 간단한 스타일링을 통해 가독성 개선\n\n### 📝 **2. 목표 달성을 위한 구체적인 할 일은?**\n- [ ] 레퍼런스 탐색\n- [ ] 피그마 작업\n- [ ] 피그마 디자인 Tailwind 토큰화\n- [ ] 컴포넌트 분리\n\n### 🧠 **3. 어떤 방식으로 접근할 생각인가?**\n- 최대한 효율적이며 유지보수가 좋은 방향으로 작업 진행\n\n### 💣 **4. 예상되는 어려움이나 리스크는?**\n- 피그마 디자인 자동화 토큰 처음이라 조사 필요\n- 어떤 게 가장 적당한 디자인인지 잘 모르겠음\n\n### ✅ **5. '완료'의 정의**\n- [ ] 노트 리스트 페이지\n- [ ] 노트 콘텐츠 페이지\n- [ ] 아름다움(중요)\n- [ ] 반응형 디자인: 특히 iOS 26 사파리 UI 좀 맞추기...",
+        "number": 9,
+        "repository": "sngminn/archive",
+        "title": "간단한 스타일링",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/9"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgflr8c",
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Ready",
+      "title": "간단한 스타일링"
+    },
+    {
+      "content": {
+        "body": "```JSON\n{\n  \"public/a\": [\"abc\", \"def\"],\n  \"public/a/nested\": [\"ghi\"],\n  \"public/b\": [\"xyz\"]\n}\n```\n위 형태의 폴더 색인용 JSON 만들기",
+        "number": 3,
+        "repository": "sngminn/archive",
+        "title": "폴더별 색인 JSON",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/3"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgff8lU",
+      "labels": ["enhancement", "good first issue"],
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Backlog",
+      "title": "폴더별 색인 JSON"
+    },
+    {
+      "content": {
+        "body": "<img width=\"473\" height=\"455\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/62aaf391-1e88-4726-9e4e-84241e849049\" />\n\n옵시디언처럼 d3.js를 통한 노트 링크 시각화",
+        "number": 5,
+        "repository": "sngminn/archive",
+        "title": "d3.js를 통한 노트 링크 시각화",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/5"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgff8s0",
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Backlog",
+      "title": "d3.js를 통한 노트 링크 시각화"
+    },
+    {
+      "content": {
+        "body": "published: true만 내보내기\n\n아마 서버사이드에서 관리해야..?",
+        "number": 6,
+        "repository": "sngminn/archive",
+        "title": "published 된 것만 내보내기",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/6"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgff8y8",
+      "labels": ["enhancement"],
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Backlog",
+      "title": "published 된 것만 내보내기"
+    },
+    {
+      "content": {
+        "body": "### 🎯 **1. 이 작업의 최종 목표는 무엇인가?**\nURI내 파일 경로 제거\n\n### 📝 **2. 목표 달성을 위한 구체적인 할 일은?**\n- [ ] URI내 파일 경로 제거\n- [ ] paths 없이 파일 id만으로 해당 파일 찾을 수 있도록 코드 수정\n\n### 🧠 **3. 어떤 방식으로 접근할 생각인가?**\n- 기존 함수 알고리즘 수정\n\n### 💣 **4. 예상되는 어려움이나 리스크는?**\n- 없음\n\n### ✅ **5. '완료'의 정의**\n- [ ] URI에서 id만으로 특정 파일에 접근이 가능함",
+        "number": 11,
+        "repository": "sngminn/archive",
+        "title": "URI내 파일 경로 제거",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/11"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgfoOxo",
+      "labels": ["enhancement"],
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Backlog",
+      "title": "URI내 파일 경로 제거"
+    },
+    {
+      "content": {
+        "body": "![high](https://www.gstatic.com/codereviewagent/high-priority.svg)\r\n\r\n`searchDirectory` 함수 내에서 `for...of` 루프와 `await`를 사용하여 파일과 디렉토리를 순차적으로 처리하고 있습니다. 이 방식은 파일이 많아질 경우 성능 저하의 원인이 될 수 있습니다. 주석으로도 남겨주셨듯이, `Promise.all`을 사용하여 병렬로 처리하면 성능을 크게 향상시킬 수 있습니다.\r\n\r\n또한, 재귀 호출 시 `path.join(dir, file.name)`을 사용하고 `getNoteMetadata`를 호출할 때도 `dir`을 전달하는 것이 코드의 명확성과 일관성을 높여줍니다.\r\n\r\n```typescript\r\n    async function searchDirectory(dir: string) {\r\n      const files = await fs.promises.readdir(dir, { withFileTypes: true });\r\n\r\n      await Promise.all(\r\n        files.map(async (file) => {\r\n          const fullPath = path.join(dir, file.name);\r\n          if (file.isDirectory()) {\r\n            await searchDirectory(fullPath);\r\n          } else if (file.name.endsWith(\".md\")) {\r\n            const relativePath = path.relative(notesPath, dir);\r\n            const noteId = relativePath\r\n              ? `${relativePath}/${file.name.replace(\".md\", \"\")}`\r\n              : file.name.replace(\".md\", \"\");\r\n\r\n            const metadata = await getNoteMetadata(file.name, dir);\r\n\r\n            result[noteId] = {\r\n              ...metadata,\r\n              path: dir,\r\n            };\r\n          }\r\n        })\r\n      );\r\n    }\r\n```\r\n\r\n_Originally posted by @gemini-code-assist[bot] in https://github.com/KingsMinn/archive/pull/8#discussion_r2409401410_\r\n            ",
+        "number": 10,
+        "repository": "sngminn/archive",
+        "title": "searchDirectory 병렬처리",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/archive/issues/10"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgfogkw",
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Backlog",
+      "title": "searchDirectory 병렬처리"
+    },
+    {
+      "content": {
+        "body": "## 📝 **요약: 무엇을, 왜 바꿨는가?**\r\n- 기존에 한 페이지 내에 있었던 노트 리스트, 내용 부분을 페이지로 분리: 리스트를 흩어서 찾아보는 방식의 UX를 기대한 게 아님. 위키처럼 노트 내 연결된 페이지를 끊임없이 탐색하는 것이 목표이므로 글에 온전히 집중할 수 있도록 변경함.\r\n-  ISR 및 cache 적용: 최적화, SSR은 블로그 특성상 비효율적임\r\n- getNote.ts 내 함수 리팩토링: 상향식 접근법으로 수정\r\n\r\n- 깃허브 템플릿 추가\r\n\r\n## 🔗 **관련 이슈**\r\n- Closes #7\r\n\r\n## ✅ **주요 변경점**\r\n- page.tsx에 있던 note list, note content를 페이지 분리.\r\n- note content는 [...id]내에 두어 상대 경로와 함께 URI가 구성될 수 있도록 함\r\n- ISR 적용하여 UX 개선\r\n- getNote.js 리팩토링 진행하여 DX개선\r\n\r\n## 📸 **스크린샷 (UI 변경이 있는 경우)**\r\nhttps://github.com/user-attachments/assets/952751ef-7811-4fe6-9ea2-973fa381b338\r\n\r\n## 💬 **리뷰어에게**\r\n- **고민한 지점:** ISR 및 cache를 적용했는데, 최적화가 잘되어있는지, 그리고 unstable_cache도입을 고려하고 있는데 현재 코드랑 비교했을 때 어떨 것 같은지\r\n- **집중 리뷰 요청:** getNote.ts가 전체적으로 괜찮은지, 프로젝트 내 코드 구조가 괜찮은지\r\n",
+        "number": 8,
+        "repository": "sngminn/archive",
+        "title": "Feat/nested folder support with isr",
+        "type": "PullRequest",
+        "url": "https://github.com/sngminn/archive/pull/8"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgfogk0",
+      "repository": "https://github.com/sngminn/archive",
+      "status": "Backlog",
+      "title": "Feat/nested folder support with isr"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n개발 환경을 구축하고 필수 라이브러리를 설치하여 개발 준비를 마친다.\n\n## 세부 작업 (Tasks)\n- [ ] 필수 라이브러리 설치 (framer-motion, lucide-react, next-themes, clsx, tailwind-merge, react-force-graph-2d, @types/d3)\n- [ ] Tailwind CSS v4 설정 검증\n- [ ] 디렉토리 구조 생성 (/content, /src/lib/obsidian, /src/components/graph)\n\n## 완료 조건 (Acceptance Criteria)\n- package.json에 모든 의존성이 추가되어야 함.\n- pnpm dev 실행 시 에러 없이 서버가 켜져야 함.\n- 다크 모드 전환이 동작해야 함.",
+        "number": 28,
+        "repository": "sngminn/me",
+        "title": "프로젝트 초기 세팅 (Project Initialization)",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/28"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgh5l2Q",
+      "labels": ["setup"],
+      "repository": "https://github.com/sngminn/me",
+      "title": "프로젝트 초기 세팅 (Project Initialization)"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n로컬의 마크다운 파일들을 읽어와서 웹에서 사용할 수 있는 데이터로 변환한다.\n\n## 세부 작업 (Tasks)\n- [ ] MDX 파서 구현 (src/lib/obsidian/post.ts)\n- [ ] 그래프 데이터 추출기 구현 (src/lib/obsidian/graph.ts)\n\n## 완료 조건 (Acceptance Criteria)\n- /content 폴더에 있는 .md 파일을 읽어서 JSON 형태로 반환하는 함수가 있어야 함.\n- 내부 링크([[Link]])가 올바르게 파싱되어 links 배열에 담겨야 함.",
+        "number": 29,
+        "repository": "sngminn/me",
+        "title": "옵시디언 파이프라인 구축 (Obsidian Pipeline)",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/29"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgh5l2c",
+      "labels": ["feature"],
+      "repository": "https://github.com/sngminn/me",
+      "title": "옵시디언 파이프라인 구축 (Obsidian Pipeline)"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n메인 화면에 옵시디언 그래프를 띄우고, 인터랙티브한 네비게이션을 구현한다.\n\n## 세부 작업 (Tasks)\n- [ ] Graph View 컴포넌트 개발 (NeuralGraph.tsx)\n- [ ] 인터랙션 구현 (Node Click, Hover)\n\n## 완료 조건 (Acceptance Criteria)\n- 메인 페이지 접속 시 그래프가 렌더링되어야 함.\n- 노드를 클릭하면 해당 포스트 페이지로 이동해야 함.\n- 그래프가 화면 중앙에 예쁘게 위치해야 함.",
+        "number": 30,
+        "repository": "sngminn/me",
+        "title": "신경망 네비게이션 구현 (Neural Navigation)",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/30"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgh5l24",
+      "labels": ["feature"],
+      "repository": "https://github.com/sngminn/me",
+      "title": "신경망 네비게이션 구현 (Neural Navigation)"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n개별 포스트를 읽을 수 있는 상세 페이지와 기본 레이아웃을 만든다.\n\n## 세부 작업 (Tasks)\n- [ ] 공통 레이아웃 (layout.tsx)\n- [ ] 상세 페이지 (/posts/[slug]/page.tsx)\n\n## 완료 조건 (Acceptance Criteria)\n- /posts/hello-world 접속 시 글 내용이 보여야 함.\n- 마크다운 문법이 예쁘게 스타일링되어야 함.",
+        "number": 31,
+        "repository": "sngminn/me",
+        "title": "포스트 상세 페이지 & UI (Post Detail & UI)",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/31"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgh5l3E",
+      "labels": ["feature"],
+      "repository": "https://github.com/sngminn/me",
+      "title": "포스트 상세 페이지 & UI (Post Detail & UI)"
+    },
+    {
+      "assignees": ["sngminn"],
+      "content": {
+        "body": "## 목표\n실제 서버에 배포하고 동작을 확인한다.\n\n## 세부 작업 (Tasks)\n- [ ] 배포 스크립트 확인\n- [ ] 최종 테스트 (데스크탑/모바일)\n\n## 완료 조건 (Acceptance Criteria)\n- main 브랜치 푸시 후, 홈서버 URL로 접속 가능해야 함.\n- 모바일에서도 그래프가 터치로 조작되어야 함.",
+        "number": 32,
+        "repository": "sngminn/me",
+        "title": "배포 및 검증 (Deploy & Verify)",
+        "type": "Issue",
+        "url": "https://github.com/sngminn/me/issues/32"
+      },
+      "id": "PVTI_lAHOCABwHM4BEvb5zgh5l3I",
+      "labels": ["deploy"],
+      "repository": "https://github.com/sngminn/me",
+      "title": "배포 및 검증 (Deploy & Verify)"
+    }
+  ],
+  "totalCount": 15
+}
