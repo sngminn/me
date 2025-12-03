@@ -1,6 +1,8 @@
 import { ModeToggle } from '@/components/mode-toggle';
+import { getAllPosts } from '@/src/lib/obsidian/post';
 
 export default function Home() {
+  const posts = getAllPosts();
   return (
     // TODO: 나중에 수정
     <div className="flex min-h-screen items-center justify-center bg-background font-sans">
