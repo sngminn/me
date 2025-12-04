@@ -11,7 +11,7 @@
     "check": "biome check --write .",
     "commit": "node scripts/smart-commit.mjs",
     "prepare": "husky",
-    "build:tokens": "style-dictionary build"
+    "build:tokens": "style-dictionary build --config style-dictionary.config.json"
   },
   "dependencies": {
     "clsx": "^2.1.1",
