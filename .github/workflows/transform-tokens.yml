@@ -1,0 +1,33 @@
+name: Transform Tokens
+
+on:
+    push:
+        paths:
+            - 'tokens.json'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: '20'
+
+            - name: Install Dependencies
+              run: pnpm install
+
+            - name: Build Tokens
+              run: pnpm run build:tokens
+
+            - name: Create Pull Request
+              uses: peter-evans/create-pull-request@v5
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+                commit-message: "design: update design tokens"
+                title: "🎨 Design Tokens Update"
+                body: "피그마 디자인 토큰이 업데이트 되었습니다. 자동으로 생성된 PR입니다."
+                branch: "design-token"
+                base: "develop"
