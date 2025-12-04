@@ -4,6 +4,7 @@ on:
     push:
         paths:
             - 'tokens.json'
+    workflow_dispatch:
 
 jobs:
     build:
