@@ -1,7 +1,13 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 @import "tailwindcss";
+@import "./tokens.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-text-base: var(--color-text-base);
+}
 
 :root {
   --background: #ffffff;

@@ -10,7 +10,8 @@
     "format": "biome format --write .",
     "check": "biome check --write .",
     "commit": "node scripts/smart-commit.mjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:tokens": "style-dictionary build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -36,6 +37,7 @@
     "eslint-config-next": "16.0.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "style-dictionary": "^5.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
