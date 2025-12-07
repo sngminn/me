@@ -3,6 +3,15 @@
  */
 
 :root {
-  --global-global-text-base: #a5a5b0;
-  --global-global-primary: #b1ff08;
+  --text-default: #484a42;
+  --primary-main: #adff08;
+  --primary-hover: #d9ff8e;
+  --primary-bg: #f5ffe0;
+  --bg-default: #ffffff;
+  --bg-subtle: #f2f5eb;
+  --bg-inverse: #0d0d0c;
+  --text-subtle: #6a6d63;
+  --text-inverse: #dadcd3;
+  --text-highlight: #0d0d0c;
+  --text-bright: #2d2f29;
 }

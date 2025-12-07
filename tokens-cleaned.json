@@ -1,1 +1,46 @@
-{}
+{
+  "text-default": {
+    "value": "#484a42",
+    "type": "color"
+  },
+  "primary-main": {
+    "value": "#adff08",
+    "type": "color"
+  },
+  "primary-hover": {
+    "value": "#d9ff8e",
+    "type": "color"
+  },
+  "primary-bg": {
+    "value": "#f5ffe0",
+    "type": "color"
+  },
+  "bg-default": {
+    "value": "#ffffff",
+    "type": "color"
+  },
+  "bg-subtle": {
+    "value": "#f2f5eb",
+    "type": "color"
+  },
+  "bg-inverse": {
+    "value": "#0d0d0c",
+    "type": "color"
+  },
+  "text-subtle": {
+    "value": "#6a6d63",
+    "type": "color"
+  },
+  "text-inverse": {
+    "value": "#dadcd3",
+    "type": "color"
+  },
+  "text-highlight": {
+    "value": "#0d0d0c",
+    "type": "color"
+  },
+  "text-bright": {
+    "value": "#2d2f29",
+    "type": "color"
+  }
+}
