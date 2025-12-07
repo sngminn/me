@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { PostLayout } from '@/src/components/layout/PostLayout';
@@ -29,6 +30,13 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <PostLayout allPosts={allPosts}>
+      <Image
+        src="/lineDrawing.png"
+        fill
+        aria-hidden
+        alt="line drawing"
+        className="pointer-events-none -z-10"
+      />
       <article className="w-[720px] min-w-[720px]">
         <div className="flex gap-3 items-center">
           <span>{longDate(post.date)}</span>
