@@ -77,4 +77,4 @@ jobs:
             rm me.tar
             docker stop me || true
             docker rm me || true
-            docker run -d --restart unless-stopped -p 3000:3000 --name me me:latest
+            docker run -d --restart unless-stopped -p 3000:3000 -e GOOGLE_SITE_VERIFICATION='${{ secrets.GOOGLE_SITE_VERIFICATION }}' --name me me:latest
