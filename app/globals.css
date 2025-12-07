@@ -5,27 +5,130 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-primary: var(--color-primary);
-  --color-text-base: var(--color-text-base);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Brand Colors */
+  --color-primary-main: var(--primary-main);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-bg: var(--primary-bg);
+
+  /* Background Colors */
+  --color-bg-default: var(--bg-default);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-inverse: var(--bg-inverse);
+
+  /* Text Colors (Tailwind Class Mapping) */
+  --color-text-default: var(--text-default);
+  --color-text-subtle: var(--text-subtle);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-highlight: var(--text-highlight);
+  --color-text-bright: var(--text-bright);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: var(--bg-default);
+  --foreground: var(--text-default);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: "pretendard", sans-serif;
+}
+
+.prose {
+  max-width: none; /* 너비 제한 해제 (레이아웃에서 잡으니까) */
+  line-height: 1.5;
+}
+
+/* Headings */
+.prose h1 {
+  color: var(--text-highlight);
+  font-weight: 700;
+  font-size: 64px;
+  margin-bottom: 64px;
+}
+
+.prose h1 a {
+  color: var(--text-highlight);
+  text-underline-offset: 12px;
+  text-decoration-color: var(--color-text-bright);
+  text-decoration-thickness: 4px;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: var(--text-highlight);
+  font-weight: 700;
+}
+
+/* Body Text */
+.prose p,
+.prose ul,
+.prose ol {
+  color: var(--text-default);
+  margin-bottom: 24px;
+}
+
+.prose ul {
+  padding-left: 1em;
+  list-style-type: disc;
+}
+
+.prose ol {
+  padding-left: 1em;
+  list-style-type: decimal;
+}
+
+/* Links */
+.prose a {
+  color: var(--text-bright);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose a:hover {
+  color: var(--text-highlight);
+}
+
+/* Strong / Bold */
+.prose strong {
+  color: var(--text-highlight);
+  font-weight: 600;
+}
+
+/* Blockquote */
+.prose blockquote {
+  border-left-color: var(--primary-main);
+  color: var(--text-subtle);
+  font-style: italic;
+}
+
+/* Code */
+.prose code {
+  color: var(--text-highlight);
+  background-color: var(--bg-subtle);
+  padding: 0.2em 0.4em;
+  margin: 0 4px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+.prose pre {
+  background-color: var(--bg-inverse);
+  color: var(--text-inverse);
+}
+
+/* Lists */
+.prose ul > li::marker {
+  color: var(--primary-main);
+}
+.prose ol > li::marker {
+  color: var(--primary-main);
+}
+
+/* HR */
+.prose hr {
+  border-color: var(--bg-subtle); /* or border-muted if exists */
 }

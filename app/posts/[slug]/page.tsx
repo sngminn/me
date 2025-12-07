@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { PostLayout } from '@/src/components/layout/PostLayout';
+import { longDate } from '@/src/lib/day';
 import { getAllPosts, getPostBySlug } from '@/src/lib/obsidian/post';
 
 interface PageProps {
@@ -28,10 +29,20 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <PostLayout allPosts={allPosts}>
-      <article>
-        <h1>{post.title}</h1>
-        <span>{String(post.date)}</span>
-        <MDXRemote source={post.content} />
+      <article className="w-[720px] min-w-[720px]">
+        <div className="flex gap-3 items-center">
+          <span>{longDate(post.date)}</span>
+          <ul className="flex gap-3">
+            {post.tags.map((tag) => (
+              <li key={tag} className="bg-primary-bg text-primary-main px-3 py-0.5 rounded-full">
+                <span>{tag}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="prose dark:prose-invert">
+          <MDXRemote source={post.content} />
+        </div>
       </article>
     </PostLayout>
   );
