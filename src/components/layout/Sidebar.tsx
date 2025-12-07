@@ -10,7 +10,7 @@ interface SidebarProps {
   className?: string;
 }
 
-export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
+export function Sidebar({ posts, relatedPosts }: SidebarProps) {
   return (
     <aside className="w-[20%] min-w-[420px] fixed top-0 h-full flex flex-col p-8">
       <div className="w-full h-48 relative">
