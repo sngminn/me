@@ -72,6 +72,16 @@ body {
   margin-bottom: 24px;
 }
 
+.prose ul {
+  padding-left: 1em;
+  list-style-type: disc;
+}
+
+.prose ol {
+  padding-left: 1em;
+  list-style-type: decimal;
+}
+
 /* Links */
 .prose a {
   color: var(--text-bright);
@@ -112,10 +122,10 @@ body {
 
 /* Lists */
 .prose ul > li::marker {
-  color: var(--text-subtle);
+  color: var(--primary-main);
 }
 .prose ol > li::marker {
-  color: var(--text-subtle);
+  color: var(--primary-main);
 }
 
 /* HR */
