@@ -11,7 +11,8 @@
     "check": "biome check --write .",
     "commit": "node scripts/smart-commit.mjs",
     "prepare": "husky",
-    "build:tokens": "style-dictionary build"
+    "transform:tokens": "token-transformer tokens.json tokens-cleaned.json primitives,color/light,color/dark primitives",
+    "build:tokens": "pnpm transform:tokens && style-dictionary build --config style-dictionary.config.json"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -39,6 +40,7 @@
     "lint-staged": "^16.2.7",
     "style-dictionary": "^5.1.1",
     "tailwindcss": "^4",
+    "token-transformer": "^0.0.33",
     "typescript": "^5"
   },
   "lint-staged": {
