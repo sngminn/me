@@ -5,23 +5,33 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-primary: var(--color-primary);
-  --color-text-base: var(--color-text-base);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary-main); /* text-primary */
+  --color-text-default: var(--text-default); /* text-text-default */
+
+  /* Typography */
+  --color-prose-body: var(--text-default);
+  --color-prose-headings: var(--text-highlight);
+  --color-prose-links: var(--primary-main);
+  --color-prose-bold: var(--text-highlight);
+  --color-prose-counters: var(--text-subtle);
+  --color-prose-bullets: var(--text-subtle);
+  --color-prose-hr: var(--border-muted);
+  --color-prose-quotes: var(--text-highlight);
+  --color-prose-quote-borders: var(--border-default);
+  --color-prose-captions: var(--text-subtle);
+  --color-prose-code: var(--text-highlight);
+  --color-prose-pre-code: var(--text-bright);
+  --color-prose-pre-bg: var(--bg-inverse);
+  --color-prose-th-borders: var(--border-muted);
+  --color-prose-td-borders: var(--border-muted);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: var(--bg-default);
+  --foreground: var(--text-default);
 }
 
 body {

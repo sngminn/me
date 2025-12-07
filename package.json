@@ -10,9 +10,7 @@
     "format": "biome format --write .",
     "check": "biome check --write .",
     "commit": "node scripts/smart-commit.mjs",
-    "prepare": "husky",
-    "transform:tokens": "token-transformer tokens.json tokens-cleaned.json primitives,color/light,color/dark primitives",
-    "build:tokens": "pnpm transform:tokens && style-dictionary build --config style-dictionary.config.json"
+    "build:tokens": "node scripts/build-tokens.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -30,6 +28,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

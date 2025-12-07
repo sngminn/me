@@ -28,8 +28,8 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <PostLayout allPosts={allPosts}>
-      <article>
-        <h1>{post.title}</h1>
+      <article className="prose dark:prose-invert">
+        <h1 className="text-text-base ">{post.title}</h1>
         <span>{String(post.date)}</span>
         <MDXRemote source={post.content} />
       </article>
