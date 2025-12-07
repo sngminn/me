@@ -1,0 +1,35 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --text-default: #484a42;
+  --primary-main: #adff08;
+  --primary-hover: #d9ff8e;
+  --primary-bg: #f5ffe0;
+  --bg-default: #ffffff;
+  --bg-subtle: #f2f5eb;
+  --bg-inverse: #0d0d0c;
+  --text-subtle: #6a6d63;
+  --text-inverse: #dadcd3;
+  --text-highlight: #0d0d0c;
+  --text-bright: #2d2f29;
+}
+
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+.dark {
+  --text-default: #90928a;
+  --primary-main: #adff08;
+  --primary-hover: #659405;
+  --primary-bg: #111a00;
+  --bg-default: #0d0d0c;
+  --bg-subtle: #1e1f1b;
+  --bg-inverse: #f2f5eb;
+  --text-subtle: #6a6d63;
+  --text-inverse: #1e1f1b;
+  --text-highlight: #f2f5eb;
+  --text-bright: #c1c3bb;
+}

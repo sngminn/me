@@ -10,20 +10,27 @@
     "format": "biome format --write .",
     "check": "biome check --write .",
     "commit": "node scripts/smart-commit.mjs",
-    "prepare": "husky"
+    "build:tokens": "node scripts/build-tokens.mjs",
+    "sync:assets": "node scripts/sync-assets.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
+    "framer-motion": "^12.23.24",
     "gray-matter": "^4.0.3",
-    "next": "16.0.5",
+    "lucide-react": "^0.555.0",
+    "next": "16.0.7",
     "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.4.6",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-force-graph-2d": "^1.29.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -32,7 +39,9 @@
     "eslint-config-next": "16.0.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "style-dictionary": "^5.1.1",
     "tailwindcss": "^4",
+    "token-transformer": "^0.0.33",
     "typescript": "^5"
   },
   "lint-staged": {

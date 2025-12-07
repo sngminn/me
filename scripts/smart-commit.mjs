@@ -34,16 +34,18 @@ async function generateCommitMessage(diff) {
   `;
 
   try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-        }),
-      }
+    const url = new URL(
+      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent`
     );
+    url.searchParams.set('key', GEMINI_API_KEY);
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+      }),
+    });
 
     const data = await response.json();
     const message = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();

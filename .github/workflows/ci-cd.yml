@@ -37,13 +37,13 @@ jobs:
           context: .
           push: false # Set to true if using GHCR
           tags: me:latest
-          outputs: type=docker,dest=/tmp/me.tar
+          outputs: type=docker,dest=me.tar
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: me-image
-          path: /tmp/me.tar
+          path: me.tar
 
   # Uncomment and configure this job for Home Server Deployment
   deploy:
@@ -54,17 +54,16 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: me-image
-          path: /tmp
-      - name: Debug - List files in /tmp
-        run: ls -R /tmp
+          path: .
+
       - name: Copy image to server
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "/tmp/me.tar"
-          target: "/tmp/me.tar"
+          source: "me.tar"
+          target: "/home/${{ secrets.USERNAME }}/"
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
@@ -73,7 +72,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            docker load -i /tmp/me.tar
+            ls -la me.tar
+            docker load -i me.tar
+            rm me.tar
             docker stop me || true
             docker rm me || true
             docker run -d --restart unless-stopped -p 3000:3000 --name me me:latest
