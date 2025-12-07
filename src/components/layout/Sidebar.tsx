@@ -9,7 +9,7 @@ interface SidebarProps {
 
 export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
   return (
-    <aside>
+    <aside className="w-[20%] min-w-[380px] sticky top-0 h-full">
       <div>
         {relatedPosts && relatedPosts.length > 0 && (
           <>
@@ -25,7 +25,7 @@ export function Sidebar({ posts, relatedPosts, className }: SidebarProps) {
         )}
       </div>
       <div>
-        <h3>All Posts</h3>
+        <h3>이런 글은 어때요?</h3>
         <ul>
           {posts.map((post) => (
             <li key={post.slug}>
