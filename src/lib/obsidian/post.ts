@@ -47,8 +47,15 @@ export function getPostBySlug(slug: string): Post | null {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
-    // obsidian 링크 [[link]] -> 일반 마크다운 링크 [link](/posts/link)로 변환
-    const processedContent = content.replace(/\[\[(.*?)\]\]/g, (match, p1) => {
+    // 0. Obsidian 이미지 ![[image.png]] -> 일반 마크다운 이미지 ![image.png](/api/obsidian-images/image.png)로 변환
+    let processedContent = content.replace(/!\[\[(.*?)\]\]/g, (_, p1) => {
+      // 경로가 포함된 경우("../files/img.png") 파일명만 추출
+      const fileName = p1.split('/').pop();
+      return `![${fileName}](/api/obsidian-images/${fileName})`;
+    });
+
+    // 1. Obsidian 링크 [[link]] -> 일반 마크다운 링크 [link](/posts/link)로 변환
+    processedContent = processedContent.replace(/\[\[(.*?)\]\]/g, (_, p1) => {
       let linkTarget = p1;
       let linkText = p1;
 

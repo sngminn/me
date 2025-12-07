@@ -10,7 +10,8 @@
     "format": "biome format --write .",
     "check": "biome check --write .",
     "commit": "node scripts/smart-commit.mjs",
-    "build:tokens": "node scripts/build-tokens.mjs"
+    "build:tokens": "node scripts/build-tokens.mjs",
+    "sync:assets": "node scripts/sync-assets.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

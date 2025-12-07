@@ -38,15 +38,23 @@ body {
 }
 
 .prose {
-  max-width: none; /* 너비 제한 해제 (레이아웃에서 잡으니까) */
-  line-height: 1.5;
+  max-width: none;
+  line-height: 1.8;
+  font-size: 18px;
 }
 
 /* Headings */
-.prose h1 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
   color: var(--text-highlight);
   font-weight: 700;
+}
+
+.prose h1 {
   font-size: 64px;
+  line-height: 1.25;
   margin-bottom: 64px;
 }
 
@@ -57,11 +65,12 @@ body {
   text-decoration-thickness: 4px;
 }
 
-.prose h2,
-.prose h3,
-.prose h4 {
-  color: var(--text-highlight);
-  font-weight: 700;
+.prose h2 {
+  font-size: 32px;
+}
+
+.prose h3 {
+  font-size: 24px;
 }
 
 /* Body Text */
@@ -131,4 +140,8 @@ body {
 /* HR */
 .prose hr {
   border-color: var(--bg-subtle); /* or border-muted if exists */
+}
+
+.prose img {
+  border-radius: 18px;
 }
