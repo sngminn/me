@@ -33,7 +33,7 @@ export default async function PostPage({ params }: PageProps) {
       <Image
         src="/lineDrawing.png"
         fill
-        aria-hidden
+        aria-hidden={true}
         alt="line drawing"
         className="pointer-events-none -z-10"
       />

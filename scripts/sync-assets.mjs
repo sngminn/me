@@ -7,7 +7,7 @@ dotenv.config({ path: '.env.local' });
 dotenv.config(); // 기본 .env도 로드 (fallback)
 
 const SOURCE_DIR = process.env.OBSIDIAN_VAULT_PATH;
-const TARGET_DIR = path.join(process.cwd(), 'content/posts');
+const TARGET_DIR = path.join(process.cwd(), 'content');
 
 function syncAssets() {
   console.log('🔄 Obsidian Assets Sync Started...');
