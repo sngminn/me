@@ -37,6 +37,8 @@ jobs:
           context: .
           push: false # Set to true if using GHCR
           tags: me:latest
+          build-args: |
+            GOOGLE_SITE_VERIFICATION=${{ secrets.GOOGLE_SITE_VERIFICATION }}
           outputs: type=docker,dest=me.tar
 
       - name: Upload artifact
