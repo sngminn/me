@@ -35,7 +35,7 @@ export default async function PostPage({ params }: PageProps) {
         alt="line drawing"
         className="pointer-events-none -z-10"
       />
-      <article>
+      <article className="max-w-[700px] m-auto">
         <div className="flex flex-col gap-3">
           <ul className="flex gap-3">
             {post.tags.map((tag) => (
@@ -46,7 +46,7 @@ export default async function PostPage({ params }: PageProps) {
           </ul>
           <span className="ml-2">{longDate(post.date)}</span>
         </div>
-        <div className="prose dark:prose-invert">
+        <div className="prose dark:prose-invert w-full mt-32">
           <MDXRemote source={post.content} />
         </div>
       </article>

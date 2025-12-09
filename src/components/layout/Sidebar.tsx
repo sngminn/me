@@ -11,7 +11,7 @@ interface SidebarProps {
 
 export function Sidebar({ posts }: SidebarProps) {
   return (
-    <aside className="max-w-[720px] min-w-[375px] h-full min-h-screen flex flex-col">
+    <aside className="max-w-[720px] h-full min-h-screen flex flex-col">
       <div className="w-full h-48 relative">
         <Image src="/logo.svg" alt="로고" fill className="object-contain object-top" />
       </div>
