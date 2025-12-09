@@ -1,4 +1,4 @@
-import { slugify } from '@/lib/utils/slugify';
+import { slugify } from '@/src/lib/utils/slugify';
 import { getAllPosts } from './post';
 import type { GraphData, GraphLink, GraphNode } from './types';
 

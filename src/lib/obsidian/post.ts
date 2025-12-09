@@ -1,7 +1,7 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
-import { slugify } from '@/lib/utils/slugify';
+import { slugify } from '@/src/lib/utils/slugify';
 import type { Post } from './types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');

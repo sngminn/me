@@ -35,6 +35,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "pretendard", sans-serif;
+  margin: auto;
+  padding: 24px 16px;
 }
 
 .prose {
@@ -49,7 +51,7 @@ body {
 .prose h3,
 .prose h4 {
   color: var(--text-highlight);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .prose h1 {
@@ -144,4 +146,21 @@ body {
 
 .prose img {
   border-radius: 18px;
+}
+
+@media screen and (max-width: 1023px) {
+  .prose {
+    font-size: 16px;
+  }
+
+  .prose h1 {
+    font-size: 32px;
+  }
+  .prose h2 {
+    font-size: 24px;
+  }
+
+  .prose h3 {
+    font-size: 18px;
+  }
 }
