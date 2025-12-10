@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
-import { BASE_URL } from '@/src/lib/constants';
 import { getAllPosts } from '@/src/lib/obsidian/post';
+import { BASE_URL } from '@/src/lib/utils/constants';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();

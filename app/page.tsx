@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { PostLayout } from '@/src/components/layout/PostLayout';
+import { Sidebar } from '@/src/components/layout/Sidebar';
 import { getAllPosts } from '@/src/lib/obsidian/post';
 
 export default function Home() {
@@ -7,15 +6,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background font-sans">
-      <PostLayout allPosts={allPosts}>
-        <Image
-          src="/lineDrawing.png"
-          fill
-          aria-hidden={true}
-          alt="line drawing"
-          className="pointer-events-none -z-10"
-        />
-      </PostLayout>
+      <Sidebar posts={allPosts} />
     </div>
   );
 }

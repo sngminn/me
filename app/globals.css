@@ -35,6 +35,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "pretendard", sans-serif;
+  margin: auto;
+  padding: 24px 16px;
+  min-width: 375px;
 }
 
 .prose {
@@ -49,13 +52,23 @@ body {
 .prose h3,
 .prose h4 {
   color: var(--text-highlight);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .prose h1 {
+  font-weight: 700;
   font-size: 64px;
   line-height: 1.25;
   margin-bottom: 64px;
+}
+
+.prose h1::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 24px;
+  background: var(--bg-subtle);
 }
 
 .prose h1 a {
@@ -144,4 +157,21 @@ body {
 
 .prose img {
   border-radius: 18px;
+}
+
+@media screen and (max-width: 1024px) {
+  .prose {
+    font-size: 16px;
+  }
+
+  .prose h1 {
+    font-size: 32px;
+  }
+  .prose h2 {
+    font-size: 24px;
+  }
+
+  .prose h3 {
+    font-size: 18px;
+  }
 }

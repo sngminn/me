@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/src/components/theme-provider';
 
-import { BASE_URL, SITE_DESCRIPTION, SITE_NAME } from '@/src/lib/constants';
+import { BASE_URL, SITE_DESCRIPTION, SITE_NAME } from '@/src/lib/utils/constants';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
