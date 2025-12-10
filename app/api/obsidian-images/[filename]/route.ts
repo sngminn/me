@@ -11,7 +11,7 @@ export async function GET(_request: NextRequest, props: { params: Promise<{ file
   const safeFilename = path.basename(filename);
 
   // 2. 파일 경로 설정
-  // content/posts/files 디렉토리에서 파일을 찾습니다.
+  // content/files 디렉토리에서 파일을 찾습니다.
   const filePath = path.join(process.cwd(), 'content/files', safeFilename);
 
   // 3. 파일 존재 여부 확인

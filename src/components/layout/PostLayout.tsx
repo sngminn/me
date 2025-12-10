@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 interface PostLayoutProps {
   children: ReactNode;
 }
+
+// TODO: 추후 삭제 고려
 export function PostLayout({ children }: PostLayoutProps) {
   return (
     <div className="flex gap-6 w-full">
