@@ -1,7 +1,7 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+@import url("https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/static/woff2/SUITE.css");
 @import "tailwindcss";
 @import "./tokens.css";
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -36,7 +36,6 @@ body {
   color: var(--foreground);
   font-family: "pretendard", sans-serif;
   margin: auto;
-  padding: 24px 16px;
   min-width: 375px;
 }
 
@@ -53,6 +52,7 @@ body {
 .prose h4 {
   color: var(--text-highlight);
   font-weight: 600;
+  font-family: "SUITE";
 }
 
 .prose h1 {

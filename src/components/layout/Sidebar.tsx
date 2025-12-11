@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import type { Post } from '@/src/lib/obsidian/types';
 import { stripMarkdown } from '@/src/lib/obsidian/utils';
@@ -11,13 +10,10 @@ interface SidebarProps {
 
 export function Sidebar({ posts }: SidebarProps) {
   return (
-    <aside className="max-w-[720px] h-full min-h-screen flex flex-col">
-      <div className="w-full h-48 relative">
-        <Image src="/logo.svg" alt="로고" fill className="object-contain object-top" />
-      </div>
+    <aside className="max-w-[720px] h-full min-h-screen flex flex-col bg-bg-default rounded-3xl ">
       <div>
         <div className="flex flex-col gap-4">
-          <h3 className="text-[18px] font-bold text-text-bright">이런 글은 어때요?</h3>
+          <h3 className="text-[18px] font-bold text-text-bright">전체 글</h3>
           <hr />
         </div>
         <ul className="flex flex-col gap-4 pt-8">
