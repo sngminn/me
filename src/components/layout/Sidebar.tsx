@@ -9,9 +9,47 @@ interface SidebarProps {
   className?: string;
 }
 
-export function Sidebar({ posts }: SidebarProps) {
+function SidebarContent({ post }: { post: Post }) {
   return (
-    <aside className="w-full min-h-screen bg-bg-default rounded-3xl ">
+    <li key={post.slug} className="w-full flex flex-col hover:bg-bg-subtle px-4 py-4 rounded-xl">
+      <Link href={`/posts/${post.slug}`}>
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+          <Image
+            src={'/thumbnails/thumbnail_01.png'}
+            fill
+            alt={`${post.title} 썸네일`}
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
+        <div className="flex justify-between items-center">
+          <div>
+            <div className="flex items-center mt-2">
+              <div className="z-1 bg-[#1A1600] text-[#FFC908] rounded-l-full w-fit px-3 py-1 text-[11px] font-medium uppercase">
+                JavaScript
+              </div>
+              <div className="w-4 h-4 -translate-x-2 bg-[#1A1600] border border-[#FFC908] rotate-45" />
+            </div>
+            <div className="pl-2">
+              <h4 className="text-text-bright font-bold text-[18px] font-[suite]">{post.title}</h4>
+              <p className="line-clamp-2 text-[14px] text-text-subtle"></p>
+              <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="w-[38px] h-[38px] bg-white rounded-full flex justify-center items-center"
+          >
+            <ArrowRight className="w-4 stroke-black" />
+          </button>
+        </div>
+      </Link>
+    </li>
+  );
+}
+
+export function Sidebar({ posts, className }: SidebarProps) {
+  return (
+    <aside className={`${className} w-full min-h-screen bg-bg-default rounded-3xl`}>
       <div className="max-w-[720px] m-auto">
         <div className="flex justify-between px-6 py-5">
           <h3 className="text-[18px] font-bold text-text-bright">전체 글</h3>
@@ -19,43 +57,10 @@ export function Sidebar({ posts }: SidebarProps) {
         </div>
         <ul className="flex flex-col gap-4 pt-8 w-full">
           {posts.map((post) => (
-            <li
-              key={post.slug}
-              className="w-full flex flex-col gap-1 hover:bg-bg-subtle px-4 py-2 rounded-xl"
-            >
-              <Link href={`/posts/${post.slug}`}>
-                <div className="relative w-full aspect-video rounded-xl overflow-hidden">
-                  <Image
-                    src={'/thumbnails/thumbnail_01.png'}
-                    fill
-                    alt={`${post.title} 썸네일`}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="flex items-center">
-                      <div className="z-1 bg-[#1A1600] text-[#FFC908] rounded-l-full w-fit px-3 py-1 text-[11px] font-medium uppercase">
-                        JavaScript
-                      </div>
-                      <div className="w-4 h-4 -translate-x-2 bg-[#1A1600] border border-[#FFC908] rotate-45" />
-                    </div>
-                    <h4 className="text-text-bright font-bold text-[18px] font-[suite]">
-                      {post.title}
-                    </h4>
-                    <p className="line-clamp-2 text-[14px] text-text-subtle"></p>
-                    <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
-                  </div>
-                  <button
-                    type="button"
-                    className="w-[38px] h-[38px] bg-white rounded-full flex justify-center items-center"
-                  >
-                    <ArrowRight className="w-4 stroke-black" />
-                  </button>
-                </div>
-              </Link>
+            <div key={post.slug}>
+              <SidebarContent post={post} />
               <hr className=" bg-white my-4 stroke-white" />
-            </li>
+            </div>
           ))}
         </ul>
       </div>

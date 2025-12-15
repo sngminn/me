@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-primary-main font-sans">
-      <div className="flex flex-col h-[80vh] items-start justify-end pb-6 gap-12">
+      <div className="flex flex-col h-[80vh] items-start justify-end pb-6 gap-12 absolute">
         <div>
           <div className="relative w-full h-[70vh]">
             <Image src="/jellyfish.png" fill className="object-cover" />
@@ -33,7 +33,7 @@ export default function Home() {
         </div>
         <TabButton content="JavaScript" />
       </div>
-      <Sidebar posts={allPosts} />
+      <Sidebar posts={allPosts} className="mt-[128px]" />
     </div>
   );
 }
