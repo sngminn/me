@@ -22,7 +22,7 @@ export default function Home() {
       <div className="flex flex-col h-[80vh] items-start justify-end pb-6 gap-12 absolute">
         <div>
           <div className="relative w-full h-[70vh]">
-            <Image src="/jellyfish.png" fill className="object-cover" />
+            <Image src="/jellyfish.png" fill className="object-cover" alt="히어로 이미지" />
           </div>
           <h1 className='text-primary-bg text-4xl font-extrabold font-["SUITE"] leading-10 '>
             {`<프론트엔드 />개발자`}
@@ -33,7 +33,7 @@ export default function Home() {
         </div>
         <TabButton content="JavaScript" />
       </div>
-      <Sidebar posts={allPosts} className="mt-[128px]" />
+      <Sidebar posts={allPosts} className="mt-32" />
     </div>
   );
 }
