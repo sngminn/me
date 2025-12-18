@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import jellyfish from '@/public/jellyfish.png';
 import { Sidebar } from '@/src/components/layout/Sidebar';
 import { getAllPosts } from '@/src/lib/obsidian/post';
 
@@ -19,10 +20,10 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-primary-main font-sans">
-      <div className="flex flex-col h-[80vh] items-start justify-end pb-6 gap-12 absolute">
+      <div className="flex flex-col h-[80vh] items-start justify-end pb-6 gap-12">
         <div>
-          <div className="relative w-full h-[70vh]">
-            <Image src="/jellyfish.png" fill className="object-cover" alt="히어로 이미지" />
+          <div className="relative w-full">
+            <Image src={jellyfish} alt="히어로 이미지" className="w-full h-auto" priority />
           </div>
           <h1 className='text-primary-bg text-4xl font-extrabold font-["SUITE"] leading-10 '>
             {`<프론트엔드 />개발자`}
