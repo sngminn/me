@@ -24,10 +24,10 @@ function SidebarContent({ post }: { post: Post }) {
         <div className="flex justify-between items-center">
           <div>
             <div className="flex items-center mt-2">
-              <div className="z-1 bg-[#1A1600] text-[#FFC908] rounded-l-full w-fit px-3 py-1 text-[11px] font-medium uppercase">
+              <div className="z-1 corner-arrow border border-l-0 border-y-0 border-r-[#FFC908] text-[#FFC908] rounded-full w-fit px-3 py-1 text-[11px] font-medium uppercase">
                 JavaScript
               </div>
-              <div className="w-4 h-4 -translate-x-2 bg-[#1A1600] border border-[#FFC908] rotate-45" />
+              {/* <div className="w-4 h-4 -translate-x-2 bg-[#1A1600] border border-[#FFC908] rotate-45" /> */}
             </div>
             <div className="pl-2">
               <h4 className="text-text-bright font-bold text-[18px] font-[suite]">{post.title}</h4>

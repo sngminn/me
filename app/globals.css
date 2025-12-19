@@ -175,3 +175,7 @@ body {
     font-size: 18px;
   }
 }
+
+.corner-arrow {
+  corner-shape: round bevel bevel round;
+}
