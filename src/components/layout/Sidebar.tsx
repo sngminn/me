@@ -9,6 +9,17 @@ interface SidebarProps {
   className?: string;
 }
 
+function TabButton({ content }: { content: string }) {
+  return (
+    <button
+      type="button"
+      className="text-base flex justify-center whitespace-nowrap items-center bg-white rounded-full text-text-inverse px-4 py-1 font-semibold"
+    >
+      {content} <ArrowRight className="w-4" />
+    </button>
+  );
+}
+
 function SidebarContent({ post }: { post: Post }) {
   return (
     <li key={post.slug} className="w-full flex flex-col hover:bg-bg-subtle px-4 py-4 rounded-xl">
@@ -54,6 +65,12 @@ export function Sidebar({ posts, className }: SidebarProps) {
         <div className="flex justify-between px-6 py-5">
           <h3 className="text-[18px] font-bold text-text-bright">전체 글</h3>
           <Search />
+        </div>
+        <div className="flex w-full overflow-x-scroll hide-scrollbar gap-2 px-3">
+          <TabButton content="KIDP 글로벌 디자인 인턴십" />
+          <TabButton content="JavaScript" />
+          <TabButton content="KIDP 글로벌 디자인 인턴십" />
+          <TabButton content="KIDP 글로벌 디자인 인턴십" />
         </div>
         <ul className="flex flex-col gap-4 pt-8 w-full">
           {posts.map((post) => (

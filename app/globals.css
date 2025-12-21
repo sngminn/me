@@ -179,3 +179,7 @@ body {
 .corner-arrow {
   corner-shape: round bevel bevel round;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
