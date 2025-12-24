@@ -22,7 +22,7 @@ function TabButton({ content }: { content: string }) {
 
 function SidebarContent({ post }: { post: Post }) {
   return (
-    <li key={post.slug} className="w-full flex flex-col hover:bg-bg-subtle px-4 py-4 rounded-xl">
+    <li className="w-full flex flex-col hover:bg-bg-subtle px-4 py-4 rounded-xl">
       <Link href={`/posts/${post.slug}`}>
         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
           <Image
@@ -41,8 +41,7 @@ function SidebarContent({ post }: { post: Post }) {
               {/* <div className="w-4 h-4 -translate-x-2 bg-[#1A1600] border border-[#FFC908] rotate-45" /> */}
             </div>
             <div className="pl-2">
-              <h4 className="text-text-bright font-bold text-[18px] font-[suite]">{post.title}</h4>
-              <p className="line-clamp-2 text-[14px] text-text-subtle"></p>
+              <h4 className={`text-text-bright font-bold text-[18px] font-suite`}>{post.title}</h4>
               <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
             </div>
           </div>
