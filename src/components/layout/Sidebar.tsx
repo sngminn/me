@@ -9,6 +9,27 @@ interface SidebarProps {
   className?: string;
 }
 
+function Tag({ text }: { text: string }) {
+  return (
+    <div className="flex items-center">
+      <div className="text-[#FFC908] bg-[#453600] rounded-l-full px-3 py-1 text-[11px] font-medium  uppercase leading-none">
+        {text}
+      </div>
+      <div className="w-2.5">
+        <svg
+          viewBox="0 0 10 20"
+          preserveAspectRatio="none"
+          className="w-full h-full"
+          fill="#453600"
+          stroke="#FFC908"
+        >
+          <path d="M0 0 L10 10 L0 20" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 function TabButton({ content }: { content: string }) {
   return (
     <button
@@ -35,10 +56,7 @@ function SidebarContent({ post }: { post: Post }) {
         <div className="flex justify-between items-center">
           <div>
             <div className="flex items-center mt-2">
-              <div className="z-1 corner-arrow border border-l-0 border-y-0 border-r-[#FFC908] text-[#FFC908] rounded-full w-fit px-3 py-1 text-[11px] font-medium uppercase">
-                JavaScript
-              </div>
-              {/* <div className="w-4 h-4 -translate-x-2 bg-[#1A1600] border border-[#FFC908] rotate-45" /> */}
+              <Tag text={'JavaScript'} />
             </div>
             <div className="pl-2">
               <h4 className={`text-text-bright font-bold text-[18px] font-suite`}>{post.title}</h4>
@@ -75,7 +93,7 @@ export function Sidebar({ posts, className }: SidebarProps) {
           {posts.map((post) => (
             <div key={post.slug}>
               <SidebarContent post={post} />
-              <hr className=" bg-white my-4 stroke-white" />
+              <hr className=" my-4  text-bg-subtle" />
             </div>
           ))}
         </ul>
