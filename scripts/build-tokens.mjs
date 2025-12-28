@@ -1,5 +1,5 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
+import { execSync } from 'node:child_process';
+import fs from 'node:fs';
 import StyleDictionary from 'style-dictionary';
 
 // 1. Transform Tokens (Light & Dark)
@@ -16,7 +16,7 @@ execSync('npx token-transformer tokens.json tokens-dark.json primitives,color/da
 });
 
 // 2. Build CSS
-console.log('\n🏗️  Building CSS...');
+console.log('\n Building CSS...');
 
 const sd = new StyleDictionary({
   source: ['tokens-light.json'], // 기본은 라이트
@@ -69,10 +69,12 @@ await sdDark.buildAllPlatforms();
 const lightCss = fs.readFileSync('app/tokens.css', 'utf8');
 const darkCss = fs.readFileSync('app/tokens-dark.tmp', 'utf8');
 
-fs.writeFileSync('app/tokens.css', lightCss + '\n' + darkCss);
+fs.writeFileSync('app/tokens.css', `${lightCss}\n${darkCss}`);
 fs.unlinkSync('app/tokens-dark.tmp'); // 임시 파일 삭제
 fs.unlinkSync('tokens-light.json'); // 중간 파일 삭제
 fs.unlinkSync('tokens-dark.json'); // 중간 파일 삭제
-fs.unlinkSync('tokens-cleaned.json'); // 예전 파일 삭제 (혹시 있으면)
+if (fs.existsSync('tokens-cleaned.json')) {
+  fs.unlinkSync('tokens-cleaned.json'); // 예전 파일 삭제 (혹시 있으면)
+}
 
 console.log('✅ Tokens built successfully!');

@@ -1,7 +1,5 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 @import "tailwindcss";
 @import "./tokens.css";
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -26,6 +24,11 @@
   --color-text-bright: var(--text-bright);
 }
 
+@theme {
+  --font-suite: var(--font-suite), sans-serif;
+  --font-pretendard: var(--font-pretendard), sans-serif;
+}
+
 :root {
   --background: var(--bg-default);
   --foreground: var(--text-default);
@@ -34,9 +37,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "pretendard", sans-serif;
+  font-family: var(--font-pretendard);
   margin: auto;
-  padding: 24px 16px;
   min-width: 375px;
 }
 
@@ -53,6 +55,7 @@ body {
 .prose h4 {
   color: var(--text-highlight);
   font-weight: 600;
+  font-family: var(--font-suite);
 }
 
 .prose h1 {
@@ -174,4 +177,8 @@ body {
   .prose h3 {
     font-size: 18px;
   }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
