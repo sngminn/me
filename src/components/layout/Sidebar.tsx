@@ -12,7 +12,7 @@ interface SidebarProps {
 function Tag({ text }: { text: string }) {
   return (
     <div className="flex items-center">
-      <div className="text-[#FFC908] bg-[#453600] rounded-l-full px-3 py-1 text-[11px] font-medium  uppercase leading-none">
+      <div className="text-[#FFC908] bg-[#282000] rounded-l-full pl-3 pr-2 py-1 text-[11px] font-medium  uppercase leading-none">
         {text}
       </div>
       <div className="w-2.5">
@@ -20,7 +20,7 @@ function Tag({ text }: { text: string }) {
           viewBox="0 0 10 20"
           preserveAspectRatio="none"
           className="w-full h-full"
-          fill="#453600"
+          fill="#282000"
           stroke="#FFC908"
         >
           <path d="M0 0 L10 10 L0 20" />
@@ -43,29 +43,31 @@ function TabButton({ content }: { content: string }) {
 
 function SidebarContent({ post }: { post: Post }) {
   return (
-    <li className="w-full flex flex-col hover:bg-bg-subtle px-4 py-4 rounded-xl">
+    <li className="w-full flex flex-col px-4 py-4 rounded-2xl">
       <Link href={`/posts/${post.slug}`}>
         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
           <Image
-            src={'/thumbnails/thumbnail_01.png'}
+            src={`/thumbnails/thumbnail_0${(post.title.length % 8) + 1}.png`}
             fill
             alt={`${post.title} 썸네일`}
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <div className="flex justify-between items-center">
-          <div>
+        <div className="flex justify-between items-center gap-3">
+          <div className="flex flex-col gap-2">
             <div className="flex items-center mt-2">
               <Tag text={'JavaScript'} />
             </div>
             <div className="pl-2">
-              <h4 className={`text-text-bright font-bold text-[18px] font-suite`}>{post.title}</h4>
+              <h4 className={`text-text-highlight leading-[125%] font-bold text-[18px] font-suite`}>
+                {post.title}
+              </h4>
               <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
             </div>
           </div>
           <button
             type="button"
-            className="w-[38px] h-[38px] bg-white rounded-full flex justify-center items-center"
+            className="w-[38px] h-[38px] aspect-square bg-white rounded-full flex justify-center items-center"
           >
             <ArrowRight className="w-4 stroke-black" />
           </button>
@@ -77,10 +79,12 @@ function SidebarContent({ post }: { post: Post }) {
 
 export function Sidebar({ posts, className }: SidebarProps) {
   return (
-    <aside className={`${className} w-full min-h-screen bg-bg-default rounded-3xl`}>
+    <aside
+      className={`${className} w-full min-h-screen bg-bg-default rounded-3xl pb-8 squircle shadow-2xl`}
+    >
       <div className="max-w-[720px] m-auto">
         <div className="flex justify-between px-6 py-5">
-          <h3 className="text-[18px] font-bold text-text-bright">전체 글</h3>
+          <h3 className="text-[18px] font-semibold text-text-bright">전체 글</h3>
           <Search />
         </div>
         <div className="flex w-full overflow-x-scroll hide-scrollbar gap-2 px-3">
@@ -90,10 +94,10 @@ export function Sidebar({ posts, className }: SidebarProps) {
           <TabButton content="KIDP 글로벌 디자인 인턴십" />
         </div>
         <ul className="flex flex-col gap-4 pt-8 w-full">
-          {posts.map((post) => (
+          {posts.map((post, ind) => (
             <div key={post.slug}>
               <SidebarContent post={post} />
-              <hr className=" my-4 text-bg-subtle" />
+              {ind !== posts.length - 1 && <hr className=" my-4 mx-3 text-bg-subtle" />}
             </div>
           ))}
         </ul>
