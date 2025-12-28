@@ -63,6 +63,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           source: "me.tar"
           target: "/home/${{ secrets.USERNAME }}/"
@@ -72,6 +73,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
           key: ${{ secrets.KEY }}
           script: |
             ls -la me.tar
