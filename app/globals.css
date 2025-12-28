@@ -40,6 +40,9 @@ body {
   font-family: var(--font-pretendard);
   margin: auto;
   min-width: 375px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .prose {
@@ -181,4 +184,26 @@ body {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* biome-ignore lint/correctness/noUnknownProperty: experimental technology */
+@supports (corner-shape: squircle) {
+  .squircle {
+    /* biome-ignore lint/correctness/noUnknownProperty: experimental technology */
+    corner-shape: squircle;
+    border-radius: 48px;
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 10s linear infinite;
 }
