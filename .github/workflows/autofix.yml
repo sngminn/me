@@ -2,10 +2,9 @@ name: autofix.ci  # needed to securely identify the workflow
 
 on:
   pull_request:
-  push:
-    branches: [ "develop" ]
 permissions:
-  contents: write
+// TODO: [AI Suggestion] The `permissions` for `contents` have been changed from `write` to `read`. Ensure this change aligns with the necessary permissions for the workflow to function correctly.
+  contents: read
 
 jobs:
   autofix:
@@ -21,4 +20,5 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run check
-      - uses: autofix-ci/action@v1
+// TODO: [AI Suggestion] The `autofix-ci/action` version is updated to a specific commit hash. Ensure this is intentional and won't cause unexpected behavior if the commit is not stable.
+      - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27

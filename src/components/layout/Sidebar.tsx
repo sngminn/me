@@ -93,7 +93,7 @@ export function Sidebar({ posts, className }: SidebarProps) {
           {posts.map((post) => (
             <div key={post.slug}>
               <SidebarContent post={post} />
-              <hr className=" my-4  text-bg-subtle" />
+              <hr className=" my-4 text-bg-subtle" />
             </div>
           ))}
         </ul>
