@@ -1,5 +1,4 @@
 import { execSync } from 'node:child_process';
-// TODO: [AI Suggestion] The import for `child_process` and `fs` can be changed to use Node.js built-in module specifiers for better clarity and maintainability.
 import fs from 'node:fs';
 import StyleDictionary from 'style-dictionary';
 
@@ -70,7 +69,6 @@ await sdDark.buildAllPlatforms();
 const lightCss = fs.readFileSync('app/tokens.css', 'utf8');
 const darkCss = fs.readFileSync('app/tokens-dark.tmp', 'utf8');
 
-// TODO: [AI Suggestion] The concatenation of `lightCss` and `darkCss` can be made more readable using template literals.
 fs.writeFileSync('app/tokens.css', `${lightCss}\n${darkCss}`);
 fs.unlinkSync('app/tokens-dark.tmp'); // 임시 파일 삭제
 fs.unlinkSync('tokens-light.json'); // 중간 파일 삭제
