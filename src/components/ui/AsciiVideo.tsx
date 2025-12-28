@@ -2,24 +2,26 @@
 
 import { useEffect, useRef } from 'react';
 
+const ASCII = ['@', '%', '#', '*', '+', '=', '-', ':', '.', ' '];
+
 export default function AsciiVideo({ className }: { className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const inputCanvasRef = useRef<HTMLCanvasElement>(null);
   const outputRef = useRef<HTMLPreElement>(null);
 
   useEffect(() => {
+    let animationId: number;
     const render = () => {
       const video = videoRef.current;
       const inputCanvas = inputCanvasRef.current;
       const output = outputRef.current;
-      const ASCII = ['@', '%', '#', '*', '+', '=', '-', ':', '.', ' '];
 
       if (!inputCanvas || !output || !video) return;
 
-      const ctx = inputCanvas.getContext('2d');
+      const ctx = inputCanvas.getContext('2d', { willReadFrequently: true });
       if (!ctx || !output || video.videoWidth === 0) return;
 
-      const [w, h] = [Math.floor(video.videoWidth / 10), Math.floor(video.videoHeight / 16)];
+      const [w, h] = [Math.floor(video.videoWidth / 5), Math.floor(video.videoHeight / 8)];
 
       ctx.drawImage(video, 0, 0, w, h);
       const imageData = ctx.getImageData(0, 0, w, h);
@@ -41,12 +43,14 @@ export default function AsciiVideo({ className }: { className?: string }) {
 
       output.innerText = converted.join('');
 
-      requestAnimationFrame(render);
+      animationId = requestAnimationFrame(render);
     };
     if (videoRef.current) {
       videoRef.current.play().catch((e) => console.error('재생 실패:', e));
     }
-    render();
+    animationId = requestAnimationFrame(render);
+
+    return () => cancelAnimationFrame(animationId);
   }, []);
 
   return (
@@ -54,7 +58,7 @@ export default function AsciiVideo({ className }: { className?: string }) {
       <video src={'/hero.mp4'} ref={videoRef} className="hidden" autoPlay muted loop playsInline />
       <pre
         ref={outputRef}
-        className="font-mono leading-[100%] w-fit whitespace-pre text-text-inverse"
+        className="font-mono text-[calc(0.7vh+0.5vw)] leading-[100%] w-fit whitespace-pre text-text-inverse"
       />
       <canvas ref={inputCanvasRef} className="hidden" />
     </div>

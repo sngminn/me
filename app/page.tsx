@@ -5,7 +5,7 @@ import { getAllPosts } from '@/src/lib/obsidian/post';
 function HeroSection() {
   return (
     <div className="flex flex-col h-[70vh] w-full justify-end items-start gap-0 fixed top-0 ">
-      <AsciiVideo className="absolute top-0 left-0" />
+      <AsciiVideo className="absolute top-0 -right-[250px]" />
       <div className="flex flex-col gap-6 p-8">
         <h1 className='text-primary-bg text-4xl whitespace-nowrap font-extrabold font-["SUITE"]'>
           {`<프론트엔드 />개발자`}
