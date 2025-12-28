@@ -37,7 +37,9 @@ export default function AsciiVideo({ className }: { className?: string }) {
         const blue = imageData.data[i + 2];
         const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue; //get luminance
 
-        converted.push(ASCII[Math.floor((luminance / 255) * ASCII.length)]);
+        converted.push(
+          ASCII[Math.min(Math.floor((luminance / 255) * ASCII.length), ASCII.length - 1)]
+        );
         if ((i / 4 + 1) % w === 0) converted.push('\n');
       }
 
