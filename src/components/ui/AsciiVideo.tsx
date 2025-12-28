@@ -23,6 +23,10 @@ export default function AsciiVideo({ className }: { className?: string }) {
 
       const [w, h] = [Math.floor(video.videoWidth / 5), Math.floor(video.videoHeight / 8)];
 
+      if (inputCanvas.width !== w || inputCanvas.height !== h) {
+        [inputCanvas.width, inputCanvas.height] = [w, h];
+      }
+
       ctx.drawImage(video, 0, 0, w, h);
       const imageData = ctx.getImageData(0, 0, w, h);
       const converted: string[] = [];
@@ -35,10 +39,6 @@ export default function AsciiVideo({ className }: { className?: string }) {
 
         converted.push(ASCII[Math.floor((luminance / 255) * ASCII.length)]);
         if ((i / 4 + 1) % w === 0) converted.push('\n');
-      }
-
-      if (inputCanvas.width !== w || inputCanvas.height !== h) {
-        [inputCanvas.width, inputCanvas.height] = [w, h];
       }
 
       output.innerText = converted.join('');

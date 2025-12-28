@@ -6,6 +6,11 @@ import type { Post } from './types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
+function extractTitle(content: string, fallback: string): string {
+  const match = content.match(/^#\s(.*)/);
+  return match ? match[1] : fallback;
+}
+
 export function getAllPosts(): Post[] {
   // Ensure directory exists
   if (!fs.existsSync(postsDirectory)) {
@@ -20,11 +25,10 @@ export function getAllPosts(): Post[] {
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
-      const match = content.match(/^#\s(.*)/);
 
       return {
         slug,
-        title: match ? match[1] : slug,
+        title: extractTitle(content, slug),
         date: data.date || '',
         tags: data.tags || [],
         content,
@@ -47,7 +51,6 @@ export function getPostBySlug(slug: string): Post | null {
     const fullPath = path.join(postsDirectory, `${slug}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
-    const match = content.match(/^#\s(.*)/);
 
     // 0. Obsidian 이미지 ![[image.png]] -> 일반 마크다운 이미지 ![image.png](/api/obsidian-images/image.png)로 변환
     let processedContent = content.replace(/!\[\[(.*?)\]\]/g, (_, p1) => {
@@ -74,7 +77,7 @@ export function getPostBySlug(slug: string): Post | null {
 
     return {
       slug,
-      title: match ? match[1] : slug,
+      title: extractTitle(content, slug),
       date: data.date || '',
       tags: data.tags || [],
       content: processedContent,

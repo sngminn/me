@@ -23,7 +23,7 @@ function FooterIcon({ type, className }: { type: footerType; className: string }
 function FooterBelt({ type }: { type: footerType }) {
   return (
     <div
-      className="w-[120vw] h-16 bg-bg-default flex whitespace-nowrap items-center overflow-hidden"
+      className="w-[120vw] h-16 bg-bg-default -translate-x-8 flex whitespace-nowrap items-center overflow-hidden"
       style={{ rotate: `${type.length * 4 - 30}deg` }}
     >
       <div className="flex animate-scroll gap-3">
@@ -52,29 +52,29 @@ function FooterBelt({ type }: { type: footerType }) {
 }
 
 function HeroSection({ isScrolled }: { isScrolled: boolean }) {
-  if (isScrolled) {
-    return (
-      <div className="fixed top-100 -left-4 flex flex-col gap-18">
-        {Object.keys(footers).map((type) => (
-          <FooterBelt key={type} type={type as footerType} />
-        ))}
-      </div>
-    );
-  } else {
-    return (
-      <div className="flex flex-col h-[70vh] w-full justify-end items-start gap-0 fixed top-0 ">
-        <AsciiVideo className="absolute top-0 -right-[250px]" />
-        <div className="flex flex-col gap-6 p-8">
-          <h1 className='text-primary-bg text-4xl whitespace-nowrap font-extrabold font-["SUITE"]'>
-            {`<프론트엔드 />개발자`}
-            <br />
-            {`{김승민}입니다_`}
-          </h1>
-          <span className="text-primary-bg">개발, 디자인 이것저것 만듭니다</span>
+  return (
+    <div className="fixed top-0 left-1/2 -translate-x-1/2 max-w-[1080px] w-full h-full overflow-hidden">
+      {isScrolled ? (
+        <div className="flex flex-col gap-18 mt-[45vh]">
+          {Object.keys(footers).map((type) => (
+            <FooterBelt key={type} type={type as footerType} />
+          ))}
         </div>
-      </div>
-    );
-  }
+      ) : (
+        <div className="flex-col h-[70vh] w-full justify-end items-start relative">
+          <AsciiVideo className="absolute top-0 -right-[250px]" />
+          <div className="flex flex-col gap-6 p-8 h-full justify-end">
+            <h1 className='text-primary-bg text-4xl whitespace-nowrap font-extrabold font-["SUITE"]'>
+              {`<프론트엔드 />개발자`}
+              <br />
+              {`{김승민}입니다_`}
+            </h1>
+            <span className="text-primary-bg">개발, 디자인 이것저것 만듭니다</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function HomeClient({ allPosts }: { allPosts: Post[] }) {
@@ -92,7 +92,7 @@ export default function HomeClient({ allPosts }: { allPosts: Post[] }) {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-primary-main">
+    <div className="flex flex-col min-h-screen items-center justify-center bg-primary-main ">
       <HeroSection isScrolled={isScrolled} />
       <Sidebar posts={allPosts} className="my-[70vh] z-10" />
     </div>
