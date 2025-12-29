@@ -1,42 +1,21 @@
-import { ArrowRight, Search } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Post } from '@/src/lib/obsidian/types';
 import { relativeDate } from '@/src/lib/utils/day';
+import { Tag } from '../ui/Tag';
 
 interface SidebarProps {
   posts: Post[];
   className?: string;
 }
-
-function Tag({ text }: { text: string }) {
-  return (
-    <div className="flex items-center">
-      <div className="text-[#FFC908] bg-[#282000] rounded-l-full pl-3 pr-2 py-1 text-[11px] font-medium  uppercase leading-none">
-        {text}
-      </div>
-      <div className="w-2.5">
-        <svg
-          viewBox="0 0 10 20"
-          preserveAspectRatio="none"
-          className="w-full h-full"
-          fill="#282000"
-          stroke="#FFC908"
-        >
-          <path d="M0 0 L10 10 L0 20" />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function TabButton({ content }: { content: string }) {
+export function TabButton({ content, active = false }: { content: string; active?: boolean }) {
   return (
     <button
       type="button"
-      className="text-base flex justify-center whitespace-nowrap items-center bg-white rounded-full text-text-inverse px-4 py-1 font-semibold"
+      className={` ${active ? 'bg-white text-text-inverse' : 'bg-bg-subtle border-text-default text-text-subtle'} text-sm flex justify-center whitespace-nowrap items-center rounded-full px-3 py-1 font-medium`}
     >
-      {content} <ArrowRight className="w-4" />
+      {content}
     </button>
   );
 }
@@ -56,10 +35,10 @@ function SidebarContent({ post }: { post: Post }) {
         <div className="flex justify-between items-center gap-3">
           <div className="flex flex-col gap-2">
             <div className="flex items-center mt-2">
-              <Tag text={'JavaScript'} />
+              <Tag text={post.tags[0]} />
             </div>
             <div className="pl-2">
-              <h4 className={`text-text-highlight leading-[125%] font-bold text-[18px] font-suite`}>
+              <h4 className={`text-text-highlight leading-[125%] font-semibold text-[18px]`}>
                 {post.title}
               </h4>
               <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
@@ -78,22 +57,25 @@ function SidebarContent({ post }: { post: Post }) {
 }
 
 export function Sidebar({ posts, className }: SidebarProps) {
+  const tags = new Set<string>();
+
+  posts.forEach((post) => {
+    tags.add(post.tags[0]);
+  });
+
   return (
     <aside
       className={`${className} w-full min-h-screen bg-bg-default rounded-3xl pb-8 squircle shadow-2xl`}
     >
-      <div className="max-w-[720px] m-auto">
-        <div className="flex justify-between px-6 py-5">
-          <h3 className="text-[18px] font-semibold text-text-bright">전체 글</h3>
-          <Search />
+      <div className="max-w-[720px] m-auto relative">
+        <div className="w-12 h-1 rounded-full bg-bg-inverse mx-auto mt-3" />
+        <div className="flex w-full overflow-x-scroll hide-scrollbar gap-2 px-3 py-4 mt-4 sticky top-0 z-10 bg-bg-default border-b border-bg-subtle">
+          <TabButton content="모든 글" active />
+          {[...tags].map((tag) => (
+            <TabButton key={tag} content={tag} />
+          ))}
         </div>
-        <div className="flex w-full overflow-x-scroll hide-scrollbar gap-2 px-3">
-          <TabButton content="KIDP 글로벌 디자인 인턴십" />
-          <TabButton content="JavaScript" />
-          <TabButton content="KIDP 글로벌 디자인 인턴십" />
-          <TabButton content="KIDP 글로벌 디자인 인턴십" />
-        </div>
-        <ul className="flex flex-col gap-4 pt-8 w-full">
+        <ul className="flex flex-col gap-4 pt-4 w-full">
           {posts.map((post, ind) => (
             <div key={post.slug}>
               <SidebarContent post={post} />

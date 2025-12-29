@@ -27,7 +27,7 @@ function FooterBelt({ type }: { type: footerType }) {
       style={{ rotate: `${type.length * 4 - 30}deg` }}
     >
       <div className="flex animate-scroll gap-3">
-        {Array(4)
+        {Array(8)
           .fill('')
           .map((_, i) => (
             <div
@@ -36,11 +36,11 @@ function FooterBelt({ type }: { type: footerType }) {
               className="flex whitespace-nowrap items-center gap-3 shrink-0"
             >
               <FooterIcon className="text-primary-main" type={type} />
-              <span className='text-primary-main uppercase whitespace-nowrap font-extrabold font-["SUITE"]'>
+              <span className="text-primary-main uppercase whitespace-nowrap font-extrabold">
                 {type}
               </span>
               <ArrowRight className="text-primary-main" />
-              <span className='text-primary-main uppercase whitespace-nowrap font-extrabold font-["SUITE"]'>
+              <span className="text-primary-main uppercase whitespace-nowrap font-extrabold">
                 {footers[type]}
               </span>
               <ArrowRight className="text-primary-main" />
@@ -66,12 +66,11 @@ function HeroSection({ isScrolled }: { isScrolled: boolean }) {
       >
         <AsciiVideo className="absolute top-0 -right-[250px]" />
         <div className="flex flex-col gap-6 p-8 h-full justify-end">
-          <h1 className='text-primary-bg text-4xl whitespace-nowrap font-extrabold font-["SUITE"]'>
-            {`<프론트엔드 />개발자`}
+          <span className="text-primary-bg">
+            프론트엔드 개발자
             <br />
-            {`{김승민}입니다_`}
-          </h1>
-          <span className="text-primary-bg">개발, 디자인 이것저것 만듭니다</span>
+            김승민입니다
+          </span>
         </div>
       </div>
     </div>
