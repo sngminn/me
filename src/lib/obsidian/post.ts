@@ -6,11 +6,6 @@ import type { Post } from './types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
-// export function extractTitle(content: string, fallback: string): string {
-//   const match = content.match(/^#\s(.*)/);
-//   return match ? match[1] : fallback;
-// }
-
 export function getAllPosts(): Post[] {
   // Ensure directory exists
   if (!fs.existsSync(postsDirectory)) {

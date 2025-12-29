@@ -1,6 +1,9 @@
+'use client';
+
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { type MouseEventHandler, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
 import { relativeDate } from '@/src/lib/utils/day';
 import { Tag } from '../ui/Tag';
@@ -9,11 +12,21 @@ interface SidebarProps {
   posts: Post[];
   className?: string;
 }
-export function TabButton({ content, active = false }: { content: string; active?: boolean }) {
+
+export function TabButton({
+  content,
+  active = false,
+  onClick,
+}: {
+  content: string;
+  active?: boolean;
+  onClick: MouseEventHandler;
+}) {
   return (
     <button
       type="button"
-      className={` ${active ? 'bg-white text-text-inverse' : 'bg-bg-subtle border-text-default text-text-subtle'} text-sm flex justify-center whitespace-nowrap items-center rounded-full px-3 py-1 font-medium`}
+      className={`${active ? 'bg-white text-text-inverse' : 'bg-bg-subtle border-text-default text-text-subtle'} text-sm flex justify-center whitespace-nowrap items-center rounded-full px-3 py-1 font-medium cursor-pointer`}
+      onClick={onClick}
     >
       {content}
     </button>
@@ -57,6 +70,7 @@ function SidebarContent({ post }: { post: Post }) {
 }
 
 export function Sidebar({ posts, className }: SidebarProps) {
+  const [activeTab, setActiveTab] = useState('');
   const tags = new Set<string>();
 
   posts.forEach((post) => {
@@ -70,9 +84,14 @@ export function Sidebar({ posts, className }: SidebarProps) {
       <div className="max-w-[720px] m-auto relative">
         <div className="w-12 h-1 rounded-full bg-bg-inverse mx-auto mt-3" />
         <div className="flex w-full overflow-x-scroll hide-scrollbar gap-2 px-3 py-4 mt-4 sticky top-0 z-10 bg-bg-default border-b border-bg-subtle">
-          <TabButton content="모든 글" active />
+          <TabButton content="모든 글" active={!activeTab} onClick={() => setActiveTab('')} />
           {[...tags].map((tag) => (
-            <TabButton key={tag} content={tag} />
+            <TabButton
+              key={tag}
+              content={tag}
+              active={activeTab === tag}
+              onClick={() => setActiveTab(tag)}
+            />
           ))}
         </div>
         <ul className="flex flex-col gap-4 pt-4 w-full">
