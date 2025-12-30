@@ -19,7 +19,7 @@ export default function AsciiVideo({ className }: { className?: string }) {
       if (!inputCanvas || !output || !video) return;
 
       const ctx = inputCanvas.getContext('2d', { willReadFrequently: true });
-      if (!ctx || !output || video.videoWidth === 0) {
+      if (!ctx || video.videoWidth === 0) {
         animationId = requestAnimationFrame(render);
         return;
       }

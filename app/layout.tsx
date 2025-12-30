@@ -59,11 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ko"
-      className={`${pretendard.variable} ${suite.variable} `}
-      suppressHydrationWarning
-    >
+    <html lang="ko" className={`${pretendard.variable} ${suite.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"

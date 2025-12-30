@@ -3,7 +3,7 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { type MouseEventHandler, useState } from 'react';
+import { type MouseEventHandler, useMemo, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
 import { relativeDate } from '@/src/lib/utils/day';
 import { Tag } from '../ui/Tag';
@@ -57,12 +57,9 @@ function SidebarContent({ post }: { post: Post }) {
               <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
             </div>
           </div>
-          <button
-            type="button"
-            className="w-[38px] h-[38px] aspect-square bg-white rounded-full flex justify-center items-center"
-          >
+          <div className="w-[38px] h-[38px] aspect-square bg-white rounded-full flex justify-center items-center">
             <ArrowRight className="w-4 stroke-black" />
-          </button>
+          </div>
         </div>
       </Link>
     </li>
@@ -71,11 +68,7 @@ function SidebarContent({ post }: { post: Post }) {
 
 export function Sidebar({ posts, className }: SidebarProps) {
   const [activeTab, setActiveTab] = useState('');
-  const tags = new Set<string>();
-
-  posts.forEach((post) => {
-    if (post.tags[0]) tags.add(post.tags[0]);
-  });
+  const tags = useMemo(() => new Set(posts.map((post) => post.tags[0]).filter(Boolean)), [posts]);
 
   return (
     <aside
