@@ -1,7 +1,7 @@
 export function Tag({ text }: { text: string }) {
   return (
     <div className="flex items-center">
-      <div className="text-[#FFC908] bg-[#282000] rounded-l-full pl-3 pr-2 py-1 text-[11px] font-medium  uppercase leading-none">
+      <div className="text-[#FFC908] bg-[#282000] rounded-l-full pl-3 pr-2 py-1 text-[11px] font-medium  uppercase leading-none whitespace-nowrap">
         {text}
       </div>
       <div className="w-2.5">
