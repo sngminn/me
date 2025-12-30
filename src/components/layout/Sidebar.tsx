@@ -95,12 +95,14 @@ export function Sidebar({ posts, className }: SidebarProps) {
           ))}
         </div>
         <ul className="flex flex-col gap-4 pt-4 w-full">
-          {posts.map((post, ind) => (
-            <div key={post.slug}>
-              <SidebarContent post={post} />
-              {ind !== posts.length - 1 && <hr className=" my-4 mx-3 text-bg-subtle" />}
-            </div>
-          ))}
+          {posts
+            .filter((post) => post.tags.includes(activeTab) || activeTab === '')
+            .map((post, ind) => (
+              <div key={post.slug}>
+                <SidebarContent post={post} />
+                {ind !== posts.length - 1 && <hr className=" my-4 mx-3 text-bg-subtle" />}
+              </div>
+            ))}
         </ul>
       </div>
     </aside>
