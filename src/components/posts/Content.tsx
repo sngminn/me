@@ -31,7 +31,7 @@ export default function Content({ post, children }: { post: Post; children: Reac
         <Tag text={post.tags[0]} />
         <span className="text-xs text-text-highlight font-medium line-clamp-1">{post.title}</span>
       </div>
-      <article className="max-w-[700px] m-auto px-3 pb-40 flex flex-col gap-4 mt-14">
+      <article className="max-w-[700px] m-auto px-3 pt-6 pb-40 flex flex-col gap-4 ">
         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
           <Image
             src={`/thumbnails/thumbnail_0${(post.title.length % 8) + 1}.png`}

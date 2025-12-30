@@ -69,7 +69,7 @@ function HeroSection({ isScrolled }: { isScrolled: boolean }) {
         ))}
       </div>
       <div
-        className={`${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'} absolute flex-col h-[70vh] w-full justify-end items-start`}
+        className={`${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'} absolute flex flex-col h-[70vh] w-full justify-end items-start`}
       >
         <AsciiVideo className="absolute top-0 -right-[250px]" />
         <div className="flex flex-col gap-6 p-8 h-full justify-end">
