@@ -19,7 +19,10 @@ export default function AsciiVideo({ className }: { className?: string }) {
       if (!inputCanvas || !output || !video) return;
 
       const ctx = inputCanvas.getContext('2d', { willReadFrequently: true });
-      if (!ctx || !output || video.videoWidth === 0) return;
+      if (!ctx || video.videoWidth === 0) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
 
       const [w, h] = [Math.floor(video.videoWidth / 5), Math.floor(video.videoHeight / 8)];
 
@@ -57,10 +60,18 @@ export default function AsciiVideo({ className }: { className?: string }) {
 
   return (
     <div className={className}>
-      <video src={'/hero.mp4'} ref={videoRef} className="hidden" autoPlay muted loop playsInline />
+      <video
+        src={'/hero.mp4'}
+        ref={videoRef}
+        className="absolute -z-50 opacity-0 pointer-events-none"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
       <pre
         ref={outputRef}
-        className="font-mono text-[calc(0.7vh+0.5vw)] leading-[100%] w-fit whitespace-pre text-text-inverse"
+        className="font-mono text-shadow-2xs text-[calc(0.7vh+0.5vw)] leading-[100%] w-fit whitespace-pre text-text-inverse pointer-events-none"
       />
       <canvas ref={inputCanvasRef} className="hidden" />
     </div>

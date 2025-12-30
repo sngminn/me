@@ -6,11 +6,6 @@ import type { Post } from './types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
-function extractTitle(content: string, fallback: string): string {
-  const match = content.match(/^#\s(.*)/);
-  return match ? match[1] : fallback;
-}
-
 export function getAllPosts(): Post[] {
   // Ensure directory exists
   if (!fs.existsSync(postsDirectory)) {
@@ -28,7 +23,7 @@ export function getAllPosts(): Post[] {
 
       return {
         slug,
-        title: extractTitle(content, slug),
+        title: data.aliases?.[0] || data.title || slug,
         date: data.date || '',
         tags: data.tags || [],
         content,
@@ -77,7 +72,7 @@ export function getPostBySlug(slug: string): Post | null {
 
     return {
       slug,
-      title: extractTitle(content, slug),
+      title: data.aliases?.[0] || data.title || slug,
       date: data.date || '',
       tags: data.tags || [],
       content: processedContent,

@@ -59,23 +59,10 @@ body {
 .prose h4 {
   color: var(--text-highlight);
   font-weight: 600;
-  font-family: var(--font-suite);
 }
 
 .prose h1 {
-  font-weight: 700;
-  font-size: 64px;
-  line-height: 1.25;
-  margin-bottom: 64px;
-}
-
-.prose h1::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 1px;
-  margin-top: 24px;
-  background: var(--bg-subtle);
+  display: none;
 }
 
 .prose h1 a {
