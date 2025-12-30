@@ -23,7 +23,7 @@ export function getAllPosts(): Post[] {
 
       return {
         slug,
-        title: data.aliases[0],
+        title: data.aliases?.[0] || data.title || slug,
         date: data.date || '',
         tags: data.tags || [],
         content,
@@ -72,7 +72,7 @@ export function getPostBySlug(slug: string): Post | null {
 
     return {
       slug,
-      title: data.aliases[0],
+      title: data.aliases?.[0] || data.title || slug,
       date: data.date || '',
       tags: data.tags || [],
       content: processedContent,

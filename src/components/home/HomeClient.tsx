@@ -27,7 +27,7 @@ function FooterIcon({ type, className }: { type: footerType; className: string }
 
 function FooterBelt({ type }: { type: footerType }) {
   return (
-    <a href={footers[type].url} target="_blank">
+    <a href={footers[type].url} target="_blank" rel="noopener noreferrer">
       <div
         className="w-[120vw] h-16 bg-bg-default -translate-x-8 flex whitespace-nowrap items-center overflow-hidden"
         style={{ rotate: `${type.length * 4 - 30}deg` }}

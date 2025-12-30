@@ -48,7 +48,7 @@ function SidebarContent({ post }: { post: Post }) {
         <div className="flex justify-between items-center gap-3">
           <div className="flex flex-col gap-2">
             <div className="flex items-center mt-2">
-              <Tag text={post.tags[0]} />
+              {post.tags[0] && <Tag text={post.tags[0]} />}
             </div>
             <div className="pl-2">
               <h4 className={`text-text-highlight leading-[125%] font-semibold text-[18px]`}>
@@ -74,7 +74,7 @@ export function Sidebar({ posts, className }: SidebarProps) {
   const tags = new Set<string>();
 
   posts.forEach((post) => {
-    tags.add(post.tags[0]);
+    if (post.tags[0]) tags.add(post.tags[0]);
   });
 
   return (
@@ -97,10 +97,10 @@ export function Sidebar({ posts, className }: SidebarProps) {
         <ul className="flex flex-col gap-4 pt-4 w-full">
           {posts
             .filter((post) => post.tags.includes(activeTab) || activeTab === '')
-            .map((post, ind) => (
+            .map((post, ind, arr) => (
               <div key={post.slug}>
                 <SidebarContent post={post} />
-                {ind !== posts.length - 1 && <hr className=" my-4 mx-3 text-bg-subtle" />}
+                {ind !== arr.length - 1 && <hr className=" my-4 mx-3 text-bg-subtle" />}
               </div>
             ))}
         </ul>
