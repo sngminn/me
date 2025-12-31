@@ -34,7 +34,7 @@ export default function Content({ post, children }: { post: Post; children: Reac
       <article className="max-w-[700px] m-auto px-3 pt-6 pb-40 flex flex-col gap-4 ">
         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
           <Image
-            src={`/thumbnails/thumbnail_0${(post.title.length % 8) + 1}.png`}
+            src={post.thumbnail || '/thumbnail-fallback.jpg'}
             fill
             alt={`${post.title} 썸네일`}
             style={{ objectFit: 'cover' }}
