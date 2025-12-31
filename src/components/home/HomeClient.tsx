@@ -73,10 +73,11 @@ function HeroSection({ isScrolled }: { isScrolled: boolean }) {
       >
         <AsciiVideo className="absolute top-0 -right-[250px]" />
         <div className="flex flex-col gap-6 p-8 h-full justify-end">
-          <span className="text-primary-bg text-2xl font-bold">
-            프론트엔드 개발자
+          {/* TODO: 폰트 변경하기 */}
+          <span className="text-primary-bg text-2xl font-bold font-mono">
+            kim
             <br />
-            김승민입니다
+            seungmin_
           </span>
         </div>
       </div>

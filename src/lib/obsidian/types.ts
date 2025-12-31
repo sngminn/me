@@ -1,4 +1,5 @@
 export interface Post {
+  thumbnail?: string;
   slug: string;
   title: string;
   date: string;

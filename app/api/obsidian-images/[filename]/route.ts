@@ -1,6 +1,6 @@
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
 import { type NextRequest, NextResponse } from 'next/server';
-import path from 'path';
 
 export async function GET(_request: NextRequest, props: { params: Promise<{ filename: string }> }) {
   const params = await props.params;
@@ -8,7 +8,8 @@ export async function GET(_request: NextRequest, props: { params: Promise<{ file
 
   // 1. 보안 검사: 상위 디렉토리 접근 방지
   // 경로 이동 문자(..)나 슬래시가 포함되어 있으면 거부하거나 파일명만 추출
-  const safeFilename = path.basename(filename);
+  // + 공백을 하이픈으로 변경 (sync-assets.mjs의 로직과 일치시킴)
+  const safeFilename = path.basename(filename).replace(/\s+/g, '-');
 
   // 2. 파일 경로 설정
   // content/files 디렉토리에서 파일을 찾습니다.

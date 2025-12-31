@@ -1,6 +1,6 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import dotenv from 'dotenv';
-import fs from 'fs';
-import path from 'path';
 
 // .env.local 파일 명시적 로드
 dotenv.config({ path: '.env.local' });
@@ -45,6 +45,27 @@ function syncAssets() {
 
   try {
     fs.cpSync(SOURCE_DIR, TARGET_DIR, { recursive: true, force: true });
+
+    // ----------------------------------------------------------------
+    // Space -> Hyphen Renaming Logic (only in Target)
+    // ----------------------------------------------------------------
+    const filesDir = path.join(TARGET_DIR, 'files');
+    if (fs.existsSync(filesDir)) {
+      console.log('🔄 Normalizing filenames (spaces -> hyphens) in content/files...');
+      const files = fs.readdirSync(filesDir);
+      let renameCount = 0;
+
+      for (const file of files) {
+        if (file.includes(' ')) {
+          const oldPath = path.join(filesDir, file);
+          const newFilename = file.replace(/\s+/g, '-');
+          const newPath = path.join(filesDir, newFilename);
+          fs.renameSync(oldPath, newPath);
+          renameCount++;
+        }
+      }
+      console.log(`✨ Renamed ${renameCount} files.`);
+    }
 
     console.log(`✅ Sync Complete! All files and folders copied.`);
   } catch (error) {

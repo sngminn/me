@@ -153,6 +153,10 @@ body {
   border-radius: 18px;
 }
 
+.prose > p:first-of-type:has(img) {
+  display: none;
+}
+
 @media screen and (max-width: 1024px) {
   .prose {
     font-size: 16px;
