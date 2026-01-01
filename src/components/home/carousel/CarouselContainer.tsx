@@ -41,6 +41,8 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
   }, []);
 
   const activePost = posts[activeIndex] || posts[0];
+  if (!activePost) return null;
+
   return (
     <div className="absolute w-full h-full overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-black pointer-events-none z-10 vignette" />
@@ -62,6 +64,7 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
             index={index}
             containerScrollX={scrollX}
             dataIndex={index}
+            priority={index === 0}
           />
         ))}
       </ul>

@@ -11,9 +11,10 @@ interface Props {
   index: number;
   containerScrollX: MotionValue<number>;
   dataIndex?: number;
+  priority?: boolean;
 }
 
-export default function CarouselItem({ post, index, containerScrollX }: Props) {
+export default function CarouselItem({ post, index, containerScrollX, priority = false }: Props) {
   const itemRef = useRef<HTMLLIElement>(null);
 
   const [range, setRange] = useState([
@@ -84,6 +85,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
             fill
             alt={`${post.title} 썸네일`}
             className="object-cover"
+            priority={priority}
           />
         </div>
 
@@ -94,6 +96,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
             fill
             alt={`${post.title} 썸네일`}
             className="object-cover"
+            priority={priority}
           />
         </div>
 
@@ -103,6 +106,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
             fill
             alt={`${post.title} 썸네일`}
             className="object-cover"
+            priority={priority}
           />
         </div>
       </Link>
