@@ -15,8 +15,12 @@ interface Props {
 
 export default function CarouselItem({ post, index, containerScrollX }: Props) {
   const itemRef = useRef<HTMLLIElement>(null);
-  const [myPosition, setMyPosition] = useState(index * 320);
-  const [cardWidth, setCardWidth] = useState(320);
+
+  const [range, setRange] = useState([
+    index * 320 - (320 - CAROUSEL_OVERLAP),
+    index * 320,
+    index * 320 + (320 - CAROUSEL_OVERLAP),
+  ]);
 
   useEffect(() => {
     const el = itemRef.current;
@@ -24,9 +28,11 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
 
     const handleResize = () => {
       const width = el.offsetWidth;
-      setCardWidth(width);
       const centerScroll = el.offsetLeft + width / 2 - window.innerWidth / 2;
-      setMyPosition(centerScroll);
+
+      const totalW = width - CAROUSEL_OVERLAP;
+      const extend = window.innerWidth / 3;
+      setRange([centerScroll - totalW - extend, centerScroll, centerScroll + totalW + extend]);
     };
 
     // 초기 실행
@@ -44,15 +50,6 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  // 카드 하나가 차지하는 실질적 공간 = 너비 - 겹치는 부분
-  const totalWidth = cardWidth - CAROUSEL_OVERLAP;
-  const EXTEND_RANGE = window.innerWidth / 3;
-  const range = [
-    myPosition - totalWidth - EXTEND_RANGE,
-    myPosition,
-    myPosition + totalWidth + EXTEND_RANGE,
-  ];
   const rotateY = useTransform(containerScrollX, range, [20, 0, -20]);
   const scale = useTransform(containerScrollX, range, [0.8, 1, 0.8]);
   const y = useTransform(containerScrollX, range, [40, 0, 40]);
@@ -73,7 +70,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
         filter,
         marginRight: -CAROUSEL_OVERLAP,
       }}
-      className="snap-center last:mr-0"
+      className="snap-center snap-always last:mr-0 will-change-transform"
       data-index={index}
     >
       <Link
@@ -81,7 +78,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
         className="relative w-[80vw] max-w-[360px] min-w-[300px] h-full flex flex-col justify-end items-center px-4 py-4 rounded-2xl "
       >
         {/* glow */}
-        <div className="blur-xl opacity-10 absolute bottom-0 w-full aspect-3/4 rounded-xl overflow-hidden">
+        <div className="blur-xl opacity-10 absolute bottom-0 w-full aspect-3/4 rounded-xl overflow-hidden hidden md:block">
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}
             fill
@@ -91,7 +88,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
         </div>
 
         {/* top atmosphere */}
-        <div className="blur-[200px] opacity-10 scale-200 absolute -top-50 w-full aspect-3/4 rounded-xl overflow-hidden">
+        <div className="blur-[200px] opacity-10 scale-200 absolute -top-50 w-full aspect-3/4 rounded-xl overflow-hidden hidden md:block">
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}
             fill
