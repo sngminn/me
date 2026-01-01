@@ -50,10 +50,10 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
   const range = [myPosition - totalWidth, myPosition, myPosition + totalWidth];
   const rotateY = useTransform(containerScrollX, range, [20, 0, -20]);
   const scale = useTransform(containerScrollX, range, [0.8, 1, 0.8]);
-  const opacity = useTransform(containerScrollX, range, [0.5, 1, 0.5]); // 겹칠 때 투명도 약간 높임
+  const opacity = useTransform(containerScrollX, range, [0.5, 1, 0.5]);
   const y = useTransform(containerScrollX, range, [40, 0, 40]);
   const z = useTransform(containerScrollX, range, [-50, 0, -50]);
-  const zIndex = useTransform(containerScrollX, range, [0, 10, 0]); // 중앙이 제일 위로
+  const zIndex = useTransform(containerScrollX, range, [0, 10, 0]);
 
   return (
     <motion.li
@@ -64,15 +64,15 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
         opacity,
         y,
         z,
-        zIndex, // Z-index 적용
-        marginRight: -CAROUSEL_OVERLAP, // 겹치기
+        zIndex,
+        marginRight: -CAROUSEL_OVERLAP,
       }}
       className="snap-center last:mr-0"
       data-index={index}
     >
       <Link
         href={`/posts/${post.slug}`}
-        className="w-[80vw] max-w-[400px] flex flex-col px-4 py-4 rounded-2xl "
+        className="w-[80vw] max-w-[400px] min-w-[300px] h-full justify-end flex flex-col px-4 py-4 rounded-2xl "
       >
         <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden">
           <Image

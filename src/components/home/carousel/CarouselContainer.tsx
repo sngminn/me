@@ -27,7 +27,8 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
       },
       {
         root: container,
-        threshold: 0.6,
+        threshold: 0, // 중앙 선에 닿자마자 감지
+        rootMargin: '0px -50% 0px -50%', // 좌우 50%씩 깎아서 중앙선만 남김
       }
     );
 
@@ -41,11 +42,13 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
 
   const activePost = posts[activeIndex] || posts[0];
   return (
-    <div className="relative w-full h-full flex flex-col justify-center ">
+    <div className="relative w-full flex flex-col flex-1 justify-between overflow-hidden">
+      <div className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 bottom-0 w-[120vw] h-[50vh] bg-black z-50 blur-[100px] pointer-events-none" />
+      <div className="absolute left-1/2 -translate-x-1/2 -translate-y-[8vh] bottom-0 w-[200vw] h-[30vh] bg-linear-to-t from-black to-transparent pointer-events-none z-50" />
       <TitleSync activePost={activePost} activeIndex={activeIndex} />
       <ul
         ref={containerRef}
-        className="flex h-full pt-4 overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange"
+        className="flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange"
         style={{
           paddingLeft: 'calc(50vw - min(40vw, 200px))',
           paddingRight: `calc(50vw - min(40vw, 200px) + ${CAROUSEL_OVERLAP}px)`,
