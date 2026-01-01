@@ -70,7 +70,7 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
         filter,
         marginRight: -CAROUSEL_OVERLAP,
       }}
-      className="snap-center snap-always last:mr-0 will-change-transform"
+      className="snap-center snap-always last:mr-0 will-change-transform preserve-3d backface-hidden"
       data-index={index}
     >
       <Link

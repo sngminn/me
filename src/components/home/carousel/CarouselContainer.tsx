@@ -49,7 +49,7 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
       <TitleSync activePost={activePost} activeIndex={activeIndex} />
       <ul
         ref={containerRef}
-        className="h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange"
+        className="h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange preserve-3d"
         style={{
           paddingLeft: 'calc(50vw - min(40vw, 200px))',
           paddingRight: `calc(50vw - min(40vw, 200px) + ${CAROUSEL_OVERLAP}px)`,

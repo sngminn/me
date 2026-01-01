@@ -239,3 +239,7 @@ body {
     rgba(0, 0, 0, 0.8) 100%
   );
 }
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
