@@ -15,7 +15,7 @@ export default function TabContainer({
       {[...tags].map((tag) => (
         <TabItem
           key={tag}
-          content={tag}
+          content={tag.replaceAll('_', ' ')}
           active={activeTab === tag}
           onClick={() => setActiveTab(tag)}
         />

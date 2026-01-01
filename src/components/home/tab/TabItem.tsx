@@ -12,7 +12,7 @@ export default function TabItem({
   return (
     <button
       type="button"
-      className={`${active ? 'bg-white text-text-inverse' : 'bg-bg-subtle border-text-default text-text-subtle'} text-sm flex justify-center whitespace-nowrap items-center rounded-full px-3 py-1 font-medium cursor-pointer`}
+      className={`${active ? 'bg-white text-text-inverse' : 'bg-[#ffffff16] border-text-default text-white'} text-sm flex justify-center whitespace-nowrap items-center rounded-full px-3 py-1 font-medium cursor-pointer`}
       onClick={onClick}
     >
       {content}

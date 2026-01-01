@@ -13,16 +13,18 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
   const filteredPosts = posts.filter((post) => post.tags.includes(activeTab) || activeTab === '');
 
   return (
-    <div className="h-screen flex flex-col">
-      <header className="flex justify-between items-center px-4 py-3">
-        <Link href={'/'}>
-          <span className="font-suite font-black">Kim Seungmin _</span>
-        </Link>
-        <button type="button">
-          <Menu />
-        </button>
-      </header>
-      <TabContainer activeTab={activeTab} setActiveTab={setActiveTab} tags={tags} />
+    <div className="relative h-screen flex flex-col">
+      <div className="w-full max-w-[1080px] mx-auto z-200">
+        <header className="flex justify-between items-center px-4 py-3">
+          <Link href={'/'}>
+            <span className="font-suite font-black tracking-tighter text-sm">Kim Seungmin _</span>
+          </Link>
+          <button type="button">
+            <Menu />
+          </button>
+        </header>
+        <TabContainer activeTab={activeTab} setActiveTab={setActiveTab} tags={tags} />
+      </div>
       <CarouselContainer posts={filteredPosts} key={activeTab} />
     </div>
   );

@@ -1,5 +1,5 @@
 'use client';
-import { type MotionValue, motion, useTransform } from 'framer-motion';
+import { type MotionValue, motion, useMotionTemplate, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
@@ -47,13 +47,19 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
 
   // 카드 하나가 차지하는 실질적 공간 = 너비 - 겹치는 부분
   const totalWidth = cardWidth - CAROUSEL_OVERLAP;
-  const range = [myPosition - totalWidth, myPosition, myPosition + totalWidth];
+  const EXTEND_RANGE = window.innerWidth / 3;
+  const range = [
+    myPosition - totalWidth - EXTEND_RANGE,
+    myPosition,
+    myPosition + totalWidth + EXTEND_RANGE,
+  ];
   const rotateY = useTransform(containerScrollX, range, [20, 0, -20]);
   const scale = useTransform(containerScrollX, range, [0.8, 1, 0.8]);
-  const opacity = useTransform(containerScrollX, range, [0.5, 1, 0.5]);
   const y = useTransform(containerScrollX, range, [40, 0, 40]);
-  const z = useTransform(containerScrollX, range, [-50, 0, -50]);
+  const z = useTransform(containerScrollX, range, [-100, 0, -100]);
   const zIndex = useTransform(containerScrollX, range, [0, 10, 0]);
+  const blurValue = useTransform(containerScrollX, range, [6, 0, 6]);
+  const filter = useMotionTemplate`blur(${blurValue}px)`;
 
   return (
     <motion.li
@@ -61,10 +67,10 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
       style={{
         rotateY,
         scale,
-        opacity,
         y,
         z,
         zIndex,
+        filter,
         marginRight: -CAROUSEL_OVERLAP,
       }}
       className="snap-center last:mr-0"
@@ -72,14 +78,34 @@ export default function CarouselItem({ post, index, containerScrollX }: Props) {
     >
       <Link
         href={`/posts/${post.slug}`}
-        className="w-[80vw] max-w-[400px] min-w-[300px] h-full justify-end flex flex-col px-4 py-4 rounded-2xl "
+        className="relative w-[80vw] max-w-[360px] min-w-[300px] h-full flex flex-col justify-end items-center px-4 py-4 rounded-2xl "
       >
-        <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden">
+        {/* glow */}
+        <div className="blur-xl opacity-10 absolute bottom-0 w-full aspect-3/4 rounded-xl overflow-hidden">
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}
             fill
             alt={`${post.title} 썸네일`}
-            style={{ objectFit: 'cover' }}
+            className="object-cover"
+          />
+        </div>
+
+        {/* top atmosphere */}
+        <div className="blur-[200px] opacity-10 scale-200 absolute -top-50 w-full aspect-3/4 rounded-xl overflow-hidden">
+          <Image
+            src={post.thumbnail || '/thumbnail-fallback.jpg'}
+            fill
+            alt={`${post.title} 썸네일`}
+            className="object-cover"
+          />
+        </div>
+
+        <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden border-reflection">
+          <Image
+            src={post.thumbnail || '/thumbnail-fallback.jpg'}
+            fill
+            alt={`${post.title} 썸네일`}
+            className="object-cover"
           />
         </div>
       </Link>

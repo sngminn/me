@@ -42,13 +42,14 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
 
   const activePost = posts[activeIndex] || posts[0];
   return (
-    <div className="relative w-full flex flex-col flex-1 justify-between overflow-hidden">
+    <div className="absolute w-full h-full overflow-hidden">
+      <div className="absolute inset-0 w-full h-full bg-black pointer-events-none z-10 vignette" />
       <div className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 bottom-0 w-[120vw] h-[50vh] bg-black z-50 blur-[100px] pointer-events-none" />
       <div className="absolute left-1/2 -translate-x-1/2 -translate-y-[8vh] bottom-0 w-[200vw] h-[30vh] bg-linear-to-t from-black to-transparent pointer-events-none z-50" />
       <TitleSync activePost={activePost} activeIndex={activeIndex} />
       <ul
         ref={containerRef}
-        className="flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange"
+        className="h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange"
         style={{
           paddingLeft: 'calc(50vw - min(40vw, 200px))',
           paddingRight: `calc(50vw - min(40vw, 200px) + ${CAROUSEL_OVERLAP}px)`,

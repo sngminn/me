@@ -2,21 +2,23 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { Tag } from '@/src/components/ui/Tag';
 import type { Post } from '@/src/lib/obsidian/types';
 import { relativeDate } from '@/src/lib/utils/day';
 
 const VARIANTS = {
   enter: (direction: number) => ({
     x: direction > 0 ? 50 : -50,
+    y: 5,
     opacity: 0,
   }),
   center: {
     x: 0,
+    y: 0,
     opacity: 1,
   },
   exit: (direction: number) => ({
     x: direction < 0 ? 50 : -50,
+    y: 5,
     opacity: 0,
   }),
 };
@@ -44,7 +46,7 @@ export default function TitleSync({
   const { direction } = directionState;
 
   return (
-    <div className="relative h-20 w-full flex justify-center overflow-hidden">
+    <div className="absolute top-[20vh] w-full flex justify-center z-100">
       <AnimatePresence mode="popLayout" custom={direction}>
         <motion.div
           key={activePost.slug}
@@ -59,13 +61,14 @@ export default function TitleSync({
           }}
           className="absolute flex flex-col px-8 gap-2 justify-center items-center w-full"
         >
-          {activePost.tags[0] && <Tag text={activePost.tags[0]} />}
           <h4
-            className={`text-text-highlight text-center leading-[125%] break-keep font-semibold text-[18px]`}
+            className={`text-text-highlight text-2xl text-center leading-[125%] break-keep font-bold font-suite`}
           >
             {activePost.title}
           </h4>
-          <span className="text-[12px] font-medium">{relativeDate(activePost.date)}</span>
+          <span className="text-[12px] font-medium">
+            {`${relativeDate(activePost.date)} · ${activePost.tags[0]?.replaceAll('_', ' ')}`}
+          </span>
         </motion.div>
       </AnimatePresence>
     </div>
