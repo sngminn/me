@@ -12,7 +12,7 @@
 ---
 
 ## 기술 스택
-최신 기술을 적극적으로 도입하여 웹 퍼포먼스와 사용자 경험의 한계를 실험합니다.
+최신 기술을 적극적으로 도입하여 웹 퍼포먼스와 사용자 경험을 높이기 위해 노력했습니다.
 
 ![Next.js 16](https://img.shields.io/badge/Next.js-16.0-black?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![React 19](https://img.shields.io/badge/React%2019%20(RC)-61DAFB?style=for-the-badge&logo=react&logoColor=black)
@@ -52,7 +52,7 @@ graph TD
 ## DevOps & Automations
 이 프로젝트는 수많은 봇과 스크립트에 의해 관리됩니다. 
 
-| 자동화 (Automation) | 도구 (Tool/Workflow) | 트리거 (Trigger) | 설명 |
+| 자동화 | 도구 | 트리거 | 설명 |
 | :--- | :--- | :--- | :--- |
 | **AI PR Writer** | `auto-pr.yml` (Gemini) | `git push` | 코드 변경사항을 분석하여 PR 본문을 AI가 자동 작성합니다. |
 | **Smart Commit** | `smart-commit.mjs` | `npm run commit` | 스테이징된 코드를 AI가 리뷰하고, 컨벤션에 맞는 커밋 메시지를 자동 생성합니다. |
@@ -81,7 +81,8 @@ graph LR
 ## 오픈소스 라이브러리
 개발 과정에서 필요한 라이브러리를 직접 개발 및 배포했습니다.
 
-### [`korean-markdown-fixer`](https://www.npmjs.com/package/korean-markdown-fixer)
+### korean-markdown-fixer
+[npm에서 보기](https://www.npmjs.com/package/korean-markdown-fixer)
 > 마크다운에서 한글과 특수문자가 인접했을 때 볼드(`**`) 처리가 깨지는 문제를 해결하는 경량 유틸리티입니다.
 
 - **Problem:** `**중요**합니다`는 잘 나오지만, `**'중요'**합니다`처럼 특수문자가 붙으면 파싱이 깨지는 현상 발생.
@@ -92,7 +93,7 @@ graph LR
 ## 기술적 결정
 
 ### 1. Next.js 16 & React 19
-- **Why:** **React Server Components (RSC)**를 극한으로 활용하기 위함입니다.
+- **Why:** **React Server Components**를 활용하기 위함입니다.
 - **Benefit:** 마크다운 파싱, 그래프 계산 등 무거운 로직을 서버로 격리하여 클라이언트 번들 사이즈를 최소화했습니다.
 
 ### 2. ESLint/Prettier 대신 Biome을 선택한 이유
@@ -105,8 +106,7 @@ graph LR
 
 ---
 
-## 🏃‍♂️ Getting Started
-이 뇌(Brain)를 복제하고 싶으신가요?
+## 시작하기
 
 ```bash
 # 1. Clone
@@ -126,8 +126,3 @@ pnpm dev
 - `pnpm commit`: AI가 커밋 메시지를 작성해줍니다.
 - `pnpm sync:assets`: Obsidian 볼트에서 데이터를 동기화합니다.
 - `pnpm build:tokens`: Figma 토큰을 CSS 변수로 변환합니다.
-
----
-
-_Designed and Engineered by **Kim Seungmin**_
-_Hosted on **Home Server**_
