@@ -4,5 +4,5 @@ import { getAllPosts } from '@/src/lib/obsidian/post';
 export default function Home() {
   const allPosts = getAllPosts();
 
-  return <HomeClient allPosts={allPosts} />;
+  return <HomeClient posts={allPosts} />;
 }

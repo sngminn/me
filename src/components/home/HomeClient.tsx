@@ -1,108 +1,142 @@
 'use client';
 
-import { ArrowRight, Github, Instagram, Mail } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import type { Post } from '@/lib/obsidian/types';
-import { Sidebar } from '../layout/Sidebar';
-import AsciiVideo from '../ui/AsciiVideo';
+import { ExternalLink, Github, Instagram, Mail, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { type ReactNode, useMemo, useState } from 'react';
+import type { Post } from '@/src/lib/obsidian/types';
+import CarouselContainer from './carousel/CarouselContainer';
+import TabContainer from './tab/TabContainer';
 
-interface Footer {
-  name: string;
-  url: string;
+const MenuItems = ['github', 'instagram', 'email'] as const;
+
+interface MenuItemProps {
+  item: (typeof MenuItems)[number];
 }
 
-const footers = {
-  github: { name: 'sngminn', url: 'https://github.com/sngminn' },
-  instagram: { name: 'solmin.works', url: 'https://www.instagram.com/solmin.works/' },
-  email: { name: 'me@kimseungmin.dev', url: 'mailto:me@kimseungmin.dev' },
-} as const satisfies Record<string, Footer>;
+const MenuMap = {
+  github: GithubMenu,
+  instagram: InstagramMenu,
+  email: EmailMenu,
+} as const;
 
-type footerType = keyof typeof footers;
-
-function FooterIcon({ type, className }: { type: footerType; className: string }) {
-  if (type === 'github') return <Github className={className} />;
-  if (type === 'instagram') return <Instagram className={className} />;
-  if (type === 'email') return <Mail className={className} />;
-}
-
-function FooterBelt({ type }: { type: footerType }) {
+function GithubMenu({ children, className }: { children: ReactNode; className: string }) {
   return (
-    <a href={footers[type].url} target="_blank" rel="noopener noreferrer">
-      <div
-        className="w-[120vw] h-16 bg-bg-default -translate-x-8 flex whitespace-nowrap items-center overflow-hidden"
-        style={{ rotate: `${type.length * 4 - 30}deg` }}
-      >
-        <div className="flex animate-scroll gap-3">
-          {Array(8)
-            .fill('')
-            .map((_, i) => (
-              <div
-                // biome-ignore lint/suspicious/noArrayIndexKey: only for repeat
-                key={i}
-                className="flex whitespace-nowrap items-center gap-3 shrink-0"
-              >
-                <FooterIcon className="text-primary-main" type={type} />
-                <span className="text-primary-main uppercase whitespace-nowrap font-extrabold">
-                  {type}
-                </span>
-                <ArrowRight className="text-primary-main" />
-                <span className="text-primary-main uppercase whitespace-nowrap font-extrabold">
-                  {footers[type].name}
-                </span>
-                <ArrowRight className="text-primary-main" />
-              </div>
-            ))}
-        </div>
-      </div>
+    <a
+      href="https://github.com/sngminn"
+      className={className}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Github className="w-9 h-9 text-white" />
+      <span>{children}</span>
+      <ExternalLink className="opacity-50 text-white" />
+    </a>
+  );
+}
+function InstagramMenu({ children, className }: { children: ReactNode; className: string }) {
+  return (
+    <a
+      href="https://www.instagram.com/solmin.works/"
+      className={className}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Instagram className="w-9 h-9 text-white" />
+      <span>{children}</span>
+      <ExternalLink className="opacity-50 text-white" />
     </a>
   );
 }
 
-function HeroSection({ isScrolled }: { isScrolled: boolean }) {
+function EmailMenu({ children, className }: { children: ReactNode; className: string }) {
+  async function clickHandler() {
+    try {
+      await navigator.clipboard.writeText('me@kimseungmin.dev');
+    } catch (e) {
+      console.log('클립보드 복사 실패:', e);
+    }
+  }
   return (
-    <div className="fixed top-0 left-1/2 -translate-x-1/2 max-w-[1080px] w-full h-full overflow-hidden">
-      <div
-        className={`${isScrolled ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} absolute flex flex-col gap-18 mt-[45vh]`}
-      >
-        {Object.keys(footers).map((type) => (
-          <FooterBelt key={type} type={type as footerType} />
+    <button type="button" onClick={clickHandler} className={className}>
+      <Mail className="w-9 h-9 text-white" />
+      <span>{children}</span>
+    </button>
+  );
+}
+
+function MenuItem({ item }: MenuItemProps) {
+  const MenuComp = MenuMap[item];
+  return (
+    <li className="px-8 py-3 flex justify-center items-center">
+      <MenuComp className="text-transparent bg-clip-text bg-linear-to-b from-white to-indigo-100 cursor-pointer text-4xl font-suite uppercase font-bold flex gap-4 justify-center items-center ">
+        {item}
+      </MenuComp>
+    </li>
+  );
+}
+
+interface MenuContainerProps {
+  menuHandler: () => void;
+}
+
+function MenuContainer({ menuHandler }: MenuContainerProps) {
+  return (
+    <div className="fixed flex justify-center items-center inset-0 z-800 w-screen h-screen">
+      <button
+        type="button"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) menuHandler();
+        }}
+        className="absolute backdrop-blur-xl bg-[#000000a0] w-full h-full -z-10"
+      />
+      <div className="max-w-[1080px] w-full fixed top-0 mx-auto flex justify-end">
+        <button
+          type="button"
+          onClick={menuHandler}
+          className="cursor-pointer px-4 py-3 border-none bg-transparent text-white"
+        >
+          <X className="w-6 h-6" />
+        </button>
+      </div>
+      <ul className="flex flex-col gap-12 list-none p-0 m-0">
+        {MenuItems.map((item) => (
+          <MenuItem key={item} item={item} />
         ))}
-      </div>
-      <div
-        className={`${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'} absolute flex flex-col h-[70vh] w-full justify-end items-start`}
-      >
-        <AsciiVideo className="absolute top-0 -right-[250px]" />
-        <div className="flex flex-col gap-6 p-8 h-full justify-end">
-          {/* TODO: 폰트 변경하기 */}
-          <span className="text-primary-bg text-2xl font-bold font-mono">
-            kim
-            <br />
-            seungmin_
-          </span>
-        </div>
-      </div>
+      </ul>
     </div>
   );
 }
 
-export default function HomeClient({ allPosts }: { allPosts: Post[] }) {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+export default function HomeClient({ posts }: { posts: Post[] }) {
+  const [activeTab, setActiveTab] = useState('');
+  const [showMenu, setShowMenu] = useState(false);
+  const tags = useMemo(
+    () => new Set(posts.map((post) => post.tags[0]).filter((tag): tag is string => Boolean(tag))),
+    [posts]
+  );
+  const filteredPosts = posts.filter((post) => post.tags.includes(activeTab) || activeTab === '');
 
-  useEffect(() => {
-    function handleScroll() {
-      const threshold = window.innerHeight * 0.7;
-      setIsScrolled(window.scrollY > threshold);
-    }
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  function handleMenuClick() {
+    setShowMenu((prev) => !prev);
+  }
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-primary-main ">
-      <HeroSection isScrolled={isScrolled} />
-      <Sidebar posts={allPosts} className="my-[70vh] z-10" />
+    <div className="relative h-screen flex flex-col">
+      {showMenu && <MenuContainer menuHandler={handleMenuClick} />}
+      <div className="w-full max-w-[1080px] mx-auto z-200">
+        <header className="flex justify-between items-center">
+          <Link href={'/'}>
+            <span className="font-suite font-black tracking-tighter text-sm px-4 py-3">
+              Kim Seungmin _
+            </span>
+          </Link>
+          <button type="button" onClick={handleMenuClick} className="cursor-pointer px-4 py-3">
+            {showMenu ? <X /> : <Menu />}
+          </button>
+        </header>
+        <TabContainer activeTab={activeTab} setActiveTab={setActiveTab} tags={tags} />
+      </div>
+      <CarouselContainer posts={filteredPosts} key={activeTab} />
     </div>
   );
 }

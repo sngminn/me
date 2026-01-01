@@ -32,18 +32,20 @@
 :root {
   --background: var(--bg-default);
   --foreground: var(--text-default);
+  --font-pretendard:
+    "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 body {
-  background: var(--background);
+  background: black;
   color: var(--foreground);
   font-family: var(--font-pretendard);
   margin: auto;
   min-width: 375px;
-  max-width: 1080px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  letter-spacing: -0.02em;
+  /* -webkit-font-smoothing: antialiased; */
+  /* -moz-osx-font-smoothing: grayscale; */
+  /* text-rendering: optimizeLegibility; */
 }
 
 .prose {
@@ -59,6 +61,7 @@ body {
 .prose h4 {
   color: var(--text-highlight);
   font-weight: 600;
+  line-height: 1.4;
 }
 
 .prose h1 {
@@ -198,4 +201,47 @@ body {
 
 .animate-scroll {
   animation: scroll 10s linear infinite;
+}
+
+.border-reflection {
+  position: relative;
+}
+
+.border-reflection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  /* 클릭 통과 & 위치 잡기 */
+  pointer-events: none;
+  z-index: 20;
+}
+
+.vignette {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, 0) 75%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
 }

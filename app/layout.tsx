@@ -4,17 +4,12 @@ import localFont from 'next/font/local';
 import { ThemeProvider } from '@/src/components/theme-provider';
 
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME } from '@/src/lib/utils/constants';
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 
 const suite = localFont({
   src: '../src/assets/fonts/SUITE-Variable.woff2',
   display: 'swap',
   variable: '--font-suite',
-});
-
-const pretendard = localFont({
-  src: '../src/assets/fonts/Pretendard-Variable.woff2',
-  display: 'swap',
-  variable: '--font-pretendard',
 });
 
 export const metadata: Metadata = {
@@ -59,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${pretendard.variable} ${suite.variable}`} suppressHydrationWarning>
+    <html lang="ko" className={`${suite.variable}`} suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"
