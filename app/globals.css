@@ -35,7 +35,7 @@
 }
 
 body {
-  background: var(--background);
+  background: black;
   color: var(--foreground);
   font-family: var(--font-pretendard);
   margin: auto;

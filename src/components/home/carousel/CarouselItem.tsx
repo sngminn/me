@@ -1,22 +1,79 @@
+'use client';
+import { type MotionValue, motion, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Tag } from '@/src/components/ui/Tag';
+import { useEffect, useRef, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
-import { relativeDate } from '@/src/lib/utils/day';
+import { CAROUSEL_OVERLAP } from './constants';
 
-export default function CarouselItem({ post }: { post: Post }) {
+interface Props {
+  post: Post;
+  index: number;
+  containerScrollX: MotionValue<number>;
+  dataIndex?: number;
+}
+
+export default function CarouselItem({ post, index, containerScrollX }: Props) {
+  const itemRef = useRef<HTMLLIElement>(null);
+  const [myPosition, setMyPosition] = useState(index * 320);
+  const [cardWidth, setCardWidth] = useState(320);
+
+  useEffect(() => {
+    const el = itemRef.current;
+    if (!el) return;
+
+    const handleResize = () => {
+      const width = el.offsetWidth;
+      setCardWidth(width);
+      const centerScroll = el.offsetLeft + width / 2 - window.innerWidth / 2;
+      setMyPosition(centerScroll);
+    };
+
+    // 초기 실행
+    handleResize();
+
+    // ResizeObserver: 요소의 크기 변화 감지 (이미지 로딩, 폰트 변경 등)
+    const resizeObserver = new ResizeObserver(() => handleResize());
+    resizeObserver.observe(el);
+
+    // Window Resize: 화면 크기 변화 감지
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // 카드 하나가 차지하는 실질적 공간 = 너비 - 겹치는 부분
+  const totalWidth = cardWidth - CAROUSEL_OVERLAP;
+  const range = [myPosition - totalWidth, myPosition, myPosition + totalWidth];
+  const rotateY = useTransform(containerScrollX, range, [20, 0, -20]);
+  const scale = useTransform(containerScrollX, range, [0.8, 1, 0.8]);
+  const opacity = useTransform(containerScrollX, range, [0.5, 1, 0.5]); // 겹칠 때 투명도 약간 높임
+  const y = useTransform(containerScrollX, range, [40, 0, 40]);
+  const z = useTransform(containerScrollX, range, [-50, 0, -50]);
+  const zIndex = useTransform(containerScrollX, range, [0, 10, 0]); // 중앙이 제일 위로
+
   return (
-    <Link href={`/posts/${post.slug}`}>
-      <li className="w-[80vw] flex flex-col px-4 py-4 rounded-2xl">
-        <div className="flex flex-col gap-2 justify-center items-center">
-          {post.tags[0] && <Tag text={post.tags[0]} />}
-          <h4
-            className={`text-text-highlight text-center leading-[125%] break-keep font-semibold text-[18px]`}
-          >
-            {post.title}
-          </h4>
-          <span className="text-[12px] font-medium">{relativeDate(post.date)}</span>
-        </div>
+    <motion.li
+      ref={itemRef}
+      style={{
+        rotateY,
+        scale,
+        opacity,
+        y,
+        z,
+        zIndex, // Z-index 적용
+        marginRight: -CAROUSEL_OVERLAP, // 겹치기
+      }}
+      className="snap-center last:mr-0"
+      data-index={index}
+    >
+      <Link
+        href={`/posts/${post.slug}`}
+        className="w-[80vw] max-w-[400px] flex flex-col px-4 py-4 rounded-2xl "
+      >
         <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden">
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}
@@ -25,7 +82,7 @@ export default function CarouselItem({ post }: { post: Post }) {
             style={{ objectFit: 'cover' }}
           />
         </div>
-      </li>
-    </Link>
+      </Link>
+    </motion.li>
   );
 }

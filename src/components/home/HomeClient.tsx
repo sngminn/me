@@ -23,7 +23,7 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
         </button>
       </header>
       <TabContainer activeTab={activeTab} setActiveTab={setActiveTab} tags={tags} />
-      <CarouselContainer posts={filteredPosts} />
+      <CarouselContainer posts={filteredPosts} key={activeTab} />
     </>
   );
 }
