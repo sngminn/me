@@ -7,13 +7,12 @@ tags:
 published: false
 aliases: []
 ---
+![[002.png]]
 24시간 혹사 당하고 있는 내 그램 홈서버는 SSH로 접속 가능하다.
 근데... 비밀번호 몇 자리가 유일한 보안이다.
 
 last -f /var/log/btmp를 찍어보니...
-
 ![[Pasted image 20251222162755.png]]
-
 뭐 저런 게 수천줄이 나옴;
 
 서버를 열면 저렇게 해킹 봇들이 다 찔러보고 다닌다고 한다.
@@ -30,7 +29,7 @@ SSH Key라는 간단하고 좋은 방법이 있지만, 공부도 할겸 간지�
 잘못하면 내 서버를 내가 못들어가 직접 서버 컴터를 열어야 하는 대참사가 벌어질 수 있다.
 차 안에 차키 넣고 문 잠근 거임
 
-![[Pasted-image-20251222172112.png]]
+![[Pasted image 20251222172112.png]]
 
 나도 알고싶지 않았다.
 
@@ -38,7 +37,7 @@ SSH Key라는 간단하고 좋은 방법이 있지만, 공부도 할겸 간지�
 언젠가 요런 SSH 접속할 때 Google 인증을 사용할 수 있다는 글을 읽은 적이 있다.
 어디서 봤는지는 기억이 안남;
 
-[해당 깃허브](https://github.com/google/google-authenticator-libpam)
+[해당 깃허브][https://github.com/google/google-authenticator-libpam]
 
 그래서 추가해봤다. 세팅은 상당히 쉽다.
 

@@ -67,7 +67,7 @@ export default function TitleSync({
           className="absolute flex flex-col px-8 gap-2 justify-center items-center w-full"
         >
           <h4
-            className={`text-transparent text-2xl text-center leading-[125%] break-keep font-bold font-suite`}
+            className="text-transparent text-2xl text-center leading-[125%] break-keep font-bold font-suite"
             style={{
               WebkitBackgroundClip: 'text',
               background: `linear-gradient(to bottom, #ffffff, ${displayColor})`,
