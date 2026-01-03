@@ -26,12 +26,12 @@ export default function Content({ post, children }: { post: Post; children: Reac
   return (
     <>
       <div
-        className={`${scrolled ? 'translate-y-0' : '-translate-y-full'} transition-transform fixed top-0 gap-3 w-full max-w-[700px] left-1/2 -translate-x-1/2 px-3 py-2 flex items-center bg-bg-default border-b border-bg-subtle z-10`}
+        className={`${scrolled ? 'translate-y-0' : '-translate-y-full'} transition-transform fixed top-0 gap-3 w-full max-w-[700px] left-1/2 -translate-x-1/2 px-3 py-2 pt-13 flex items-center bg-[#000000e0] backdrop-blur-2xl border-b border-bg-subtle z-10`}
       >
         {post.tags[0] && <Tag text={post.tags[0]} />}
         <span className="text-xs text-text-highlight font-medium line-clamp-1">{post.title}</span>
       </div>
-      <article className="max-w-[700px] m-auto px-3 pt-6 pb-40 flex flex-col gap-4 ">
+      <article className="max-w-[700px] m-auto px-3 pt-6 pb-40 flex flex-col gap-4 bg-bg-default">
         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}

@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/src/components/theme-provider';
 
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME } from '@/src/lib/utils/constants';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import Layout from '@/src/components/layout/Layout';
 
 const suite = localFont({
   src: '../src/assets/fonts/SUITE-Variable.woff2',
@@ -63,7 +64,7 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          {children}
+          <Layout>{children}</Layout>
         </ThemeProvider>
       </body>
     </html>
