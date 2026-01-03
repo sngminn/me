@@ -14,7 +14,7 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
   const filteredPosts = posts.filter((post) => post.tags.includes(activeTab) || activeTab === '');
   return (
     <div className="relative h-screen flex flex-col">
-      <div className="w-full max-w-[1080px] mx-auto z-100">
+      <div className="w-full max-w-[1080px] mt-7 mx-auto z-100">
         <TabContainer activeTab={activeTab} setActiveTab={setActiveTab} tags={tags} />
       </div>
       <CarouselContainer posts={filteredPosts} key={activeTab} />

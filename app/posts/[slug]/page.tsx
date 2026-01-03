@@ -22,8 +22,10 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <Content post={post}>
-      <MDXRemote source={post.content} />
-    </Content>
+    <div className="bg-bg-default w-full h-hull">
+      <Content post={post}>
+        <MDXRemote source={post.content} />
+      </Content>
+    </div>
   );
 }

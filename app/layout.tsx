@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
 import { ThemeProvider } from '@/src/components/theme-provider';
@@ -6,6 +6,14 @@ import { ThemeProvider } from '@/src/components/theme-provider';
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME } from '@/src/lib/utils/constants';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import Layout from '@/src/components/layout/Layout';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+};
 
 const suite = localFont({
   src: '../src/assets/fonts/SUITE-Variable.woff2',
@@ -64,7 +72,8 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          <Layout>{children}</Layout>
+          <Layout />
+          {children}
         </ThemeProvider>
       </body>
     </html>

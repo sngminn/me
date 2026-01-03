@@ -8,7 +8,7 @@ interface MenuHandlerProps {
 
 export default function GNB({ menuHandler }: MenuHandlerProps) {
   return (
-    <header className="flex justify-between items-center bg-linear-to-b from-bg-default to-transparent">
+    <header className="flex justify-between items-center bg-linear-to-b from-bg-default to-transparent max-w-[1080px] w-full">
       <Link href={'/'}>
         <span
           className="text-transparent bg-clip-text bg-linear-to-b from-40% from-white to-90% to-indigo-200 font-suite font-black tracking-tighter text-sm px-4 py-3"

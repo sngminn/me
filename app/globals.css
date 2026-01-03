@@ -46,12 +46,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
 }
 
 .prose {
   max-width: none;
   line-height: 1.8;
   font-size: 18px;
+
+  letter-spacing: 0;
 }
 
 /* Headings */
@@ -141,7 +145,7 @@ body {
 
 /* Lists */
 .prose ul > li::marker {
-  color: var(--primary-main);
+  color: var(--marker-color);
 }
 .prose ol > li::marker {
   color: var(--primary-main);
@@ -154,6 +158,7 @@ body {
 
 .prose img {
   border-radius: 18px;
+  margin: 8px 0 8px 0;
 }
 
 .prose > p:first-of-type:has(img) {
