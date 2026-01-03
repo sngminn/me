@@ -245,3 +245,7 @@ body {
 .preserve-3d {
   transform-style: preserve-3d;
 }
+
+.will-change-filter {
+  will-change: filter;
+}

@@ -1,6 +1,7 @@
-import { useScroll } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
+import CarouselAmbient from './CarouselAmbient';
 import CarouselItem from './CarouselItem';
 import { CAROUSEL_OVERLAP } from './constants';
 import TitleSync from './TitleSync';
@@ -9,6 +10,7 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
   const containerRef = useRef<HTMLUListElement>(null);
   const { scrollX } = useScroll({ container: containerRef });
   const [activeIndex, setActiveIndex] = useState(0);
+  const negativeScrollX = useTransform(scrollX, (v) => -v);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -47,8 +49,21 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
     <div className="absolute w-full h-full overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-black pointer-events-none z-10 vignette" />
       <div className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 bottom-0 w-[120vw] h-[50vh] bg-black z-50 blur-[100px] pointer-events-none" />
-      <div className="absolute left-1/2 -translate-x-1/2 -translate-y-[8vh] bottom-0 w-[200vw] h-[30vh] bg-linear-to-t from-black to-transparent pointer-events-none z-50" />
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[200vw] h-[50vh] bg-linear-to-t from-black to-transparent pointer-events-none z-50" />
       <TitleSync activePost={activePost} activeIndex={activeIndex} />
+      <motion.ul
+        className="absolute h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange preserve-3d"
+        style={{
+          x: negativeScrollX,
+          paddingLeft: 'calc(50vw - min(40vw, 200px))',
+          paddingRight: `calc(50vw - min(40vw, 200px) + ${CAROUSEL_OVERLAP}px)`,
+        }}
+      >
+        {posts.map((post, index) => (
+          <CarouselAmbient post={post} key={post.slug} index={index} containerScrollX={scrollX} />
+        ))}
+      </motion.ul>
+
       <ul
         ref={containerRef}
         className="h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange preserve-3d"

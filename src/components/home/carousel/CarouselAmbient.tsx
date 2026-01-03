@@ -1,7 +1,5 @@
 'use client';
-import { type MotionValue, motion, useMotionTemplate, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+import { type MotionValue, motion, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
 import { DEFAULT_COLOR, TAG_COLORS } from '@/src/lib/utils/constants';
@@ -15,7 +13,7 @@ interface Props {
   priority?: boolean;
 }
 
-export default function CarouselItem({ post, index, containerScrollX, priority = false }: Props) {
+export default function CarouselAmbient({ post, index, containerScrollX }: Props) {
   const itemRef = useRef<HTMLLIElement>(null);
 
   const [range, setRange] = useState([
@@ -37,14 +35,11 @@ export default function CarouselItem({ post, index, containerScrollX, priority =
       setRange([centerScroll - totalW - extend, centerScroll, centerScroll + totalW + extend]);
     };
 
-    // 초기 실행
     handleResize();
 
-    // ResizeObserver: 요소의 크기 변화 감지 (이미지 로딩, 폰트 변경 등)
     const resizeObserver = new ResizeObserver(() => handleResize());
     resizeObserver.observe(el);
 
-    // Window Resize: 화면 크기 변화 감지
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -52,13 +47,10 @@ export default function CarouselItem({ post, index, containerScrollX, priority =
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-  const rotateY = useTransform(containerScrollX, range, [20, 0, -20]);
   const scale = useTransform(containerScrollX, range, [0.8, 1, 0.8]);
   const y = useTransform(containerScrollX, range, [40, 0, 40]);
   const z = useTransform(containerScrollX, range, [-100, 0, -100]);
   const zIndex = useTransform(containerScrollX, range, [0, 10, 0]);
-  const blurValue = useTransform(containerScrollX, range, [6, 0, 6]);
-  const filter = useMotionTemplate`blur(${blurValue}px)`;
 
   const mainTag = post.tags[0];
   const displayColor = TAG_COLORS[mainTag] || DEFAULT_COLOR;
@@ -67,48 +59,28 @@ export default function CarouselItem({ post, index, containerScrollX, priority =
     <motion.li
       ref={itemRef}
       style={{
-        rotateY,
         scale,
         y,
         z,
         zIndex,
-        filter,
         marginRight: -CAROUSEL_OVERLAP,
       }}
-      className="snap-center snap-always last:mr-0 will-change-transform preserve-3d backface-hidden transform-sty"
+      className="snap-center snap-always last:mr-0 will-change-transform preserve-3d backface-hidden mix-blend-plus-lighter"
       data-index={index}
     >
-      <motion.div
-        initial={{ y: 500 }}
-        animate={{ y: 0 }}
-        transition={{
-          duration: 1,
-          delay: index * 0.07,
-          ease: [0, 1, 0, 1],
-        }}
-        className="w-full h-full"
-      >
-        <Link
-          href={`/posts/${post.slug}`}
-          className="relative w-[80vw] max-w-[360px] min-w-[300px] h-full flex flex-col justify-end items-center px-4 py-4 rounded-2xl "
-        >
-          {/* glow */}
-          <div
-            className="absolute bottom-0 w-full aspect-3/4 opacity-5 rounded-xl bg-(--tag-color) blur-[32px] transform-gpu will-change-filter"
-            style={{ '--tag-color': displayColor } as React.CSSProperties}
-          />
+      <div className="relative w-[80vw] max-w-[360px] min-w-[300px] h-full flex justify-center">
+        {/* glow */}
+        <div
+          className="absolute bottom-0 w-full aspect-3/4 opacity-10 rounded-xl bg-(--tag-color) blur-[128px] transform-gpu will-change-filter"
+          style={{ '--tag-color': displayColor } as React.CSSProperties}
+        />
 
-          <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden border-reflection">
-            <Image
-              src={post.thumbnail || '/thumbnail-fallback.jpg'}
-              fill
-              alt={`${post.title} 썸네일`}
-              className="object-cover"
-              priority={priority}
-            />
-          </div>
-        </Link>
-      </motion.div>
+        {/* top atmosphere */}
+        <div
+          className="absolute -top-20 w-[90vw] h-[20vh] opacity-10 md:opacity-5 bg-(--tag-color) blur-[128px] transform-gpu will-change-filter"
+          style={{ '--tag-color': displayColor } as React.CSSProperties}
+        />
+      </div>
     </motion.li>
   );
 }

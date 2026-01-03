@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
+import { DEFAULT_COLOR, TAG_COLORS } from '@/src/lib/utils/constants';
 import { relativeDate } from '@/src/lib/utils/day';
 
 const VARIANTS = {
@@ -30,6 +31,10 @@ export default function TitleSync({
   activePost: Post;
   activeIndex: number;
 }) {
+  const mainTag = activePost.tags[0];
+  const baseColor = TAG_COLORS[mainTag] || DEFAULT_COLOR;
+  const displayColor = `hsl(from ${baseColor} h s 95)`;
+
   const [directionState, setDirectionState] = useState({
     prevIndex: activeIndex,
     direction: 1,
@@ -62,11 +67,16 @@ export default function TitleSync({
           className="absolute flex flex-col px-8 gap-2 justify-center items-center w-full"
         >
           <h4
-            className={`text-text-highlight text-2xl text-center leading-[125%] break-keep font-bold font-suite`}
+            className={`text-transparent text-2xl text-center leading-[125%] break-keep font-bold font-suite`}
+            style={{
+              WebkitBackgroundClip: 'text',
+              background: `linear-gradient(to bottom, #ffffff, ${displayColor})`,
+              backgroundClip: 'text',
+            }}
           >
             {activePost.title}
           </h4>
-          <span className="text-[12px] font-medium">
+          <span className="text-[12px] font-medium text-white opacity-50">
             {`${relativeDate(activePost.date)} · ${activePost.tags[0]?.replaceAll('_', ' ')}`}
           </span>
         </motion.div>

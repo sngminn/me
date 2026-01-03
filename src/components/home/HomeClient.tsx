@@ -126,7 +126,7 @@ export default function HomeClient({ posts }: { posts: Post[] }) {
       <div className="w-full max-w-[1080px] mx-auto z-200">
         <header className="flex justify-between items-center">
           <Link href={'/'}>
-            <span className="font-suite font-black tracking-tighter text-sm px-4 py-3">
+            <span className="text-transparent bg-clip-text bg-linear-to-b from-40% from-white to-90% to-indigo-200 font-suite font-black tracking-tighter text-sm px-4 py-3">
               Kim Seungmin _
             </span>
           </Link>
