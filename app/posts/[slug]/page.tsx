@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import rehypePrettyCode from 'rehype-pretty-code';
 import Content from '@/src/components/posts/Content';
 import { getAllPosts, getPostBySlug } from '@/src/lib/obsidian/post';
 
@@ -24,7 +25,22 @@ export default async function PostPage({ params }: PageProps) {
   return (
     <div className="bg-bg-default w-full h-hull">
       <Content post={post}>
-        <MDXRemote source={post.content} />
+        <MDXRemote
+          source={post.content}
+          options={{
+            mdxOptions: {
+              rehypePlugins: [
+                [
+                  rehypePrettyCode,
+                  {
+                    theme: 'one-dark-pro',
+                    keepBackground: true,
+                  },
+                ],
+              ],
+            },
+          }}
+        />
       </Content>
     </div>
   );

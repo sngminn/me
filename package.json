@@ -40,6 +40,8 @@
     "eslint-config-next": "16.0.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "rehype-pretty-code": "^0.14.1",
+    "shiki": "^3.20.0",
     "style-dictionary": "^5.1.1",
     "tailwindcss": "^4",
     "token-transformer": "^0.0.33",
