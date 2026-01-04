@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
+import { cn } from '@/src/lib/utils/cn';
+import { DEFAULT_COLOR, TAG_COLORS } from '@/src/lib/utils/constants';
 import { CAROUSEL_OVERLAP } from './constants';
 
 interface Props {
@@ -16,6 +18,7 @@ interface Props {
 
 export default function CarouselItem({ post, index, containerScrollX, priority = false }: Props) {
   const itemRef = useRef<HTMLLIElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [range, setRange] = useState([
     index * 320 - (320 - CAROUSEL_OVERLAP),
@@ -59,6 +62,9 @@ export default function CarouselItem({ post, index, containerScrollX, priority =
   const blurValue = useTransform(containerScrollX, range, [6, 0, 6]);
   const filter = useMotionTemplate`blur(${blurValue}px)`;
 
+  const mainTag = post.tags?.[0];
+  const displayColor = (mainTag && TAG_COLORS[mainTag]) || DEFAULT_COLOR;
+
   return (
     <motion.li
       ref={itemRef}
@@ -71,45 +77,45 @@ export default function CarouselItem({ post, index, containerScrollX, priority =
         filter,
         marginRight: -CAROUSEL_OVERLAP,
       }}
-      className="snap-center snap-always last:mr-0 will-change-transform preserve-3d backface-hidden"
+      className="preserve-3d backface-hidden transform-sty snap-center snap-always will-change-transform last:mr-0"
       data-index={index}
     >
-      <Link
-        href={`/posts/${post.slug}`}
-        className="relative w-[80vw] max-w-[360px] min-w-[300px] h-full flex flex-col justify-end items-center px-4 py-4 rounded-2xl "
+      <motion.div
+        initial={{ y: 500 }}
+        animate={{ y: 0 }}
+        transition={{
+          duration: 1,
+          delay: index * 0.07,
+          ease: [0, 1, 0, 1],
+        }}
+        className="h-full w-full"
       >
-        {/* glow */}
-        <div className="blur-xl opacity-10 absolute bottom-0 w-full aspect-3/4 rounded-xl overflow-hidden hidden md:block">
-          <Image
-            src={post.thumbnail || '/thumbnail-fallback.jpg'}
-            fill
-            alt={`${post.title} 썸네일`}
-            className="object-cover"
-            priority={priority}
+        <Link
+          href={`/posts/${post.slug}`}
+          className="relative flex h-full w-[80vw] min-w-[300px] max-w-[360px] flex-col items-center justify-end rounded-2xl px-4 py-4"
+        >
+          {/* glow */}
+          <div
+            className="absolute bottom-0 aspect-3/4 w-full transform-gpu rounded-xl bg-(--tag-color) opacity-5 blur-[32px] will-change-filter"
+            style={{ '--tag-color': displayColor } as React.CSSProperties}
           />
-        </div>
 
-        {/* top atmosphere */}
-        <div className="blur-[200px] opacity-10 scale-200 absolute -top-50 w-full aspect-3/4 rounded-xl overflow-hidden hidden md:block">
-          <Image
-            src={post.thumbnail || '/thumbnail-fallback.jpg'}
-            fill
-            alt={`${post.title} 썸네일`}
-            className="object-cover"
-            priority={priority}
-          />
-        </div>
-
-        <div className="relative w-full aspect-3/4 rounded-xl overflow-hidden border-reflection">
-          <Image
-            src={post.thumbnail || '/thumbnail-fallback.jpg'}
-            fill
-            alt={`${post.title} 썸네일`}
-            className="object-cover"
-            priority={priority}
-          />
-        </div>
-      </Link>
+          <div className="relative aspect-3/4 w-full overflow-hidden rounded-xl border-reflection">
+            <Image
+              src={post.thumbnail || '/thumbnail-fallback.jpg'}
+              fill
+              alt={`${post.title} 썸네일`}
+              className={cn(
+                'object-cover duration-700 ease-in-out',
+                isLoading ? 'scale-110 blur-xl grayscale' : 'scale-100 blur-0 grayscale-0'
+              )}
+              priority={priority}
+              onLoad={() => setIsLoading(false)}
+              sizes="(max-width: 768px) 80vw, 360px"
+            />
+          </div>
+        </Link>
+      </motion.div>
     </motion.li>
   );
 }

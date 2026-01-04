@@ -4,11 +4,15 @@ import Image from 'next/image';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
 import { Tag } from '@/src/components/ui/Tag';
 import type { Post } from '@/src/lib/obsidian/types';
+import { DEFAULT_COLOR, TAG_COLORS } from '@/src/lib/utils/constants';
 import { longDate } from '@/src/lib/utils/day';
 
 export default function Content({ post, children }: { post: Post; children: ReactNode }) {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const sentinelRef = useRef<HTMLHeadingElement | null>(null);
+  const mainTag = post.tags?.[0];
+  const color = (mainTag && TAG_COLORS[mainTag]) || DEFAULT_COLOR;
+  const primary = `oklch(from ${color} 0.9 0.34 h)`; //TODO: util로 분리하기
 
   useEffect(() => {
     if (!sentinelRef.current) return;
@@ -26,13 +30,16 @@ export default function Content({ post, children }: { post: Post; children: Reac
   return (
     <>
       <div
-        className={`${scrolled ? 'translate-y-0' : '-translate-y-full'} transition-transform fixed top-0 gap-3 w-full max-w-[700px] left-1/2 -translate-x-1/2 px-3 py-2 flex items-center bg-bg-default border-b border-bg-subtle z-10`}
+        className={`${scrolled ? 'translate-y-0' : '-translate-y-full'} -translate-x-1/2 fixed top-0 left-1/2 z-10 flex w-full items-center justify-center border-bg-subtle border-b bg-[#000000e0] px-3 py-2 pt-13 backdrop-blur-2xl transition-transform`}
       >
-        {post.tags[0] && <Tag text={post.tags[0]} />}
-        <span className="text-xs text-text-highlight font-medium line-clamp-1">{post.title}</span>
+        <div className="flex w-full max-w-[1080px] items-center gap-3">
+          {post.tags[0] && <Tag text={post.tags[0]} color={primary} />}
+          <span className="line-clamp-1 font-medium text-text-highlight text-xs">{post.title}</span>
+        </div>
       </div>
-      <article className="max-w-[700px] m-auto px-3 pt-6 pb-40 flex flex-col gap-4 ">
-        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+      <article className="m-auto flex max-w-[700px] flex-col gap-4 bg-bg-default pb-40">
+        <div className="relative aspect-square w-full bg-linear-to-t from-black to-transparent">
+          <div className="absolute top-0 z-1 h-full w-full bg-linear-to-t from-bg-default to-transparent" />
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}
             fill
@@ -40,13 +47,22 @@ export default function Content({ post, children }: { post: Post; children: Reac
             style={{ objectFit: 'cover' }}
           />
         </div>
-        {post.tags[0] && <Tag text={post.tags[0]} />}
-        <h1 ref={sentinelRef} className="font-semibold text-2xl leading-[125%] text-text-highlight">
+        <h1
+          ref={sentinelRef}
+          className="-mt-12 z-1 break-keep px-6 text-center font-semibold text-3xl text-text-highlight leading-[125%]"
+        >
           {post.title}
         </h1>
-        <span className="text-xs">{longDate(post.date)}</span>
-        <hr className="text-bg-subtle" />
-        <div className="prose dark:prose-invert w-full mt-8">{children}</div>
+        <span className="text-center text-xs">
+          {longDate(post.date) + (post.tags[0] && ` · ${post.tags[0].replaceAll('_', ' ')}`)}
+        </span>
+        <hr className="my-4 text-bg-subtle md:mt-16 md:mb-10" />
+        <div
+          className="prose dark:prose-invert mt-8 w-full px-3"
+          style={{ '--marker-color': primary } as React.CSSProperties}
+        >
+          {children}
+        </div>
       </article>
     </>
   );

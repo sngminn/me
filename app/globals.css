@@ -43,15 +43,19 @@ body {
   margin: auto;
   min-width: 375px;
   letter-spacing: -0.02em;
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
-  /* text-rendering: optimizeLegibility; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
 }
 
 .prose {
   max-width: none;
   line-height: 1.8;
   font-size: 18px;
+
+  letter-spacing: 0;
 }
 
 /* Headings */
@@ -125,7 +129,7 @@ body {
 }
 
 /* Code */
-.prose code {
+.prose :not(pre) > code {
   color: var(--text-highlight);
   background-color: var(--bg-subtle);
   padding: 0.2em 0.4em;
@@ -134,14 +138,29 @@ body {
   font-size: 0.9em;
   font-weight: 500;
 }
+
 .prose pre {
-  background-color: var(--bg-inverse);
-  color: var(--text-inverse);
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--bg-subtle);
+  margin: 8px 0 8px 0;
+  /* background-color is handled by rehype-pretty-code */
+}
+
+.prose pre code {
+  display: grid; /* For line numbers if needed later */
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit; /* Let syntax highlighting take over */
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 /* Lists */
 .prose ul > li::marker {
-  color: var(--primary-main);
+  color: var(--marker-color);
 }
 .prose ol > li::marker {
   color: var(--primary-main);
@@ -154,6 +173,7 @@ body {
 
 .prose img {
   border-radius: 18px;
+  margin: 8px 0 8px 0;
 }
 
 .prose > p:first-of-type:has(img) {
@@ -244,4 +264,8 @@ body {
 
 .preserve-3d {
   transform-style: preserve-3d;
+}
+
+.will-change-filter {
+  will-change: filter;
 }

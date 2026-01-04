@@ -1,7 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import rehypePrettyCode from 'rehype-pretty-code';
 import Content from '@/src/components/posts/Content';
 import { getAllPosts, getPostBySlug } from '@/src/lib/obsidian/post';
+
+// 커스텀 테마 로드
+const themePath = path.join(process.cwd(), 'src/lib/HTVODP-color-theme.json');
+const customTheme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
 
 interface PageProps {
   params: Promise<{
@@ -22,8 +29,25 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <Content post={post}>
-      <MDXRemote source={post.content} />
-    </Content>
+    <div className="h-full w-full bg-bg-default">
+      <Content post={post}>
+        <MDXRemote
+          source={post.content}
+          options={{
+            mdxOptions: {
+              rehypePlugins: [
+                [
+                  rehypePrettyCode,
+                  {
+                    theme: customTheme,
+                    keepBackground: true,
+                  },
+                ],
+              ],
+            },
+          }}
+        />
+      </Content>
+    </div>
   );
 }

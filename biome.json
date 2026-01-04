@@ -36,6 +36,14 @@
       "suspicious": {
         "noAssignInExpressions": "warn",
         "useIterableCallbackReturn": "warn"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "options": {
+            "functions": ["clsx", "twMerge"]
+          }
+        }
       }
     }
   },
