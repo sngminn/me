@@ -6,6 +6,10 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import Content from '@/src/components/posts/Content';
 import { getAllPosts, getPostBySlug } from '@/src/lib/obsidian/post';
 
+// 커스텀 테마 로드
+const themePath = path.join(process.cwd(), 'src/lib/HTVODP-color-theme.json');
+const customTheme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
+
 interface PageProps {
   params: Promise<{
     slug: string;
@@ -24,12 +28,8 @@ export default async function PostPage({ params }: PageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  // 커스텀 테마 로드
-  const themePath = path.join(process.cwd(), 'docs/HTVODP-color-theme.json');
-  const customTheme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
-
   return (
-    <div className="h-hull w-full bg-bg-default">
+    <div className="h-full w-full bg-bg-default">
       <Content post={post}>
         <MDXRemote
           source={post.content}

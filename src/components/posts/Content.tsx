@@ -10,8 +10,8 @@ import { longDate } from '@/src/lib/utils/day';
 export default function Content({ post, children }: { post: Post; children: ReactNode }) {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const sentinelRef = useRef<HTMLHeadingElement | null>(null);
-  const mainTag = post.tags[0];
-  const color = TAG_COLORS[mainTag] || DEFAULT_COLOR;
+  const mainTag = post.tags?.[0];
+  const color = (mainTag && TAG_COLORS[mainTag]) || DEFAULT_COLOR;
   const primary = `oklch(from ${color} 0.9 0.34 h)`; //TODO: util로 분리하기
 
   useEffect(() => {

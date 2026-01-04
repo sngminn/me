@@ -10,7 +10,7 @@ export default function Layout() {
     setShowMenu((prev) => !prev);
   }
   return (
-    <div className="fixed w-full top-0 left-1/2 -translate-x-1/2 z-200 flex justify-center">
+    <div className="-translate-x-1/2 fixed top-0 left-1/2 z-200 flex w-full justify-center">
       {showMenu && <GNBMenu menuHandler={handleMenuClick} />}
       <GNB menuHandler={handleMenuClick} />
     </div>

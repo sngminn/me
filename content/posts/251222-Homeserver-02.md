@@ -38,7 +38,7 @@ SSH Key라는 간단하고 좋은 방법이 있지만, 공부도 할겸 간지�
 언젠가 요런 SSH 접속할 때 Google 인증을 사용할 수 있다는 글을 읽은 적이 있다.
 어디서 봤는지는 기억이 안남;
 
-[해당 깃허브][https://github.com/google/google-authenticator-libpam]
+[해당 깃허브](https://github.com/google/google-authenticator-libpam)
 
 그래서 추가해봤다. 세팅은 상당히 쉽다.
 

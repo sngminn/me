@@ -52,8 +52,8 @@ export default function CarouselAmbient({ post, index, containerScrollX }: Props
   const z = useTransform(containerScrollX, range, [-100, 0, -100]);
   const zIndex = useTransform(containerScrollX, range, [0, 10, 0]);
 
-  const mainTag = post.tags[0];
-  const displayColor = TAG_COLORS[mainTag] || DEFAULT_COLOR;
+  const mainTag = post.tags?.[0];
+  const displayColor = (mainTag && TAG_COLORS[mainTag]) || DEFAULT_COLOR;
 
   return (
     <motion.li
@@ -65,19 +65,19 @@ export default function CarouselAmbient({ post, index, containerScrollX }: Props
         zIndex,
         marginRight: -CAROUSEL_OVERLAP,
       }}
-      className="snap-center snap-always last:mr-0 will-change-transform preserve-3d backface-hidden mix-blend-plus-lighter"
+      className="preserve-3d backface-hidden snap-center snap-always mix-blend-plus-lighter will-change-transform last:mr-0"
       data-index={index}
     >
-      <div className="relative w-[80vw] max-w-[360px] min-w-[300px] h-full flex justify-center">
+      <div className="relative flex h-full w-[80vw] min-w-[300px] max-w-[360px] justify-center">
         {/* glow */}
         <div
-          className="absolute bottom-0 w-full aspect-3/4 opacity-10 rounded-xl bg-(--tag-color) blur-[128px] transform-gpu will-change-filter"
+          className="absolute bottom-0 aspect-3/4 w-full transform-gpu rounded-xl bg-(--tag-color) opacity-10 blur-[128px] will-change-filter"
           style={{ '--tag-color': displayColor } as React.CSSProperties}
         />
 
         {/* top atmosphere */}
         <div
-          className="absolute -top-20 w-[90vw] h-[20vh] opacity-10 md:opacity-5 bg-(--tag-color) blur-[128px] transform-gpu will-change-filter"
+          className="-top-20 absolute h-[20vh] w-[90vw] transform-gpu bg-(--tag-color) opacity-10 blur-[128px] will-change-filter md:opacity-5"
           style={{ '--tag-color': displayColor } as React.CSSProperties}
         />
       </div>

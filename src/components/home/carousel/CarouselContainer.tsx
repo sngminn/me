@@ -52,7 +52,7 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
       <div className="-translate-x-1/2 pointer-events-none absolute bottom-0 left-1/2 z-50 h-[50vh] w-[200vw] bg-linear-to-t from-black to-transparent" />
       <TitleSync activePost={activePost} activeIndex={activeIndex} />
       <motion.ul
-        className="hide-scrollbar transform-3d perspective-midrange preserve-3d absolute flex h-full snap-x snap-mandatory overflow-scroll scroll-smooth pt-4 pb-[8vh]"
+        className="hide-scrollbar transform-3d perspective-midrange preserve-3d pointer-events-none absolute flex h-full pt-4 pb-[8vh]"
         style={{
           x: negativeScrollX,
           paddingLeft: 'calc(50vw - min(40vw, 200px))',

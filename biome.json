@@ -41,7 +41,7 @@
         "useSortedClasses": {
           "level": "warn",
           "options": {
-            "functions": ["clsx", "twMerge", "tw"]
+            "functions": ["clsx", "twMerge"]
           }
         }
       }
