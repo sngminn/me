@@ -5,7 +5,7 @@ export function Tag({ text, color }: { text: string; color: string }) {
   return (
     <div className="flex items-center">
       <div
-        className="rounded-l-full pl-3 pr-2 py-1 text-[11px] font-medium  uppercase leading-none whitespace-nowrap"
+        className="whitespace-nowrap rounded-l-full py-1 pr-2 pl-3 font-medium text-[11px] uppercase leading-none"
         style={{
           color: primary,
           backgroundColor: secondary,
@@ -17,7 +17,7 @@ export function Tag({ text, color }: { text: string; color: string }) {
         <svg
           viewBox="0 0 10 20"
           preserveAspectRatio="none"
-          className="w-full h-full"
+          className="h-full w-full"
           stroke={primary}
           fill={secondary}
         >
