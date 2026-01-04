@@ -16,7 +16,8 @@ export function getAllPosts(): Post[] {
   const allPostsData = fileNames
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, '');
+      const slug = fileName.replace(/\.md$/, '').toLowerCase();
+
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const { data, content } = matter(fileContents);
@@ -47,7 +48,18 @@ export function getAllPosts(): Post[] {
 
 export function getPostBySlug(slug: string): Post | null {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    const targetSlug = slug.toLowerCase();
+
+    const fileNames = fs.readdirSync(postsDirectory);
+    const matchedFileName = fileNames.find(
+      (fileName) => fileName.replace(/\.md$/, '').toLowerCase() === targetSlug
+    );
+
+    if (!matchedFileName) {
+      return null;
+    }
+
+    const fullPath = path.join(postsDirectory, matchedFileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
     const match = content.match(/!\[\[(.*?)(?:\|.*?)?\]\]/) || '';
@@ -82,8 +94,8 @@ export function getPostBySlug(slug: string): Post | null {
 
     return {
       thumbnail,
-      slug,
-      title: data.title || slug,
+      slug: targetSlug,
+      title: data.title || targetSlug,
       date: data.date || '',
       tags: data.tags || [],
       content: processedContent,

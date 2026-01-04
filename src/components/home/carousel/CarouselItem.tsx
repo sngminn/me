@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import type { Post } from '@/src/lib/obsidian/types';
-import { cn } from '@/src/lib/utils/cn';
 import { DEFAULT_COLOR, TAG_COLORS } from '@/src/lib/utils/constants';
 import { CAROUSEL_OVERLAP } from './constants';
 
@@ -18,7 +17,6 @@ interface Props {
 
 export default function CarouselItem({ post, index, containerScrollX, priority = false }: Props) {
   const itemRef = useRef<HTMLLIElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const [range, setRange] = useState([
     index * 320 - (320 - CAROUSEL_OVERLAP),
@@ -100,18 +98,13 @@ export default function CarouselItem({ post, index, containerScrollX, priority =
             style={{ '--tag-color': displayColor } as React.CSSProperties}
           />
 
-          <div className="relative aspect-3/4 w-full overflow-hidden rounded-xl border-reflection">
+          <div className="relative aspect-3/4 w-full overflow-hidden rounded-xl border-reflection bg-neutral-900">
             <Image
               src={post.thumbnail || '/thumbnail-fallback.jpg'}
               fill
               alt={`${post.title} 썸네일`}
-              className={cn(
-                'object-cover duration-700 ease-in-out',
-                isLoading ? 'scale-110 blur-xl grayscale' : 'scale-100 blur-0 grayscale-0'
-              )}
+              className="object-cover duration-700 ease-in-out"
               priority={priority}
-              onLoad={() => setIsLoading(false)}
-              sizes="(max-width: 768px) 80vw, 360px"
             />
           </div>
         </Link>
