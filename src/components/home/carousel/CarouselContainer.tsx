@@ -46,13 +46,13 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
   if (!activePost) return null;
 
   return (
-    <div className="absolute w-full h-full overflow-hidden">
-      <div className="absolute inset-0 w-full h-full bg-black pointer-events-none z-10 vignette" />
-      <div className="absolute left-1/2 -translate-x-1/2 translate-y-1/2 bottom-0 w-[120vw] h-[50vh] bg-black z-50 blur-[100px] pointer-events-none" />
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[200vw] h-[50vh] bg-linear-to-t from-black to-transparent pointer-events-none z-50" />
+    <div className="absolute h-full w-full overflow-hidden">
+      <div className="vignette pointer-events-none absolute inset-0 z-10 h-full w-full bg-black" />
+      <div className="-translate-x-1/2 pointer-events-none absolute bottom-0 left-1/2 z-50 h-[50vh] w-[120vw] translate-y-1/2 bg-black blur-[100px]" />
+      <div className="-translate-x-1/2 pointer-events-none absolute bottom-0 left-1/2 z-50 h-[50vh] w-[200vw] bg-linear-to-t from-black to-transparent" />
       <TitleSync activePost={activePost} activeIndex={activeIndex} />
       <motion.ul
-        className="absolute h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange preserve-3d"
+        className="hide-scrollbar transform-3d perspective-midrange preserve-3d absolute flex h-full snap-x snap-mandatory overflow-scroll scroll-smooth pt-4 pb-[8vh]"
         style={{
           x: negativeScrollX,
           paddingLeft: 'calc(50vw - min(40vw, 200px))',
@@ -66,7 +66,7 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
 
       <ul
         ref={containerRef}
-        className="h-full flex pt-4 pb-[8vh] overflow-scroll hide-scrollbar snap-x snap-mandatory scroll-smooth transform-3d perspective-midrange preserve-3d"
+        className="hide-scrollbar transform-3d perspective-midrange preserve-3d flex h-full snap-x snap-mandatory overflow-scroll scroll-smooth pt-4 pb-[8vh]"
         style={{
           paddingLeft: 'calc(50vw - min(40vw, 200px))',
           paddingRight: `calc(50vw - min(40vw, 200px) + ${CAROUSEL_OVERLAP}px)`,

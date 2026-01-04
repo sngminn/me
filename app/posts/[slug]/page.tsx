@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -22,8 +24,12 @@ export default async function PostPage({ params }: PageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  // 커스텀 테마 로드
+  const themePath = path.join(process.cwd(), 'docs/HTVODP-color-theme.json');
+  const customTheme = JSON.parse(fs.readFileSync(themePath, 'utf8'));
+
   return (
-    <div className="bg-bg-default w-full h-hull">
+    <div className="h-hull w-full bg-bg-default">
       <Content post={post}>
         <MDXRemote
           source={post.content}
@@ -33,7 +39,7 @@ export default async function PostPage({ params }: PageProps) {
                 [
                   rehypePrettyCode,
                   {
-                    theme: 'one-dark-pro',
+                    theme: customTheme,
                     keepBackground: true,
                   },
                 ],

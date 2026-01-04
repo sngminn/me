@@ -29,16 +29,16 @@ export default function Content({ post, children }: { post: Post; children: Reac
   return (
     <>
       <div
-        className={`${scrolled ? 'translate-y-0' : '-translate-y-full'} flex items-center justify-center transition-transform fixed top-0 w-full left-1/2 -translate-x-1/2 px-3 py-2 pt-13 bg-[#000000e0] backdrop-blur-2xl border-b border-bg-subtle z-10`}
+        className={`${scrolled ? 'translate-y-0' : '-translate-y-full'} -translate-x-1/2 fixed top-0 left-1/2 z-10 flex w-full items-center justify-center border-bg-subtle border-b bg-[#000000e0] px-3 py-2 pt-13 backdrop-blur-2xl transition-transform`}
       >
-        <div className="flex gap-3 w-full max-w-[1080px] items-center">
+        <div className="flex w-full max-w-[1080px] items-center gap-3">
           {post.tags[0] && <Tag text={post.tags[0]} color={displayColor} />}
-          <span className="text-xs text-text-highlight font-medium line-clamp-1">{post.title}</span>
+          <span className="line-clamp-1 font-medium text-text-highlight text-xs">{post.title}</span>
         </div>
       </div>
-      <article className="max-w-[700px] m-auto pb-40 flex flex-col gap-4 bg-bg-default">
-        <div className="relative w-full aspect-square bg-linear-to-t from-black to-transparent">
-          <div className="absolute bg-linear-to-t from-bg-default to-transparent w-full h-full top-0 z-1" />
+      <article className="m-auto flex max-w-[700px] flex-col gap-4 bg-bg-default pb-40">
+        <div className="relative aspect-square w-full bg-linear-to-t from-black to-transparent">
+          <div className="absolute top-0 z-1 h-full w-full bg-linear-to-t from-bg-default to-transparent" />
           <Image
             src={post.thumbnail || '/thumbnail-fallback.jpg'}
             fill
@@ -48,16 +48,16 @@ export default function Content({ post, children }: { post: Post; children: Reac
         </div>
         <h1
           ref={sentinelRef}
-          className="font-semibold text-3xl leading-[125%] px-6 -mt-12 z-1 text-text-highlight text-center break-keep"
+          className="-mt-12 z-1 break-keep px-6 text-center font-semibold text-3xl text-text-highlight leading-[125%]"
         >
           {post.title}
         </h1>
-        <span className="text-xs text-center">
+        <span className="text-center text-xs">
           {longDate(post.date) + (post.tags[0] && ` · ${post.tags[0].replaceAll('_', ' ')}`)}
         </span>
-        <hr className="text-bg-subtle" />
+        <hr className="my-4 text-bg-subtle md:mt-16 md:mb-10" />
         <div
-          className="prose dark:prose-invert w-full mt-8 px-3"
+          className="prose dark:prose-invert mt-8 w-full px-3"
           style={{ '--marker-color': displayColor } as React.CSSProperties}
         >
           {children}
