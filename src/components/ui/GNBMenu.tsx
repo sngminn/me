@@ -32,9 +32,9 @@ function GithubMenu({
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Github className="w-9 h-9 text-white" />
+      <Github className="h-9 w-9 text-white" />
       <span>{children}</span>
-      <ExternalLink className="opacity-50 text-white" />
+      <ExternalLink className="text-white opacity-50" />
     </a>
   );
 }
@@ -55,9 +55,9 @@ function InstagramMenu({
       target="_blank"
       rel="noopener noreferrer"
     >
-      <Instagram className="w-9 h-9 text-white" />
+      <Instagram className="h-9 w-9 text-white" />
       <span>{children}</span>
-      <ExternalLink className="opacity-50 text-white" />
+      <ExternalLink className="text-white opacity-50" />
     </a>
   );
 }
@@ -85,6 +85,7 @@ function EmailMenu({
       await navigator.clipboard.writeText('me@kimseungmin.dev');
       setCopied(true);
     } catch (e) {
+      window.open('mailto:me@kimseungmin.dev', '_blank', 'noopener noreferrer');
       console.error('클립보드 복사 실패:', e);
     }
   }
@@ -98,9 +99,9 @@ function EmailMenu({
       style={style}
     >
       <motion.div layout>
-        <Mail className="w-9 h-9 text-white" />
+        <Mail className="h-9 w-9 text-white" />
       </motion.div>
-      <motion.div layout className="relative overflow-x-hidden flex items-center justify-center">
+      <motion.div layout className="relative flex items-center justify-center overflow-x-hidden">
         <AnimatePresence mode="popLayout">
           {copied ? (
             <motion.span
@@ -110,7 +111,7 @@ function EmailMenu({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -15, opacity: 0 }}
               transition={{ ease: [0.23, 1, 0.32, 1], duration: 0.4 }}
-              className="inline-block whitespace-nowrap font-semibold text-transparent bg-clip-text bg-linear-to-b from-white to-[#ffffff70]"
+              className="inline-block whitespace-nowrap bg-linear-to-b from-white to-[#ffffff70] bg-clip-text font-semibold text-transparent"
             >
               클립보드에 복사되었어요
             </motion.span>
@@ -122,7 +123,7 @@ function EmailMenu({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -15, opacity: 0 }}
               transition={{ ease: [0.23, 1, 0.32, 1], duration: 0.4 }}
-              className="inline-block whitespace-nowrap text-transparent bg-clip-text bg-linear-to-b from-white to-[#ffffff70]"
+              className="inline-block whitespace-nowrap bg-linear-to-b from-white to-[#ffffff70] bg-clip-text text-transparent"
             >
               {children}
             </motion.span>
@@ -140,10 +141,10 @@ function MenuItem({ item, index }: MenuItemProps) {
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 100 }}
       transition={{ ease: [0, 0.8, 0.2, 1], duration: 1, delay: index * 0.1 }}
-      className="px-8 py-3 flex justify-center items-center"
+      className="flex items-center justify-center px-8 py-3"
     >
       <MenuComp
-        className="text-transparent bg-clip-text bg-linear-to-b from-white to-[#ffffff70] cursor-pointer text-2xl font-suite uppercase font-bold flex gap-4 justify-center items-center transform-gpu"
+        className="flex transform-gpu cursor-pointer items-center justify-center gap-4 bg-linear-to-b from-white to-[#ffffff70] bg-clip-text font-bold font-suite text-2xl text-transparent uppercase"
         style={{ WebkitBackgroundClip: 'text' }}
       >
         {item}
@@ -158,30 +159,30 @@ interface MenuContainerProps {
 
 export default function GNBMenu({ menuHandler }: MenuContainerProps) {
   return (
-    <div className="fixed flex justify-center items-center inset-0 z-800 w-screen h-screen">
+    <div className="fixed inset-0 z-800 flex h-screen w-screen items-center justify-center">
       <motion.button
         type="button"
         onClick={(e) => {
           if (e.target === e.currentTarget) menuHandler();
         }}
-        className="absolute bg-[#000000a0] w-full h-full -z-10 transform-gpu"
+        className="-z-10 absolute h-full w-full transform-gpu bg-[#000000a0]"
         initial={{ backdropFilter: 'blur(0px)', opacity: 0 }}
         animate={{ backdropFilter: 'blur(24px)', opacity: 1 }}
         transition={{ ease: [0, 0.8, 0.2, 1], duration: 0.5 }}
       />
-      <div className="max-w-[1080px] w-full fixed top-0 mx-auto flex justify-end">
+      <div className="fixed top-0 mx-auto flex w-full max-w-[1080px] justify-end">
         <motion.button
           type="button"
           onClick={menuHandler}
-          className="cursor-pointer px-4 py-3 border-none bg-transparent text-white"
+          className="cursor-pointer border-none bg-transparent px-4 py-3 text-white"
           initial={{ rotate: -45 }}
           animate={{ rotate: 0 }}
           transition={{ ease: [0, 1, 0, 1], duration: 0.4 }}
         >
-          <X className="w-6 h-6" />
+          <X className="h-6 w-6" />
         </motion.button>
       </div>
-      <ul className="flex flex-col gap-12 list-none p-0 m-0">
+      <ul className="m-0 flex list-none flex-col gap-12 p-0">
         {MenuItems.map((item, index) => (
           <MenuItem key={item} item={item} index={index} />
         ))}
