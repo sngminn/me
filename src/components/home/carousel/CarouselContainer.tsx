@@ -29,8 +29,8 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
       },
       {
         root: container,
-        threshold: 0, // 중앙 선에 닿자마자 감지
-        rootMargin: '0px -50% 0px -50%', // 좌우 50%씩 깎아서 중앙선만 남김
+        threshold: 0,
+        rootMargin: '0px -50% 0px -50%',
       }
     );
 
@@ -41,6 +41,38 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
 
     return () => observer.disconnect();
   }, []);
+
+  const [layout, setLayout] = useState({ width: 320, paddingLeft: 0, windowWidth: 0 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const windowW = window.innerWidth;
+      // CSS: w-[80vw] min-w-[300px] max-w-[360px]
+      const w = Math.min(360, Math.max(300, windowW * 0.8));
+
+      // CSS: paddingLeft: 'calc(50vw - min(40vw, 200px))'
+      const halfItemParam = Math.min(windowW * 0.4, 200);
+      const paddingL = windowW * 0.5 - halfItemParam;
+
+      setLayout({ width: w, paddingLeft: paddingL, windowWidth: windowW });
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const getRange = (index: number) => {
+    const { width, paddingLeft, windowWidth } = layout;
+    if (windowWidth === 0) return undefined;
+
+    const offsetLeft = paddingLeft + index * (width - CAROUSEL_OVERLAP);
+    const centerScroll = offsetLeft + width / 2 - windowWidth / 2;
+    const totalW = width - CAROUSEL_OVERLAP;
+    const extend = windowWidth / 3;
+
+    return [centerScroll - totalW - extend, centerScroll, centerScroll + totalW + extend];
+  };
 
   const activePost = posts[activeIndex] || posts[0];
   if (!activePost) return null;
@@ -60,7 +92,13 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
         }}
       >
         {posts.map((post, index) => (
-          <CarouselAmbient post={post} key={post.slug} index={index} containerScrollX={scrollX} />
+          <CarouselAmbient
+            post={post}
+            key={post.slug}
+            index={index}
+            containerScrollX={scrollX}
+            range={getRange(index)}
+          />
         ))}
       </motion.ul>
 
@@ -80,6 +118,7 @@ export default function CarouselContainer({ posts }: { posts: Post[] }) {
             containerScrollX={scrollX}
             dataIndex={index}
             priority={index === 0}
+            range={getRange(index)}
           />
         ))}
       </ul>
