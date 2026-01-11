@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/src/components/theme-provider';
 
 import { BASE_URL, SITE_DESCRIPTION, SITE_NAME } from '@/src/lib/utils/constants';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import { ViewTransitions } from '@/src/components/common/ViewTransitionContext';
 import Layout from '@/src/components/layout/Layout';
 
 export const viewport: Viewport = {
@@ -79,8 +80,10 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          <Layout />
-          {children}
+          <ViewTransitions>
+            <Layout />
+            {children}
+          </ViewTransitions>
         </ThemeProvider>
       </body>
     </html>

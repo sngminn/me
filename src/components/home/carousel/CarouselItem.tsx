@@ -1,8 +1,7 @@
-'use client';
 import { type MotionValue, motion, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRef } from 'react';
+import ViewTransitionLink from '@/src/components/common/ViewTransitionLink';
 import type { Post } from '@/src/lib/obsidian/types';
 import { DEFAULT_COLOR, TAG_COLORS } from '@/src/lib/utils/constants';
 import { CAROUSEL_OVERLAP } from './constants';
@@ -60,7 +59,7 @@ export default function CarouselItem({
         }}
         className="h-full w-full"
       >
-        <Link
+        <ViewTransitionLink
           href={`/posts/${post.slug}`}
           className="relative flex h-full w-[80vw] min-w-[300px] max-w-[360px] flex-col items-center justify-end rounded-2xl px-4 py-4"
         >
@@ -71,7 +70,10 @@ export default function CarouselItem({
             }}
           />
 
-          <div className="relative aspect-3/4 w-full overflow-hidden rounded-xl border-reflection bg-neutral-900">
+          <div
+            className="relative aspect-3/4 w-full overflow-hidden rounded-xl border-reflection bg-neutral-900"
+            style={{ viewTransitionName: `post-thumbnail-${post.slug}` } as React.CSSProperties}
+          >
             <Image
               src={post.thumbnail || '/thumbnail-fallback.jpg'}
               fill
@@ -80,7 +82,7 @@ export default function CarouselItem({
               priority={priority}
             />
           </div>
-        </Link>
+        </ViewTransitionLink>
       </motion.div>
     </motion.li>
   );

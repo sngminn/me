@@ -68,11 +68,14 @@ export default function TitleSync({
         >
           <h4
             className="break-keep text-center font-bold font-suite text-2xl text-transparent leading-[125%] md:text-4xl"
-            style={{
-              WebkitBackgroundClip: 'text',
-              background: `linear-gradient(to bottom, #ffffff, ${displayColor})`,
-              backgroundClip: 'text',
-            }}
+            style={
+              {
+                WebkitBackgroundClip: 'text',
+                background: `linear-gradient(to bottom, #ffffff, ${displayColor})`,
+                backgroundClip: 'text',
+                viewTransitionName: `post-title-${activePost.slug}`,
+              } as React.CSSProperties
+            }
           >
             {activePost.title}
           </h4>
