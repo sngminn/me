@@ -39,7 +39,7 @@ export default function Content({ post, children }: { post: Post; children: Reac
       </div>
       <article className="m-auto flex max-w-[700px] flex-col gap-4 bg-bg-default pb-40">
         <div className="relative aspect-square w-full bg-linear-to-t from-black to-transparent">
-          <div className="absolute top-0 z-1 h-full w-full bg-linear-to-t from-bg-default to-transparent" />
+          <div className="fade-in absolute top-0 z-1 animate-in bg-linear-to-t from-bg-default to-transparent duration-1000" />
           <div
             className="absolute h-full w-full"
             style={{ viewTransitionName: `post-thumbnail-${post.slug}` } as React.CSSProperties}
