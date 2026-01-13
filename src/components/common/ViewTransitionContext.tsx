@@ -12,7 +12,7 @@ export function ViewTransitions({ children }: { children: ReactNode }) {
   // Ref to store the resolve function of the promise that waits for page load
   const finishViewTransition = useRef<(() => void) | null>(null);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Only responds to pathname changes.
   useEffect(() => {
     // When pathname changes, if there is a pending transition, resolve it.
     if (finishViewTransition.current) {

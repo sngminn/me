@@ -85,7 +85,7 @@ function EmailMenu({
       await navigator.clipboard.writeText('me@kimseungmin.dev');
       setCopied(true);
     } catch (e) {
-      window.open('mailto:me@kimseungmin.dev', '_blank', 'noopener noreferrer');
+      window.open('mailto:me@kimseungmin.dev', '_blank');
       console.error('클립보드 복사 실패:', e);
     }
   }
