@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
 import Content from '@/src/components/posts/Content';
@@ -25,6 +25,11 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
+
+  if (slug !== slug.toLowerCase()) {
+    redirect(`/posts/${slug.toLowerCase()}`);
+  }
+
   const post = getPostBySlug(slug);
   if (!post) notFound();
 

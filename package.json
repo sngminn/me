@@ -52,6 +52,7 @@
       "biome check --write --no-errors-on-unmatched"
     ]
   },
+  "packageManager": "pnpm@10.24.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "sharp",
